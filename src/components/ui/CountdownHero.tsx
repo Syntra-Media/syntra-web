@@ -13,7 +13,7 @@ const CountdownHero = () => {
         console.log("useEffect")
 
         const t1 = new Date();
-        const t2 = new Date('2024-07-07');
+        const t2 = new Date('2024-07-18');
 
         const diff = t2.getTime() - t1.getTime();
 
