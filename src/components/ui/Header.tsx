@@ -16,7 +16,7 @@ const Header = ({className}: HeaderProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        let handler = (e) => {
+        let handler = (e: any) => {
             if (e.target.closest(".menu") || e.target.closest("button")) return;
             setIsOpen(false);
         }
