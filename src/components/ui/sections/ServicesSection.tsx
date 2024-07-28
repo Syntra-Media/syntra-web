@@ -29,7 +29,7 @@ const ServicesSection = () => {
                         services
                     </h2>
                     <p className={"text-light/90"}>
-                        Unlock new levels of success with our comprehensive suite of premier services. From cutting-edge web design and development to strategic SEO and meticulous website optimization, we provide everything your business needs to thrive in the digital world. Our team of experts works closely with you to create customized solutions that drive traffic, enhance user engagement, and increase conversions. With our innovative strategies and unwavering commitment to excellence, we help you realize your business's full potential and achieve lasting growth.
+                        Unlock new levels of success with our comprehensive suite of premier services. From cutting-edge web design and development to strategic SEO and meticulous website optimization, we provide everything your business needs to thrive in the digital world. Our team of experts works closely with you to create customized solutions that drive traffic, enhance user engagement, and increase conversions. With our innovative strategies and unwavering commitment to excellence, we help you realize your business&lsquos full potential and achieve lasting growth.
                     </p>
                     <Button variant={"default"} className={"w-40"}>View our work</Button>
                 </div>

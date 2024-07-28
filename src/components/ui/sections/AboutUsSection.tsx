@@ -9,7 +9,7 @@ const AboutUsSection = () => {
                         The team that will <span className={"text-primary-100"}>transform</span> your digital presence
                     </h2>
                     <p className={"text-light/90 w-3/4"}>
-                        Our dedicated team of digital marketing professionals is committed to bringing your brand's vision to life. With expertise in web design, SEO, content creation, and social media management, we collaborate to create strategies that drive results. Passionate about innovation and excellence, we work tirelessly to ensure your online presence is not only strong but also impactful, helping your business reach new heights. Trust us to be your partners in achieving digital success.
+                        Our dedicated team of digital marketing professionals is committed to bringing your brand&lsquos vision to life. With expertise in web design, SEO, content creation, and social media management, we collaborate to create strategies that drive results. Passionate about innovation and excellence, we work tirelessly to ensure your online presence is not only strong but also impactful, helping your business reach new heights. Trust us to be your partners in achieving digital success.
                     </p>
                 </div>
                 <div className={"flex flex-col w-1/3 h-full justify-center items-center gap-8"}>

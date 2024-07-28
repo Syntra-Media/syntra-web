@@ -20,7 +20,7 @@ const Home = () => {
         if ((date < openingDate) && (process.env.NEXT_PUBLIC_DEV_MODE == '0')) {
             router.push('/coming-soon');
         }
-    }, []);
+    }, [router]);
 
   return (
         <div className={"flex flex-col w-full overflow-x-hidden"}>

@@ -21,7 +21,7 @@ const LandingHero = () => {
         });
 
         return () => controls.stop();
-    }, []);
+    }, [count]);
 
 
     return (
