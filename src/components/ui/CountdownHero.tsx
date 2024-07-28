@@ -57,11 +57,11 @@ const CountdownHero = () => {
                     animate={{opacity:1}}
                     transition={{delay:2}}
                 >
-                    <Link href={"https://youtube.com"}>
+                    <Link href={"https://www.linkedin.com/company/syntra-media/"}>
                         <Linkedin className={"w-10 h-10 text-light/60 hover:text-light transition-all duration-300"} />
                     </Link>
-                    <Instagram className={"w-10 h-10 text-light/60 hover:text-light transition-all duration-300"}/>
-                    <Twitter className={"w-10 h-10 text-light/60 hover:text-light transition-all duration-300"}/>
+                    <Instagram href={"https://instagram.com/syntramedia"} className={"w-10 h-10 text-light/60 hover:text-light transition-all duration-300"}/>
+                    <Twitter href={"https://x.com/syntramedia"} className={"w-10 h-10 text-light/60 hover:text-light transition-all duration-300"}/>
                 </motion.div>
                 <motion.p className={"text-sm text-light/60"} initial={{opacity:0}} animate={{opacity:1}} transition={{delay:2}}>© 2024 Syntra Media. All Rights Reserved.</motion.p>
             </div>
