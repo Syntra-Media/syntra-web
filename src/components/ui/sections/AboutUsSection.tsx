@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutUsSection = () => {
     return (
-        <div className={"flex w-full h-[35rem] overflow-hidden"}>
+        <div className={"flex w-full h-[45rem] overflow-hidden"}>
             <div className={"flex w-full h-full my-8 mx-40"}>
                 <div className={"flex flex-col justify-center gap-8 w-2/3 h-full"}>
                     <h2 className={"font-semibold text-4xl w-2/3"}>

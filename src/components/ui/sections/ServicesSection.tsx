@@ -1,40 +1,28 @@
 import React from 'react';
 import {Button} from "@/components/ui/Button";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/Carousel"
+
 
 const ServicesSection = () => {
     return (
         <div className={"flex w-full h-[30rem] overflow-hidden"}>
             <div className={"flex w-full h-full mx-32 gap-32"}>
-                <div className={"grid w-full h-full grid-cols-2 grid-rows-2 gap-8"}>
-                    <div className={"bg-neutral-900/30 backdrop-blur rounded-lg border border-light/10"}>
-                        <div className={"w-full h-full flex flex-col m-4 gap-2"}>
-                            <p className={"font-medium"}>Web Development</p>
-                            <p className={"text-sm"}>Crafting Stunning, Responsive Websites to Elevate Your
-                                Brand</p>
-                        </div>
-                    </div>
-                    <div className={"bg-neutral-900/30 backdrop-blur rounded-lg border border-light/10"}>
-                        <div className={"w-full h-full flex flex-col m-4 gap-2"}>
-                            <p className={"font-medium"}>Web Development</p>
-                            <p className={"text-sm"}>Crafting Stunning, Responsive Websites to Elevate Your
-                                Brand</p>
-                        </div>
-                    </div>
-                    <div className={"bg-neutral-900/30 backdrop-blur rounded-lg border border-light/10"}>
-                        <div className={"w-full h-full flex flex-col m-4 gap-2"}>
-                            <p className={"font-medium"}>Web Development</p>
-                            <p className={"text-sm"}>Crafting Stunning, Responsive Websites to Elevate Your
-                                Brand</p>
-                        </div>
-                    </div>
-                    <div className={"bg-neutral-900/30 backdrop-blur rounded-lg border border-light/10"}>
-                        <div className={"w-full h-full flex flex-col m-4 gap-2"}>
-                            <p className={"font-medium"}>Web Development</p>
-                            <p className={"text-sm"}>Crafting Stunning, Responsive Websites to Elevate Your
-                                Brand</p>
-                        </div>
-                    </div>
-                </div>
+                <Carousel className={"w-full h-full"}>
+                    <CarouselContent className={"h-full"}>
+                        <CarouselItem className={"flex h-full justify-center items-center"}>1</CarouselItem>
+                        <CarouselItem>2</CarouselItem>
+                        <CarouselItem>3</CarouselItem>
+                        <CarouselItem>4</CarouselItem>
+                    </CarouselContent>
+                    <CarouselPrevious/>
+                    <CarouselNext/>
+                </Carousel>
                 <div className={"w-full h-full flex flex-col gap-8"}>
                     <h2 className={"font-semibold text-4xl"}>
                         Unleash your business <span className={"text-primary-100"}>potential</span> with our premier

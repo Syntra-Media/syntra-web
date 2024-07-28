@@ -1,4 +1,6 @@
 import React from 'react';
+import {NAV_ITEMS} from "@/utils/navItems";
+import Link from "next/link";
 
 const Footer = () => {
     return (
@@ -14,10 +16,13 @@ const Footer = () => {
                 </div>
                 <div className={"flex flex-col gap-8 w-full items-end"}>
                     <nav className={"flex gap-4 font-medium text-xl uppercase"}>
-                        <p>Home</p>
-                        <p>About Us</p>
-                        <p>Contact</p>
-                        <p>Pricing</p>
+                        {
+                            NAV_ITEMS.map((item, index) => (
+                                <Link key={index} href={item.href}>
+                                    {item.title}
+                                </Link>
+                            ))
+                        }
                     </nav>
                     <p className={"text-light/60 text-sm"}>
                         © 2024 Syntra Media. All Rights Reserved.

@@ -10,6 +10,9 @@ const LandingHero = () => {
     const count = useMotionValue(0)
     const rounded = useTransform(count, value => Math.round(value))
 
+    const InputMotion = motion(Input);
+    const ButtonMotion = motion(Button);
+
     useEffect(() => {
         const controls = animate(count, 50, {
             duration: 2,
@@ -31,7 +34,7 @@ const LandingHero = () => {
             >
                 Elevate your business with our <motion.span initial={{color: "#eeeeee"}} animate={{color: "#FFD60A"}}
                                                             transition={{delay: 1.2}}>expert</motion.span> web marketing
-                agency.
+                agency<span className={"text-primary-100"}>.</span>
             </motion.h1>
             <motion.p
                 className={"text-center text-lg text-light w-1/2 font-light"}
@@ -48,8 +51,17 @@ const LandingHero = () => {
                 className={"flex flex-col w-1/3 justify-center items-center relative"}
             >
                 <div className={"w-full flex"}>
-                    <Input type={"text"} placeholder={"Type your website URL or app name"} className={"w-full"}/>
-                    <Button variant={"default"} className={"absolute right-0 rounded-l-none"}>Get Started</Button>
+                    <InputMotion type={"text"} placeholder={"Type your website URL or app name"} className={"w-full"}
+                        initial={{x: -75}}
+                        animate={{x: 0}}
+                         transition={{delay:1, duration:1.12, ease: "easeOut"}}
+                    />
+                    <ButtonMotion variant={"default"} className={"absolute right-0 rounded-l-none"}
+                        initial={{x: 75}}
+                        animate={{x: 0}}
+                          transition={{delay:1, duration:1.12, ease: "easeOut"}}
+
+                    >Get Started</ButtonMotion>
                 </div>
                 <motion.p
                     className={"text-light/60 text-xs my-4"}
