@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {cn} from "@/utils/cn.ts"
+import {cn} from "@/utils/cn"
 import {ChevronRight} from "lucide-react";
 import {motion, AnimatePresence} from "framer-motion";
 
