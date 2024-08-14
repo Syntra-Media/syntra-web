@@ -17,7 +17,7 @@ const Home = () => {
         let date = new Date();
         let openingDate = new Date('2024-09-01');
 
-        if ((date < openingDate) && (process.env.NODE_ENV == 'production')) {
+        if ((date < openingDate) && (process.env.NODE_ENV === 'production')) {
             router.push('/coming-soon');
         }
     }, [router]);
