@@ -5,11 +5,15 @@ const AboutUsSection = () => {
         <div className={"flex w-full h-[45rem] overflow-hidden"}>
             <div className={"flex w-full h-full my-8 mx-40"}>
                 <div className={"flex flex-col justify-center gap-8 w-2/3 h-full"}>
-                    <h2 className={"font-semibold text-4xl w-2/3"}>
-                        The team that will <span className={"text-primary-100"}>transform</span> your digital presence
+                    <h2 className={"font-semibold text-4xl w-9/12"}>
+                    Our <span className="text-primary-100">dedicated</span> team will get you top-tier digital marketing results.
                     </h2>
                     <p className={"text-light/90 w-3/4"}>
-                        Our dedicated team of digital marketing professionals is committed to bringing your brand&lsquos vision to life. With expertise in web design, SEO, content creation, and social media management, we collaborate to create strategies that drive results. Passionate about innovation and excellence, we work tirelessly to ensure your online presence is not only strong but also impactful, helping your business reach new heights. Trust us to be your partners in achieving digital success.
+                    With years of experience in digital marketing landspace, our team consists of industry veterans and innovative thinkers who bring a wealth of expertise to every project. 
+                    <br></br><br></br>
+                    We take pride in our client-centric approach. Our commitment is to deliver results that are not just effective but also aligned with your vision.
+                    <br></br><br></br>
+                    From crafting appealing web designs and optimizing them with SEO, to growing your business on social media, we ensure every aspect of your digital presence  is effectively managed to drive results and support your digital marketing success.
                     </p>
                 </div>
                 <div className={"flex flex-col w-1/3 h-full justify-center items-center gap-8"}>
@@ -34,7 +38,7 @@ const AboutUsSection = () => {
                             }
                         </div>
                         <p className={"mt-4 text-light/80"}>
-                            And many more who works for us!
+                            And many more who works with us!
                         </p>
                     </div>
                 </div>
