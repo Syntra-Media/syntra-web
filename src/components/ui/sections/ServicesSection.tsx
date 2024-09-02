@@ -15,15 +15,26 @@ const ServicesSection = () => {
             <div className={"flex w-full h-full mx-32 gap-32"}>
                 <Carousel className={"w-full h-full"}>
                     <CarouselContent className={"h-full"}>
-                        <CarouselItem className={"flex h-full justify-center items-center"}>1</CarouselItem>
-                        <CarouselItem>2</CarouselItem>
-                        <CarouselItem>3</CarouselItem>
-                        <CarouselItem>4</CarouselItem>
+                        <CarouselItem className={"flex h-[30rem] justify-center items-center"}>
+                            <div className={"w-full h-full border border-light/20 rounded-lg"}>
+
+                            </div>
+                        </CarouselItem>
+                        <CarouselItem className={"flex h-[30rem] justify-center items-center"}>
+                            <div className={"w-full h-full border border-light/20 rounded-lg"}>
+
+                            </div>
+                        </CarouselItem>
+                        <CarouselItem className={"flex h-[30rem] justify-center items-center"}>
+                            <div className={"w-full h-full border border-light/20 rounded-lg"}>
+
+                            </div>
+                        </CarouselItem>
                     </CarouselContent>
                     <CarouselPrevious/>
                     <CarouselNext/>
                 </Carousel>
-                <div className={"w-full h-full flex flex-col gap-8"}>
+                <div className={"w-full h-full flex flex-col gap-8 justify-center"}>
                     <h2 className={"font-semibold text-4xl"}>
                         Unleash your business <span className={"text-primary-100"}>potential</span> with our premier
                         services

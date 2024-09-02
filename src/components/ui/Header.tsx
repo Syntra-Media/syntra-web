@@ -28,7 +28,7 @@ const Header = ({className}: HeaderProps) => {
         <div className={cn("absolute flex w-full h-20 overflow-hidden", className)}>
             <div className={"flex w-full h-full my-2 justify-between items-center mx-8"}>
                 <motion.div onClick={() => setIsOpen(!isOpen)}
-                            className={"items-center cursor-pointer hidden md:flex"}
+                            className={"items-center cursor-pointer flex lg:hidden"}
                             initial={{opacity: 0}}
                             animate={{opacity: 1}}
                             transition={{duration: 1.5}}
@@ -77,7 +77,7 @@ const Header = ({className}: HeaderProps) => {
                 </AnimatePresence>
 
                 <svg width="18" height="38" viewBox="0 0 18 38" fill="none" xmlns="http://www.w3.org/2000/svg"
-                     className={"md:absolute md:right-1/2 md:translate-x-1/2"}>
+                     className={"lg:relative lg:translate-x-0 lg:right-0 absolute right-1/2 translate-x-1/2"}>
                     <motion.path
                         d="M0 18.1485L6.13333 5.99242L11.6 3.08182L18 0L9.32727 18.1485H18L11.4667 32.5303L6.13333 34.9273L0 37.6667L9.32727 18.1485H0Z"
                         stroke={"#FFC300"}
@@ -88,7 +88,7 @@ const Header = ({className}: HeaderProps) => {
                 </svg>
 
                 <motion.div
-                    className={"flex gap-8 items-center absolute right-1/2 translate-x-1/2 md:hidden py-4 px-5 border border-light/10 rounded-xl shadow-xl"}
+                    className={"hidden lg:flex gap-8 items-center absolute right-1/2 translate-x-1/2 py-4 px-5 border border-light/10 rounded-xl shadow-xl"}
                     initial={{opacity: 0}}
                     animate={{opacity: 1}}
                     transition={{duration: 1.5}}

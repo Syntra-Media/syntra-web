@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
         <div className={"flex flex-col w-full overflow-x-hidden"}>
-        <Header/>
+          <Header/>
           <LandingHero />
           <LogoSection/>
           <ServicesSection/>
