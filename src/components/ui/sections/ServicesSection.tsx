@@ -36,13 +36,16 @@ const ServicesSection = () => {
                 </Carousel>
                 <div className={"w-full h-full flex flex-col gap-8 justify-center"}>
                     <h2 className={"font-semibold text-4xl"}>
-                        Unleash your business <span className={"text-primary-100"}>potential</span> with our premier
-                        services
+                        Tired of poor digital marketing results? &ndash; <span className={"text-primary-100"}>We got you covered!</span>
                     </h2>
                     <p className={"text-light/90"}>
-                        Unlock new levels of success with our comprehensive suite of premier services. From cutting-edge web design and development to strategic SEO and meticulous website optimization, we provide everything your business needs to thrive in the digital world. Our team of experts works closely with you to create customized solutions that drive traffic, enhance user engagement, and increase conversions. With our innovative strategies and unwavering commitment to excellence, we help you realize your business&lsquos full potential and achieve lasting growth.
+                    Frustrated by poor digital marketing results? We offer expert analysis, strategic planning, and hands-on management to turn your digital marketing around. 
+                    <br></br><br></br>
+                    Our experts handle every aspect of your digital marketing, from creating compelling web designs and optimizing it with SEO, to managing social media and executing targeted ad campaigns. We provide end-to-end solutions that drive real results and save you time, and money. 
+                    <br></br><br></br>
+                    <span className="font-medium">Book Your FREE Strategy Call to Learn How Our Experts Can Transform Your Business into a Digital Powerhouse.</span>
                     </p>
-                    <Button variant={"default"} className={"w-40"}>View our work</Button>
+                    <Button variant={"default"} className={"w-5/12"}>Book Your FREE Strategy Call</Button>
                 </div>
             </div>
         </div>
