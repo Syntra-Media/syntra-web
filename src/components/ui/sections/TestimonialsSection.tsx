@@ -4,24 +4,24 @@ import Marquee from "@/components/magicui/marquee";
 
 const TESTIMONIALS = [
     {
-        name: "John Doe",
-        company: "Company",
-        testimonial: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet felis id felis tincidunt ultricies. Donec in semper nunc. Curabitur nec nunc sed libero tempor dictum",
+        name: "Victor Shyptur",
+        company: "The Redemption Community",
+        testimonial: "We've worked with Syntra Media for crafting a visually-appealing web design for our mens growth community. I can full heartedly say that they've met what they promised. Totally recommend.",
     },
     {
-        name: "John Doe",
-        company: "Company",
-        testimonial: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet felis id felis tincidunt ultricies. Donec in semper nunc. Curabitur nec nunc sed libero tempor dictum",
+        name: "Xander Straskins",
+        company: "Extrask Game Company",
+        testimonial: "They are man of their words. Very easy to work with and they deliver what they promise. They were able to create me a unique and visually appealing website for my game company.",
     },
     {
-        name: "John Doe",
-        company: "Company",
-        testimonial: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet felis id felis tincidunt ultricies. Donec in semper nunc. Curabitur nec nunc sed libero tempor dictum",
+        name: "Vicky Hikari",
+        company: "The Art Code Studios",
+        testimonial: "We've worked with UI/UX design for our art studio's future website. They were able to deliver a design that resonates well with our brand perception and values. Highly recommend.",
     },
     {
-        name: "John Doe",
-        company: "Company",
-        testimonial: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet felis id felis tincidunt ultricies. Donec in semper nunc. Curabitur nec nunc sed libero tempor dictum",
+        name: "Fatma Arslan",
+        company: "The Wonderfuel Station",
+        testimonial: "We've worked with Syntra Media in regards to our brochure designs. They were able to create eye-catching visuals that not just look fancy but also convey the brand message of ours. Great job.",
     },
 ]
 
@@ -51,7 +51,7 @@ const TestimonialsSection = () => {
                             </div>
                             <div className={"flex flex-col font-light -space-y-2"}>
                                 <p className={""}>
-                                    50+
+                                    20+
                                 </p>
                                 <p className={"text-light/70 text-sm"}>
                                     Satisfied clients

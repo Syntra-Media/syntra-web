@@ -1,12 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 
-const Contractors = ["/images/team/Syntra-Media-İhsan-Çarkcı-Contractor.jpeg", "/images/team/Syntra-Media-İhsan-Çarkcı-Contractor.jpeg", "/images/team/Syntra-Media-İhsan-Çarkcı-Contractor.jpeg", "/images/team/Syntra-Media-İhsan-Çarkcı-Contractor.jpeg"]
+const Contractors = ["/images/team/Syntra-Media-Alphan-Bartu-Altıntaş-Contractor.jpeg", "/images/team/Syntra-Media-Kerem-Kenan-Eren-Contractor.png", "/images/team/Syntra-Media-Taha-Yücel-Contractor.png", "/images/team/Syntra-Media-İhsan-Çarkcı-Contractor.jpeg"]
 
 const AboutUsSection = () => {
     return (
         <div className={"flex w-full overflow-hidden"}>
-            <div className={"flex flex-col gap-y-12 lg:gap-64 3xl:gap-80  items-center lg:flex-row w-full h-full my-28 mx-8 lg:mx-40"}>
+            <div className={"flex flex-col gap-y-12 lg:gap-48 3xl:gap-80  items-center lg:flex-row w-full h-full my-28 mx-8 lg:mx-40"}>
                 <div className={"flex flex-col justify-center gap-8 w-full h-full"}>
                     <h2 className={"font-semibold text-4xl"}>
                     Our <span className="text-primary-100">dedicated</span> team will get you<br/> top-tier digital marketing results.
