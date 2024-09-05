@@ -59,7 +59,7 @@ const Page = () => {
         </p>
         <Button>
             <Link href={"/portal"}>
-                Portal'a geri dön
+                Portal&apos;a geri dön
             </Link>
         </Button>
     </div> : activeRoute.component;

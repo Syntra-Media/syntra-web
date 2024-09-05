@@ -64,12 +64,4 @@ const AuthSettings = {
     },
 }
 
-async function getProjectInfo(userMail: string) {
-    return prisma.project.findFirst({
-        where: {
-            ownerMail: userMail
-        }
-    });
-}
-
 export default AuthSettings;
