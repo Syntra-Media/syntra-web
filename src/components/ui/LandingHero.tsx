@@ -25,38 +25,39 @@ const LandingHero = () => {
 
 
     return (
-        <div className={"w-full h-screen bg-radial flex flex-col justify-center items-center gap-8"}>
+        <div className={"w-full h-screen bg-radial flex flex-col justify-center items-center gap-4 md:gap-8"}>
             <motion.h1
-                className={"text-7xl text-center font-semibold lg:text-6xl md:text-5xl sm:text-3xl mobile:text-3xl mx-52 w-4/5"}
+                className={"font-medium text-3xl text-center lg:text-6xl 3xl:text-7xl"}
                 initial={{opacity: 0}}
                 animate={{opacity: 1}}
                 transition={{duration: 1.5}}
             >
                 Getting
                 <motion.span initial={{color: "#eeeeee"}} animate={{color: "#FFD60A"}} transition={{delay: 1.2}}> top-tier </motion.span> 
-                 digital marketing results, <span className={"text-primary-100"}>without the high costs.</span>
+                 digital marketing results,<br/> <span className={"text-primary-100"}>without the high costs.</span>
             </motion.h1>
             <motion.p
-                className={"text-center text-lg text-light w-7/12 font-light"}
+                className={"text-center text-sm text-light mx-8 lg:text-lg lg:w-1/2 font-light"}
                 initial={{opacity: 0}}
                 animate={{opacity: 1}}
                 transition={{duration: 1.5, delay: 0.5}}
             >
-                Taking over the guesswork – Our expert team at Syntra Media will help you achieve your website, social media, and SEO goals, saving you time and money.
+                Taking over the guesswork – Our expert team at Syntra Media will help you
+                achieve your website, social media, and SEO goals, saving you time and money.
             </motion.p>
             <motion.div
                 initial={{opacity: 0}}
                 animate={{opacity: 1}}
                 transition={{delay: 1}}
-                className={"flex flex-col w-5/12 justify-center items-center relative"}
+                className={"flex flex-col justify-center items-center relative"}
             >
-                <div className={"w-full flex"}>
-                    <InputMotion type={"text"} placeholder={"Type your favorite email address"} className={"w-full"}
+                <div className={"w-full flex justify-center"}>
+                    <InputMotion type={"text"} placeholder={"Type your favorite email address"} className={"w-full pr-96 hidden lg:flex"}
                         initial={{x: -75}}
                         animate={{x: 0}}
                          transition={{delay:1, duration:1.12, ease: "easeOut"}}
                     />
-                    <ButtonMotion variant={"default"} className={"absolute right-0 rounded-l-none"}
+                    <ButtonMotion variant={"default"} className={"hidden lg:flex lg:absolute lg:right-0 lg:rounded-l-none"}
                         initial={{x: 75}}
                         animate={{x: 0}}
                           transition={{delay:1, duration:1.12, ease: "easeOut"}}
@@ -64,7 +65,7 @@ const LandingHero = () => {
                     >Book Your FREE Strategy Call</ButtonMotion>
                 </div>
                 <motion.p
-                    className={"text-light/60 text-xs my-4"}
+                    className={"text-light/60 text-xs hidden lg:flex my-4"}
                     initial={{opacity: 0}}
                     animate={{opacity: 1}}
                     transition={{delay: 1}}
@@ -78,8 +79,8 @@ const LandingHero = () => {
                 animate={{opacity: 1}}
                 transition={{delay: 1}}
             >
-                <p className={"text-light/80"}>Over <motion.span>{rounded}</motion.span> happy clients & firms</p>
-                <p className={"text-light/60 text-sm"}>be part of those who have achieved their marketing goals</p>
+                <p className={"text-light/80 hidden lg:flex gap-2"}>Over <motion.span>{rounded}</motion.span> happy clients & firms</p>
+                <p className={"text-light/60 text-sm hidden lg:flex"}>be part of those who have achieved their marketing goals</p>
                 <ChevronDown className={"my-4"}/>
             </motion.div>
         </div>

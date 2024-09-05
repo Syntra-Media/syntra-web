@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Inter } from "next/font/google";
 import type { WithContext, WebPage } from "schema-dts";
 import "./globals.css";
+import NextAuthSessionProvider from "@/components/providers/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 const jsonLD: WithContext<WebPage> = {
@@ -76,7 +77,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLD) }}
         />
-        {children}
+        <NextAuthSessionProvider>
+          {children}
+        </NextAuthSessionProvider>
       </body>
     </html>
   );

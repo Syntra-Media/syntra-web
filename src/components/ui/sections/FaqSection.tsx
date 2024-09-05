@@ -4,35 +4,24 @@ import Link from "next/link";
 
 const QUESTIONS = [
     {
-        title: "What is the purpose of this website?",
-        description: "The purpose of this website is to showcase the capabilities of the Next.js framework and to demonstrate how to create a modern, responsive website using Tailwind CSS.",
+        title: "What services does Syntra Media offer?",
+        description: "At Syntra Media, we deliver customized digital marketing services—web design, SEO, social media management, and content creation—to boost your digital presence and drive measurable business growth."
     },
     {
-        title: "How can I contribute to this project?",
-        description: "You can contribute to this project by submitting a pull request on GitHub. Please make sure to follow the guidelines in the CONTRIBUTING.md file.",
+        title: "How do you develop a digital marketing strategy?",
+        description: "Our dedicated team will assess your current digital marketing strategy and pinpoint areas for improvement. We'll also analyze your top competitors' digital marketing efforts to ensure we can help you outperform them."
     },
     {
-        title: "Is this website open source?",
-        description: "Yes, this website is open source and the code is available on GitHub. You are free to use, modify, and distribute the code as you see fit.",
+        title: "Can you provide case studies or examples of past work?",
+        description: "Absolutely! We can provide detailed case studies and examples of our past work that showcase how we've helped businesses like yours achieve their digital marketing goals. Check them out here."
     },
     {
-        title: "Who created this website?",
-        description: "This website was created by John Doe, a web developer based in New York City. John has over 10 years of experience in web development and has worked on a variety of projects for clients around the world.",
-    },    {
-        title: "Who created this website?",
-        description: "This website was created by John Doe, a web developer based in New York City. John has over 10 years of experience in web development and has worked on a variety of projects for clients around the world.",
-    },    {
-        title: "Who created this website?",
-        description: "This website was created by John Doe, a web developer based in New York City. John has over 10 years of experience in web development and has worked on a variety of projects for clients around the world.",
-    },    {
-        title: "Who created this website?",
-        description: "This website was created by John Doe, a web developer based in New York City. John has over 10 years of experience in web development and has worked on a variety of projects for clients around the world.",
-    },    {
-        title: "Who created this website?",
-        description: "This website was created by John Doe, a web developer based in New York City. John has over 10 years of experience in web development and has worked on a variety of projects for clients around the world.",
-    },    {
-        title: "Who created this website?",
-        description: "This website was created by John Doe, a web developer based in New York City. John has over 10 years of experience in web development and has worked on a variety of projects for clients around the world.",
+        title: "How often will I receive updates on my project?",
+        description: "You'll receive regular updates on your project through our client portal, where you can track progress, view reports, and communicate directly with our team. We keep you informed every step of the way to ensure transparency and alignment with your goals.",
+    },
+    {
+        title: "How do you handle client data and privacy?",
+        description: "We take client data and privacy very seriously. Our client portal is secured with advanced encryption protocols to protect your information. We follow strict privacy policies to ensure your data is handled with the utmost care and confidentiality, ensuring that only authorized team members have access."
     },
 ]
 
@@ -40,10 +29,10 @@ const FaqSection = () => {
     const [activeIndex, setActiveIndex] = useState(0)
 
     return (
-        <div className={"flex w-full h-screen overflow-hidden"}>
-            <div className={"w-full h-full flex flex-col mx-32 my-16 gap-8"}>
+        <div className={"flex w-full overflow-hidden"}>
+            <div className={"w-full h-full flex flex-col mx-8 lg:mx-40 my-24 gap-8"}>
                 <h2 className={"font-semibold text-4xl"}>You might have <span className={"text-primary-100"}>questions...</span></h2>
-                <div className={"flex flex-col gap-4 overflow-y-auto"}>
+                <div className={"flex flex-col gap-4 lg:gap-6 overflow-y-auto"}>
                     {
                         QUESTIONS.map((question, index) => (
                             <div onClick={() => setActiveIndex(index)} key={index}>
@@ -56,6 +45,11 @@ const FaqSection = () => {
                             </div>
                         ))
                     }
+                </div>
+                <div className={"w-full flex justify-center font-light"}>
+                    <p>
+                        If you have more questions, <Link href={"/contact"}><span className={"text-primary underline underline-offset-4"}>contact us!</span></Link>
+                    </p>
                 </div>
             </div>
         </div>

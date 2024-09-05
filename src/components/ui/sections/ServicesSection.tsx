@@ -1,39 +1,58 @@
 import React from 'react';
 import {Button} from "@/components/ui/Button";
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/Carousel"
+import {BentoGrid, BentoGridItem} from "@/components/ui/BentoGrid";
+import {IconBrandMeta, IconPencil, IconSearch, IconWorld} from "@tabler/icons-react";
 
+const Skeleton = () => (
+    <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"></div>
+);
+
+const ITEMS = [
+    {
+        title: "UI/UX Design",
+        description: "Expert UI/UX design that enhances user experience and drives engagement.",
+        icon: <IconPencil/>,
+        header: <Skeleton/>
+    },
+    {
+        title: "Web Design",
+        description: "Custom web design that captivates and converts.",
+        icon: <IconWorld/>,
+        header: <Skeleton/>
+    },
+    {
+        title: "SEO",
+        description: "Boost your visibility and grow your business with expert SEO services.",
+        icon: <IconSearch/>,
+        header: <Skeleton/>
+    },
+    {
+        title: "Social Media Management",
+        description: "Effective social media management that grows your brand and audience.",
+        icon: <IconBrandMeta/>,
+        header: <Skeleton/>
+    },
+
+]
 
 const ServicesSection = () => {
     return (
-        <div className={"flex w-full h-[30rem] overflow-hidden"}>
-            <div className={"flex w-full h-full mx-32 gap-32"}>
-                <Carousel className={"w-full h-full"}>
-                    <CarouselContent className={"h-full"}>
-                        <CarouselItem className={"flex h-[30rem] justify-center items-center"}>
-                            <div className={"w-full h-full border border-light/20 rounded-lg"}>
-
-                            </div>
-                        </CarouselItem>
-                        <CarouselItem className={"flex h-[30rem] justify-center items-center"}>
-                            <div className={"w-full h-full border border-light/20 rounded-lg"}>
-
-                            </div>
-                        </CarouselItem>
-                        <CarouselItem className={"flex h-[30rem] justify-center items-center"}>
-                            <div className={"w-full h-full border border-light/20 rounded-lg"}>
-
-                            </div>
-                        </CarouselItem>
-                    </CarouselContent>
-                    <CarouselPrevious/>
-                    <CarouselNext/>
-                </Carousel>
+        <div className={"flex w-full overflow-hidden"}>
+            <div className={"flex flex-col lg:flex-row w-full h-full mx-8 lg:mx-40 my-32 gap-32 items-center justify-center dark"}>
+                <BentoGrid>
+                    {
+                        ITEMS.map((item, index) => (
+                            <BentoGridItem
+                                key={index}
+                                title={item.title}
+                                description={item.description}
+                                icon={item.icon}
+                                header={item.header}
+                                className={index === 1 || index === 2 ? "bg-bg-100/10 lg:col-span-2 border-neutral-100/10": "bg-bg-100/10 border-neutral-100/10"}
+                            />
+                        ))
+                    }
+                </BentoGrid>
                 <div className={"w-full h-full flex flex-col gap-8 justify-center"}>
                     <h2 className={"font-semibold text-4xl"}>
                         Tired of poor digital marketing results? &ndash; <span className={"text-primary-100"}>We got you covered!</span>
@@ -45,7 +64,7 @@ const ServicesSection = () => {
                     <br></br><br></br>
                     <span className="font-medium">Book Your FREE Strategy Call to Learn How Our Experts Can Transform Your Business into a Digital Powerhouse.</span>
                     </p>
-                    <Button variant={"default"} className={"w-5/12"}>Book Your FREE Strategy Call</Button>
+                    <Button variant={"default"} className={"w-max"}>Book Your FREE Strategy Call</Button>
                 </div>
             </div>
         </div>

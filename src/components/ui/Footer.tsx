@@ -4,29 +4,34 @@ import Link from "next/link";
 
 const Footer = () => {
     return (
-        <div className={"w-full h-60 border-t border-light/20 flex overflow-hidden"}>
-            <div className={"flex w-full h-full m-12 justify-between"}>
-                <div className={"flex flex-col gap-8 w-full"}>
-                    <p className={"text-2xl "}>
+        <div className={"w-full h-full border-t border-light/20 flex overflow-hidden"}>
+            <div className={"flex flex-col lg:flex-row mx-8 lg:mx-28 my-12 w-full h-full gap-x-96 gap-y-8"}>
+                <div className={"flex w-full h-full flex-col gap-4"}>
+                    <h2 className={"text-2xl font-medium"}>
                         Syntra Media
-                    </p>
-                    <p className={"w-2/3 text-light/90"}>
+                    </h2>
+                    <p className={"text-light/90"}>
                         We offer customized digital marketing solutions, including web design, SEO, social media management, and content creation, to enhance your online presence and drive business growth.
                     </p>
                 </div>
-                <div className={"flex flex-col gap-8 w-full items-end"}>
-                    <nav className={"flex gap-4 font-medium text-xl uppercase"}>
-                        {
-                            NAV_ITEMS.map((item, index) => (
-                                <Link key={index} href={item.href}>
-                                    {item.title}
-                                </Link>
-                            ))
-                        }
-                    </nav>
-                    <p className={"text-light/60 text-sm"}>
-                        © 2024 Syntra Media. All Rights Reserved.
-                    </p>
+                <div className={"flex w-full h-full flex-col lg:items-end"}>
+                    <div className={"flex flex-col gap-4"}>
+                        <h2 className={"text-2xl font-medium lg:text-right text-light/90"}>
+                            Quick Links
+                        </h2>
+                        <div className={"flex flex-col lg:flex-row gap-4 text-light/70"}>
+                            {
+                                NAV_ITEMS.map((item, index) => (
+                                    <Link key={index} href={item.href}>
+                                        <p className={"text-light/90 hover:text-primary-100 text-lg uppercase"}>{item.title}</p>
+                                    </Link>
+                                ))
+                            }
+                        </div>
+                        <p className={"mt-4 text-light/50 text-center lg:text-right"}>
+                            &copy; 2024 Syntra Media. All rights reserved.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

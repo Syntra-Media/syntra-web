@@ -70,6 +70,10 @@ const Header = ({className}: HeaderProps) => {
                                             </div>
                                         ))
                                     }
+
+                                    <Button variant={"default"} size={"lg"} className={"absolute bottom-0 right-1/2 translate-x-1/2 mb-8"} onClick={() => setIsOpen(!isOpen)}>
+                                        Close
+                                    </Button>
                                 </div>
                             </motion.div>
                         )
@@ -77,7 +81,7 @@ const Header = ({className}: HeaderProps) => {
                 </AnimatePresence>
 
                 <svg width="18" height="38" viewBox="0 0 18 38" fill="none" xmlns="http://www.w3.org/2000/svg"
-                     className={"lg:relative lg:translate-x-0 lg:right-0 absolute right-1/2 translate-x-1/2"}>
+                     className={"lg:relative lg:translate-x-0 lg:right-0 absolute right-0 mr-8"}>
                     <motion.path
                         d="M0 18.1485L6.13333 5.99242L11.6 3.08182L18 0L9.32727 18.1485H18L11.4667 32.5303L6.13333 34.9273L0 37.6667L9.32727 18.1485H0Z"
                         stroke={"#FFC300"}
@@ -106,6 +110,7 @@ const Header = ({className}: HeaderProps) => {
                     initial={{opacity: 0}}
                     animate={{opacity: 1}}
                     transition={{duration: 1.5}}
+                    className={"hidden lg:flex"}
                 >
                     <Button variant={"secondary"}>Contact Us</Button>
                 </motion.div>
