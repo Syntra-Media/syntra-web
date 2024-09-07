@@ -10,6 +10,7 @@ import ServicesSection from "@/components/ui/sections/ServicesSection";
 import Footer from "@/components/ui/Footer";
 import FaqSection from "@/components/ui/sections/FaqSection";
 import TestimonialsSection from "@/components/ui/sections/TestimonialsSection";
+import CTASection from "@/components/ui/sections/CTASection";
 
 const Home = () => {
   const router = useRouter();
@@ -32,6 +33,7 @@ const Home = () => {
           <AboutUsSection/>
           <TestimonialsSection/>
           <FaqSection/>
+          <CTASection/>
           <Footer/>
         </div>
     );
