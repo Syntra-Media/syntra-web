@@ -1,27 +1,20 @@
 "use client";
 
 import React from 'react';
-import {useSession} from "next-auth/react";
 import PortalSideBar from "@/components/ui/PortalSideBar";
 import {useRouter} from "next/navigation";
 import PhaseCard from "@/components/ui/PhaseCard";
+import {useUser} from "@clerk/nextjs";
 
 const Portal = () => {
     const router = useRouter();
-    const {data: session} = useSession(
-        {
-            required: true,
-            onUnauthenticated() {
-                router.push("/api/auth/signin");
-            }
-        }
-    );
+    const {user} = useUser();
 
     return (
         <div className={"flex w-full h-screen"}>
             <div className={"flex flex-col gap-4 w-full mx-16 my-16"}>
                 <h1 className={"font-medium text-5xl"}>
-                    Hoş geldin, <span className={"text-primary-100"}>{session?.user?.name}.</span>
+                    Hoş geldin, <span className={"text-primary-100"}>{user?.firstName}.</span>
                 </h1>
                 <p className={"text-xl"}>
                     Sizlere daha iyi hizmet sunabilmek için ihtiyaç duyduğunuz tüm araçlara bu portal üzerinden kolayca ulaşabilirsiniz.

@@ -29,13 +29,16 @@ const CTASection = () => {
     const [selectedCategory, setCategory] = React.useState<string>("Web Design");
     const [selectedHour, setHour] = React.useState<string | undefined>(undefined);
     const [minBookingDate, setMinBookingDate] = React.useState<Date | undefined>(new Date(new Date().setDate(new Date().getDate() + 2)));
-    const [date, setDate] = React.useState<Date | undefined>(new Date());
+    const [date, setDate] = React.useState<Date | undefined>(new Date(new Date().setDate(new Date().getDate() + 2)));
+    const [submitted, setSubmitted] = React.useState<boolean>(false);
+
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(formSchema),
     });
 
     const onSubmit = (data: any) => {
-        console.log("Form submitted:", data);
+        setSubmitted(true);
+        console.log(data);
     };
 
     return (
@@ -50,7 +53,7 @@ const CTASection = () => {
                         {/* Kategoriler */}
                         <div className="flex space-x-4 mb-6">
                             {["Web Design", "White-hat SEO", "UI/UX Design", "Social Media"].map((category) => (
-                                <Button key={category} variant={category === selectedCategory ? "default" : "secondary"}
+                                <Button type={"button"} key={category} variant={category === selectedCategory ? "default" : "secondary"}
                                         onClick={() => setCategory(category)}>
                                     {category}
                                 </Button>
@@ -110,7 +113,9 @@ const CTASection = () => {
 
 
                         <Button type="submit"
-                                className="mt-6 w-max">
+                                className="mt-6 w-max"
+                                disabled={submitted}
+                        >
                             Book Your FREE Strategy Call
                         </Button>
                     </form>
@@ -120,11 +125,12 @@ const CTASection = () => {
                             className={"w-full h-full"}
                             showOutsideDays={true}
                             onSelect={setDate}
-                            selected={minBookingDate}
-                            disabled={{ before: minBookingDate as Date, after: new Date(new Date().setDate(new Date().getDate() + 60)) }}
+                            selected={date}
+                            disabled={{ before: minBookingDate as Date, after: new Date(new Date().setDate(new Date().getDate() + 14)) }}
                         />
                     </div>
                 </div>
+
             </div>
         </div>
     );

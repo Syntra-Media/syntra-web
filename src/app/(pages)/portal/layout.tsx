@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import NextAuthSessionProvider from "@/components/providers/SessionProvider";
 import PortalSideBar from "@/components/ui/PortalSideBar";
+import {ClerkProvider} from "@clerk/nextjs";
 
 export const metadata: Metadata = {
     title: "Syntra Media - Client Portal",
@@ -13,8 +13,10 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <PortalSideBar>
-            {children}
-        </PortalSideBar>
+        <ClerkProvider>
+            <PortalSideBar>
+                {children}
+            </PortalSideBar>
+        </ClerkProvider>
     );
 }
