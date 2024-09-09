@@ -28,7 +28,10 @@ const Page = ({params}: {params: {slug: string}}) => {
             setDate(new Date(data.created_at).toLocaleDateString("tr-TR"));
         }
         fetchPost();
-    }, []);
+    }, [
+        params,
+        router
+    ]);
 
     return (
         <div className={"w-full h-full flex justify-center"}>

@@ -47,11 +47,11 @@ const CTASection = () => {
                 <h2 className={"text-4xl font-semibold"}>
                     Ready to take the first step? – <span className={"text-primary"}>Let&apos;s Talk!</span>
                 </h2>
-                <div className={"w-full h-full flex flex-col lg:flex-row gap-x-24"}>
+                <div className={"w-full h-full flex flex-col lg:flex-row gap-x-24 gap-y-12"}>
                     <form onSubmit={handleSubmit(onSubmit)} className="text-white w-full h-full flex flex-col">
 
                         {/* Kategoriler */}
-                        <div className="flex space-x-4 mb-6">
+                        <div className="flex gap-x-4 mb-6 flex-wrap gap-y-4">
                             {["Web Design", "White-hat SEO", "UI/UX Design", "Social Media"].map((category) => (
                                 <Button type={"button"} key={category} variant={category === selectedCategory ? "default" : "secondary"}
                                         onClick={() => setCategory(category)}>
@@ -100,7 +100,7 @@ const CTASection = () => {
                             </div>
                         </div>
 
-                        <div className={"flex w-full justify-start gap-4"}>
+                        <div className={"flex w-full justify-start gap-4 flex-wrap"}>
                             {
                                 AVAIBLE_HOURS.map((hour) => (
                                     <Button type={"button"} key={hour} size={"lg"} variant={hour === selectedHour ? "default" : "secondary"}
@@ -119,7 +119,7 @@ const CTASection = () => {
                             Book Your FREE Strategy Call
                         </Button>
                     </form>
-                    <div className={"w-full flex h-full items-center justify-center"}>
+                    <div className={"w-fit md:w-full flex h-full items-center justify-center"}>
                         <Calendar
                             mode={"single"}
                             className={"w-full h-full"}

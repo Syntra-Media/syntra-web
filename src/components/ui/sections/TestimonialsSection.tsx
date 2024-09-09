@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {Button} from "@/components/ui/Button";
 import Marquee from "@/components/magicui/Marquee";
 
@@ -34,8 +34,8 @@ const TestimonialsSection = () => {
                         Discover why our clients <span className={"text-primary"}>choose</span> us
                     </h2>
                     <p className={"text-light/90"}>
-                    Our clients' success is at the core of what we do, and their feedback speaks volumes about our dedication. Each testimonial reflects the trust and satisfaction we've earned by staying committed to their unique goals.                       <br/><br/>
-                    From boosting online visibility to driving real business growth, our clients' experiences highlight the transformative power of our services. We’re honored to share their stories and continue pushing boundaries to help them achieve even greater success.                    </p>
+                    Our clients&apos; success is at the core of what we do, and their feedback speaks volumes about our dedication. Each testimonial reflects the trust and satisfaction we&apos;ve earned by staying committed to their unique goals.                       <br/><br/>
+                    From boosting online visibility to driving real business growth, our clients&apos; experiences highlight the transformative power of our services. We’re honored to share their stories and continue pushing boundaries to help them achieve even greater success.                    </p>
                     <div className={"hidden lg:flex flex-col lg:flex-row items-center gap-6"}>
                         <Button className={"w-max"}>
                             Book Your FREE Strategy Call

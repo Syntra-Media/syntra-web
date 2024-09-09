@@ -17,6 +17,7 @@ import {
     IconBrandX
 } from "@tabler/icons-react";
 import OrbitingCircles from "@/components/magicui/OrbitingCircles";
+import { cn } from '@/utils/cn';
 
 const WebDesignSection = () => {
     return (
@@ -41,7 +42,7 @@ const WebDesignSection = () => {
 
 const UIUXDesignSection = () => {
     return (
-        <div className="w-full h-full flex justify-center items-center group">
+        <div className="hidden w-full h-full md:flex justify-center items-center group">
             <div className={"rounded-lg w-full h-full flex overflow-hidden bg-slate-800 opacity-50 group-hover:opacity-100 transition-all duration-500"}>
                 <div className={"flex mt-3 ml-3 w-full h-full bg-slate-900 rounded-tl-lg"}>
                     <div className={"relative flex h-2/3 w-1/2 mt-4 ml-4 bg-slate-700"}>
@@ -102,19 +103,19 @@ const SEOComponent = () => {
 
 const SocialMediaComponent = () => {
     return (
-        <div className="w-full h-full flex justify-center items-center group">
+        <div className="hidden w-full h-full md:flex justify-center items-center group">
             <div className={"relative flex h-full w-full justify-center items-center opacity-50 transition-all duration-1000 group-hover:opacity-100"}>
-                <OrbitingCircles className={"size-[40px] border-none bg-transparent"} duration={10} radius={60}>
+                <OrbitingCircles className={"size-[30px] border-none bg-transparent"} duration={10} radius={50}>
                     <IconBrandInstagram/>
                 </OrbitingCircles>
-                <OrbitingCircles className={"size-[40px] border-none bg-transparent"} duration={10} delay={5} radius={60}>
+                <OrbitingCircles className={"size-[30px] border-none bg-transparent"} duration={10} delay={5} radius={50}>
                     <IconBrandLinkedin/>
                 </OrbitingCircles>
 
-                <OrbitingCircles className={"size-[30px] border-none bg-transparent"} duration={10} delay={5} radius={30} reverse>
+                <OrbitingCircles className={"size-[20px] border-none bg-transparent"} duration={10} delay={5} radius={25} reverse>
                     <IconBrandFacebook/>
                 </OrbitingCircles>
-                <OrbitingCircles className={"size-[30px] border-none bg-transparent"} duration={10} radius={30} reverse>
+                <OrbitingCircles className={"size-[20px] border-none bg-transparent"} duration={10} radius={25} reverse>
                     <IconBrandX/>
                 </OrbitingCircles>
             </div>
@@ -163,7 +164,7 @@ const ServicesSection = () => {
                                 title={item.title}
                                 description={item.description}
                                 header={item.header}
-                                className={index === 1 || index === 2 ? "bg-bg-100/10 lg:col-span-2 border-neutral-100/10": "bg-bg-100/10 border-neutral-100/10"}
+                                className={cn("rounded-xl border border-neutral-100/10 bg-bg/50", index === 1 || index === 2 ? "lg:col-span-2": "")}
                             />
                         ))
                     }

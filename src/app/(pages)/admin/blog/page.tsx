@@ -62,7 +62,11 @@ const Page = () => {
             setPosts(posts);
         }
         checkAdmin();
-    }, []);
+    }, [
+        userId,
+        getToken,
+        router
+    ]);
 
     return (
         <div className={"w-full flex"}>

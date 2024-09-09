@@ -20,7 +20,11 @@ const AdminPanel = () => {
             }
         }
         checkAdmin();
-    }, []);
+    }, [
+        userId,
+        getToken,
+        router
+    ]);
 
     if (!user) {
         return null;
