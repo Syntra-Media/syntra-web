@@ -14,7 +14,7 @@ const LandingHero = () => {
     const ButtonMotion = motion(Button);
 
     useEffect(() => {
-        const controls = animate(count, 50, {
+        const controls = animate(count, 20, {
             duration: 2,
             ease: "easeInOut",
             delay: 1,
@@ -79,7 +79,7 @@ const LandingHero = () => {
                 animate={{opacity: 1}}
                 transition={{delay: 1}}
             >
-                <p className={"text-light/80 hidden lg:flex gap-2"}>Over <motion.span>{rounded}</motion.span> happy clients & firms</p>
+                <p className={"text-light/80 hidden lg:flex gap-1"}>Over <motion.span>{rounded}</motion.span> happy clients & firms</p>
                 <p className={"text-light/60 text-sm hidden lg:flex"}>be part of those who have achieved their marketing goals</p>
                 <ChevronDown className={"my-4"}/>
             </motion.div>

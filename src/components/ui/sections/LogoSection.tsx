@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from "next/image";
 import {cn} from "@/utils/cn";
-import Marquee from "@/components/magicui/marquee";
+import Marquee from "@/components/magicui/Marquee";
 
 const Images = [
     "/images/logos/RainbowVeterinerKlinigi.png",

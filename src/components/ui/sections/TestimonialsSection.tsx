@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button} from "@/components/ui/Button";
-import Marquee from "@/components/magicui/marquee";
+import Marquee from "@/components/magicui/Marquee";
 
 const TESTIMONIALS = [
     {
@@ -41,7 +41,7 @@ const TestimonialsSection = () => {
                             Book Your FREE Strategy Call
                         </Button>
                         <div className={"flex gap-3 items-center"}>
-                            <div className={"flex -space-x-6"}>
+                            <div className={"hidden -space-x-6"}>
                                 <div className={"w-12 h-12 rounded-full bg-white border border-bg-100"}></div>
                                 <div className={"w-12 h-12 rounded-full bg-white border border-bg-100"}></div>
                                 <div className={"w-12 h-12 rounded-full bg-white border border-bg-100"}></div>
