@@ -60,7 +60,7 @@ const ServicesSection = () => {
                     <p className={"text-light/90"}>
                     Frustrated by poor digital marketing results? We offer expert analysis, strategic planning, and hands-on management to turn your digital marketing around. 
                     <br></br><br></br>
-                    Our experts handle every aspect of your digital marketing, from creating compelling web designs and optimizing it with SEO, to managing social media and executing targeted ad campaigns. We provide end-to-end solutions that drive real results and save you time, and money. 
+                    Our experts handle every aspect of your digital marketing, from creating <span className="font-medium">compelling web designs</span> and optimizing it with <span className="font-medium">SEO</span>, to managing <span className="font-medium">social media</span> and executing targeted ad campaigns. We provide end-to-end solutions that drive real results and save you time, and money. 
                     <br></br><br></br>
                     <span className="font-medium">Book Your FREE Strategy Call to Learn How Our Experts Can Transform Your Business into a Digital Powerhouse.</span>
                     </p>

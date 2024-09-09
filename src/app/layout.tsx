@@ -8,9 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 const jsonLD: WithContext<WebPage> = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Syntra Media | Web Design, SEO & Social Media Agency",
+  name: "Syntra Media | Web Design, SEO & Digital Marketing Agency",
   description:
-    "Top-tier digital marketing services, including web design, SEO, and social media, without the high costs. Join our 50+ happy clients today and feel the change!",
+    "Top-tier digital marketing services, including web design, SEO, and social media, without the high costs. Join our 20+ happy clients today, here in Syntra Media!",
   url: "https://syntramedia.com",
   inLanguage: "en-US",
   image: "https://syntramedia.com/images/og-image.png",
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
 
   title: {
     template: "%s | Syntra Media",
-    default: "Syntra Media | Web Design, SEO & Social Media Agency",
+    default: "Syntra Media | Web Design, SEO & Digital Marketing Agency",
   },
-  description: "Top-tier digital marketing services, including web design, SEO, and social media, without the high costs. Join our 50+ happy clients today and feel the change!",
+  description: "Top-tier digital marketing services, including web design, SEO, and social media, without the high costs. Join our 20+ happy clients today, here in Syntra Media!",
   keywords: "digital marketing",
 
   alternates: {
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Syntra Media | Web Design, SEO & Social Media Agency",
-    description: "Top-tier digital marketing services, including web design, SEO, and social media, without the high costs. Join our 50+ happy clients today and feel the change!",
+    title: "Syntra Media | Web Design, SEO & Digital Marketing Agency",
+    description: "Top-tier digital marketing services, including web design, SEO, and social media, without the high costs. Join our 20+ happy clients today, here in Syntra Media!",
     type: "website",
     locale: "en_US",
     url: "https://syntramedia.com",
@@ -41,21 +41,21 @@ export const metadata: Metadata = {
         url: "https://syntramedia.com/images/og-image.png",
         width: 300,
         height: 300,
-        alt: "Syntra Media | Web Design, SEO & Social Media Agency",
+        alt: "Syntra Media | Web Design, SEO & Digital Marketing Agency",
       },
     ],
   },
 
   twitter: {
-    title: "Syntra Media | Web Design, SEO & Social Media Agency",
-    description: "Top-tier digital marketing services, including web design, SEO, and social media, without the high costs. Join our 50+ happy clients today and feel the change!",
+    title: "Syntra Media | Web Design, SEO & Digital Marketing Agency",
+    description: "Top-tier digital marketing services, including web design, SEO, and social media, without the high costs. Join our 20+ happy clients today, here in Syntra Media!",
     card: "summary_large_image",
     images: [
       {
         url: "https://syntramedia.com/images/og-image.png",
         width: 300,
         height: 300,
-        alt: "Syntra Media | Web Design, SEO & Social Media Agency",
+        alt: "Syntra Media | Web Design, SEO & Digital Marketing Agency",
       },
     ],
   },

@@ -70,7 +70,7 @@ const LandingHero = () => {
                     animate={{opacity: 1}}
                     transition={{delay: 1}}
                 >
-                    Book your free strategy call with our experts to get started now. 
+                    Book your free strategy call with our experts to get started now. No cost.
                 </motion.p>
             </motion.div>
             <motion.div

@@ -12,9 +12,9 @@ const AboutUsSection = () => {
                     Our <span className="text-primary-100">dedicated</span> team will get you<br/> top-tier digital marketing results.
                     </h2>
                     <p className={"text-light/90"}>
-                    With years of experience in digital marketing landspace, our team consists of industry veterans and innovative thinkers who bring a wealth of expertise to every project. 
+                    With years of experience in digital marketing landspace, our team consists of <span className="font-medium">industry veterans</span> and <span className="font-medium">innovative thinkers</span> who bring a wealth of expertise to every project. 
                     <br></br><br></br>
-                    We take pride in our client-centric approach. Our commitment is to deliver results that are not just effective but also aligned with your vision.
+                    We take pride in our <span className="font-medium">client-centric approach</span>. Our commitment is to deliver results that are not just effective but also aligned with your vision.
                     <br></br><br></br>
                     From crafting appealing web designs and optimizing them with SEO, to growing your business on social media, we ensure every aspect of your digital presence  is effectively managed to drive results and support your digital marketing success.
                     </p>

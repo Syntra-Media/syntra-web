@@ -34,10 +34,8 @@ const TestimonialsSection = () => {
                         Discover why our clients <span className={"text-primary"}>choose</span> us
                     </h2>
                     <p className={"text-light/90"}>
-                        We take pride in our client-centric approach. Our commitment is to deliver results that are not just effective but also aligned with your vision.
-                        <br/><br/>
-                        From crafting appealing web designs and optimizing them with SEO, to growing your business on social media, we ensure every aspect of your digital presence  is effectively managed to drive results and support your digital marketing success.
-                    </p>
+                    Our clients' success is at the core of what we do, and their feedback speaks volumes about our dedication. Each testimonial reflects the trust and satisfaction we've earned by staying committed to their unique goals.                       <br/><br/>
+                    From boosting online visibility to driving real business growth, our clients' experiences highlight the transformative power of our services. We’re honored to share their stories and continue pushing boundaries to help them achieve even greater success.                    </p>
                     <div className={"hidden lg:flex flex-col lg:flex-row items-center gap-6"}>
                         <Button className={"w-max"}>
                             Book Your FREE Strategy Call
