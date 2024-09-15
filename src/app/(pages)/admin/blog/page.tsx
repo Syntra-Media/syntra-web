@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { useAuth, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { createPost, deletePost, getPosts, isUserAdmin } from "@/utils/supabaseRequests";
+import {useAuth} from "@clerk/nextjs";
+import { createPost, deletePost, getPosts } from "@/utils/supabaseRequests";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { Input } from '@/components/ui/Input';
@@ -15,6 +15,8 @@ import { CircleX, Pen, Eye } from "lucide-react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAdmin } from '@/components/providers/AdminProvider';
+import {Oval} from 'react-loader-spinner'
 
 type Category = "SEO/ASO" | "Sosyal Medya Pazarlaması" | "Web Tasarım" | "Aday Bulma" | "Ücretli Pazarlama" | "İçerik Pazarlaması" | "E-Posta Pazarlaması" | "Dijital Kaynak Kütüphanesi";
 
@@ -28,8 +30,8 @@ const schema = z.object({
 });
 
 const Page = () => {
-    const { getToken, userId } = useAuth();
-    const { user } = useUser();
+    const {getToken} = useAuth();
+    const {user, isLoaded} = useAdmin()
     const router = useRouter();
     const [posts, setPosts] = useState<any[]>();
     const [mode, setMode] = useState("write");
@@ -66,20 +68,13 @@ const Page = () => {
     };
 
     useEffect(() => {
-        const checkAdmin = async () => {
-            const token = await getToken({ template: "supabase" });
-            const admin = await isUserAdmin({ userId, token });
-
-            if (!admin) {
-                router.push("/");
-            }
-
+        const GetPostsFromDB = async () => {
             const posts = await getPosts();
             setPosts(posts);
             setValue("writer", user?.fullName);
         };
-        checkAdmin();
-    }, [userId, getToken, router]);
+        GetPostsFromDB();
+    }, []);
 
     const onSubmit = async (data: any) => {
         const token = await getToken({ template: "supabase" });
@@ -91,6 +86,14 @@ const Page = () => {
         const posts = await getPosts();
         setPosts(posts);
     };
+
+    if (!isLoaded) {
+        return (
+            <div className={"w-full h-screen flex items-center justify-center"}>
+                <Oval color={"#ffc300"}/>
+            </div>
+        )
+    }
 
     return (
         <div className={"w-full flex"}>

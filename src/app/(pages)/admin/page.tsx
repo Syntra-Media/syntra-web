@@ -1,40 +1,28 @@
 "use client";
 
 import React, {useEffect} from 'react';
-import {useAuth, useUser} from "@clerk/nextjs";
-import {isUserAdmin} from "@/utils/supabaseRequests";
 import {useRouter} from "next/navigation";
+import { useAdmin } from '@/components/providers/AdminProvider';
 
 const AdminPanel = () => {
-    const {getToken, userId} = useAuth();
-    const {user} = useUser();
     const router = useRouter();
+    const {user, isLoaded} = useAdmin();
 
-    useEffect(() => {
-        const checkAdmin = async () => {
-            const token = await getToken({template: "supabase"});
-            const admin = await isUserAdmin({userId, token});
-
-            if (!admin) {
-                router.push("/");
-            }
-        }
-        checkAdmin();
-    }, [
-        userId,
-        getToken,
-        router
-    ]);
-
-    if (!user) {
-        return null;
+    if (!isLoaded) {
+        return (
+            <div className={"w-full h-screen flex justify-center items-center"}>
+                <p className={"text-2xl font-medium"}>
+                    Loading...
+                </p>
+            </div>
+        )
     }
 
     return (
         <div className={"w-full flex h-screen overflow-hidden"}>
             <div className={"flex flex-col gap-12 w-full h-full mx-24 mt-24"}>
                 <h1 className={"font-medium text-5xl"}>
-                    Welcome, <span className={"text-primary-100"}>{user.firstName}.</span>
+                    Welcome, <span className={"text-primary-100"}>{user?.firstName}.</span>
                 </h1>
                 <div className={"w-full h-full flex gap-24"}>
                     <div className={"hover:bg-neutral-800/20 transition-all w-full h-full mb-24 flex flex-col border border-light/10 rounded-lg justify-center items-center"} onClick={() => router.push("/admin/blog")}>

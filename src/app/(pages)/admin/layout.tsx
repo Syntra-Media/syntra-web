@@ -1,6 +1,7 @@
 // src/app/(pages)/admin/layout.tsx
 import { ClerkProvider } from "@clerk/nextjs";
 import { ReactNode } from "react";
+import {AdminProvider} from "@/components/providers/AdminProvider";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -9,9 +10,11 @@ interface AdminLayoutProps {
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <ClerkProvider>
-      <div className="admin-layout">
-        {children}
-      </div>
+        <AdminProvider>
+          <div className="admin-layout">
+            {children}
+          </div>
+        </AdminProvider>
     </ClerkProvider>
   );
 };
