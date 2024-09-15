@@ -26,7 +26,7 @@ const Blog = () => {
 
     return (
         <div className={"w-full flex"}>
-            <div className={"flex flex-col w-full h-full mx-8 lg:mx-[14rem] 2xl:mx-[18rem] my-14"}>
+            <div className={"flex flex-col w-full h-full mx-8 lg:mx-[5.5rem] 2xl:mx-[18rem] my-14"}>
                 <div className={"flex w-full gap-12 justify-center"}>
                     <div className={"flex flex-col bg-neutral-800/50"}>
                         <Link href={`/blog/${latestPost?.slug}`} passHref className={"w-full"}>
@@ -51,7 +51,7 @@ const Blog = () => {
                             </div>
                         </Link>
                     </div>
-                    <div className={"hidden 2xl:flex flex-col"}>
+                    <div className={"hidden lg:flex flex-col"}>
                         <div className={"flex justify-center w-full"}>
                             <div className={cn("cursor-pointer flex items-center justify-center w-full py-5 bg-neutral-800/50", selected === "latest" && "bg-transparent border-b border-primary")} onClick={() => setSelected("latest")}>
                                 En Yeniler
