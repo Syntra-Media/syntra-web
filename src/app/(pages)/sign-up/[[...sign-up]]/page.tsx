@@ -1,11 +1,21 @@
-import React from 'react';
+import {ClerkProvider, SignUp} from '@clerk/nextjs'
 
-const Page = () => {
+export default function Page() {
     return (
-        <div>
-            ...
-        </div>
-    );
-};
-
-export default Page;
+        <ClerkProvider>
+            <div className={"w-full h-screen flex justify-center items-center"}>
+                {/*
+                <SignUp
+                    appearance={{
+                        elements: {
+                            footer: {
+                                display: "none",
+                            }
+                        }
+                    }}
+                />
+                */}
+            </div>
+        </ClerkProvider>
+    )
+}
