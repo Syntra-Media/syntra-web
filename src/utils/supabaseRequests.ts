@@ -12,6 +12,25 @@ export const isUserAdmin = async ({userId, token}: any) => {
     return false;
 }
 
+export const getPostsByCategory = async (category: string) => {
+    console.log(category)
+    const supabase = await supabaseClient();
+
+    const {data, error} = await supabase.from("posts").select().eq("category", category);
+
+    if (error) {
+        console.error(error);
+        return [];
+    }
+
+    data?.forEach((post: any) => {
+        post.reading_time = Math.ceil(post.content.split(" ").length / 200);
+        post.date = new Date(post.created_at).toLocaleDateString("tr-TR");
+    })
+
+    return data;
+}
+
 export const getPosts = async () => {
     const supabase = await supabaseClient();
 
@@ -30,10 +49,10 @@ export const getPosts = async () => {
     return data;
 }
 
-export const createPost = async ({token, title, content, image, category, writer}: any) => {
+export const createPost = async ({token, title, content, image, category, writer, slug}: any) => {
     const supabase = await supabaseClient(token);
 
-    const {data, error} = await supabase.from("posts").insert([{title, content, image, category, writer}]);
+    const {data, error} = await supabase.from("posts").insert([{title, content, image, category, writer, slug}]);
 
     if (error) {
         console.error(error);

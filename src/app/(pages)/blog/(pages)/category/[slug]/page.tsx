@@ -1,18 +1,26 @@
 "use client";
 
-import React from 'react';
-import {getPosts} from "@/utils/supabaseRequests";
-import Image from "next/image";
-import Link from 'next/link';
-import {Skeleton} from "@/components/ui/Skeleton";
+import React, {useEffect} from 'react'
+import {NAV_ITEMS} from '@/components/ui/BlogHeader'
+import {usePosts} from "@/components/providers/PostProvider";
 import {Oval} from "react-loader-spinner";
-import { cn } from '@/utils/cn';
-import { Separator } from '@/components/ui/Separator';
-import { usePosts } from '@/components/providers/PostProvider';
+import Link from "next/link";
+import Image from "next/image";
 
-const Blog = () => {
+const Category = ({params}: {params: {slug: string}}) => {
+    const [categorizedPosts, setCategorizedPosts] = React.useState<any[]>();
+    const [category, setCategory] = React.useState<string>(NAV_ITEMS.find(item => item.route === `/blog/category/${params.slug}`)?.name || "");
     const {posts, loading} = usePosts();
-    const [selectedCategory, setSelectedCategory] = React.useState<string>("all")
+
+    useEffect(() => {
+        if (loading) {
+            return;
+        }
+
+        const categoryPosts = posts.filter(post => post.category === category);
+        console.log(categoryPosts);
+        setCategorizedPosts(categoryPosts);
+    }, [loading]);
 
     if (loading) {
         return (
@@ -28,25 +36,22 @@ const Blog = () => {
                 <div className={"flex flex-col w-full gap-8"}>
                     <div className={"flex flex-col gap-4"}>
                         <h2 className={"text-3xl font-medium"}>
-                            En Yeniler
+                            {category}
                         </h2>
-                        <div className={"flex gap-10 text-light/70"}>
-                            <p className={selectedCategory === "all" ? "text-light/90 border-b border-primary cursor-pointer" : "cursor-pointer"} onClick={() => setSelectedCategory("all")}>
-                                Hepsi
-                            </p>
-                            <p className={selectedCategory === "SEO/ASO" ? "text-light/90 border-b border-primary cursor-pointer" : "cursor-pointer"} onClick={() => setSelectedCategory("SEO/ASO")}>
-                                SEO
-                            </p>
-                            <p className={selectedCategory === "Web Tasarım" ? "text-light/90 border-b border-primary cursor-pointer" : "cursor-pointer"} onClick={() => setSelectedCategory("Web Tasarım")}>
-                                Web Tasarım
-                            </p>
-                        </div>
                     </div>
                     <div className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"}>
                         {
-                            posts.map((post: any, index: number) => {
-                                if (index === posts.length - 1) return;
-                                if (selectedCategory === "all" || post.category === selectedCategory) {
+                            (categorizedPosts?.length == 0) && (
+                                <div>
+                                    <p className={"text-light/60"}>
+                                        Bu kategoride henüz hiç yazı bulunmamaktadır.
+                                    </p>
+                                </div>
+                            )
+                        }
+                        {
+                            categorizedPosts?.map((post: any, index: number) => {
+                                if (post.category === category || category === "Tüm Yazılar") {
                                     return (
                                         <Link href={`/blog/${post.slug}`} passHref key={post.id} className={"w-full"}>
                                             <div className={"flex flex-col gap-4 cursor-pointer w-full"}>
@@ -80,6 +85,6 @@ const Blog = () => {
             </div>
         </div>
     );
-};
+}
 
-export default Blog;
+export default Category;

@@ -61,7 +61,7 @@ const PortalSideBar = ({children}: PortalSideBarProps) => {
 
     return (
         <div className={"flex w-full h-screen bg-radial overflow-hidden text-light"}>
-            <div className={"w-20 h-screen md:hidden sm:hidden bg-bg flex"}>
+            <div className={"w-20 h-screen hidden md:flex bg-bg"}>
                 <div className={"w-full h-full flex flex-col mx-4 my-8 items-center gap-8"}>
                     <svg width="18" height="38" viewBox="0 0 18 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path

@@ -20,16 +20,16 @@ const Portal = () => {
                     Sizlere daha iyi hizmet sunabilmek için ihtiyaç duyduğunuz tüm araçlara bu portal üzerinden kolayca ulaşabilirsiniz.
                 </p>
                 <div className={"w-full h-full grid grid-cols-8 grid-rows-4 gap-8"}>
-                    <div className="col-span-2 ">
+                    <div className="col-span-2">
                         <PhaseCard/>
                     </div>
-                    <div className="col-span-3 col-start-3 ">2</div>
-                    <div className="col-span-3 col-start-6 ">3</div>
-                    <div className="col-span-2 row-start-2 ">4</div>
-                    <div className="col-span-3 col-start-3 row-start-2 ">5</div>
-                    <div className="col-span-3 col-start-6 row-start-2 ">6</div>
-                    <div className="col-span-5 row-span-2 row-start-3 ">7</div>
-                    <div className="col-span-3 row-span-2 col-start-6 row-start-3 ">8</div>
+                    <div className="col-span-3 col-start-3 bg-bg-100/70 rounded-lg">2</div>
+                    <div className="col-span-3 col-start-6 bg-bg-100/70 rounded-lg">3</div>
+                    <div className="col-span-2 row-start-2 bg-bg-100/70 rounded-lg">4</div>
+                    <div className="col-span-3 col-start-3 row-start-2 bg-bg-100/70 rounded-lg">5</div>
+                    <div className="col-span-3 col-start-6 row-start-2 bg-bg-100/70 rounded-lg">6</div>
+                    <div className="col-span-5 row-span-2 row-start-3 bg-bg-100/70 rounded-lg">7</div>
+                    <div className="col-span-3 row-span-2 col-start-6 row-start-3 bg-bg-100/70 rounded-lg">8</div>
                 </div>
             </div>
         </div>

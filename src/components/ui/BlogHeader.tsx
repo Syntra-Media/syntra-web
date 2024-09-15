@@ -7,8 +7,9 @@ import { Button } from './Button';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 import {cn} from "@/utils/cn";
+import { usePosts } from '../providers/PostProvider';
 
-const NAV_ITEMS = [
+export const NAV_ITEMS = [
     {
         name: "Anasayfa",
         route: "/blog",
@@ -55,6 +56,8 @@ const BlogHeader = () => {
     const [open, setOpen] = React.useState(false);
     const pathname = usePathname();
 
+    const {posts, loading} = usePosts();
+
     return (
         <div className={"w-full h-24 flex"}>
             <div className={"w-full flex items-center mx-12 justify-between gap-12"}>
@@ -82,11 +85,12 @@ const BlogHeader = () => {
                         open && (
                             <div className={"absolute top-0 left-0 flex flex-col justify-center text-center gap-4 w-full h-screen bg-neutral-800/50 backdrop-blur"}>
                                 {NAV_ITEMS.map((item) => (
-                                    <a key={item.route}
+                                    <Link key={item.route}
                                         href={item.route}
+                                          passHref
                                         className={cn("transition-all text-lg text-light/70 hover:text-light/100", pathname === item.route && "text-light")}>
                                         {item.name}
-                                    </a>
+                                    </Link>
                                 ))}
                                 <CircleX onClick={() => setOpen(false)} className={"absolute top-0 right-0 m-12 cursor-pointer"} size={36}/>
                             </div>
@@ -95,11 +99,12 @@ const BlogHeader = () => {
                 </div>
                 <div className={"gap-4 items-center justify-end hidden lg:flex flex-wrap"}>
                     {NAV_ITEMS.map((item) => (
-                        <a key={item.route}
+                        <Link key={item.route}
                             href={item.route}
+                              passHref
                             className={cn("transition-all text-light/70 hover:text-light/100", pathname === item.route && "text-light")}>
                              {item.name}
-                        </a>
+                        </Link>
                     ))}
                 </div>
             </div>

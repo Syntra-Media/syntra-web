@@ -1,37 +1,28 @@
 "use client"
 
-import React from 'react';
-import {getPost} from "@/utils/supabaseRequests";
+import React, {useEffect} from 'react';
+import {usePosts} from "@/components/providers/PostProvider";
 import {useRouter} from 'next/navigation'
-import Image from "next/image";
 import { Separator } from '@/components/ui/Separator';
 
 const Page = ({params}: {params: {slug: string}}) => {
     const [post, setPost] = React.useState<any>();
-    const [readingTime, setReadingTime] = React.useState<number>(0);
-    const [date, setDate] = React.useState<string>("");
     const router = useRouter();
 
-    React.useEffect(() => {
-        const fetchPost = async () => {
-            const data = await getPost({title: decodeURIComponent(params.slug)});
-            console.log(decodeURIComponent(params.slug))
-            console.log(data);
+    const {posts, loading} = usePosts();
 
-            if (!data) {
-                router.push("/404")
-                return;
-            }
-
-            setPost(data);
-            setReadingTime(Math.ceil(data.content.split(" ").length / 200));
-            setDate(new Date(data.created_at).toLocaleDateString("tr-TR"));
+    useEffect(() => {
+        if (loading) {
+            return;
         }
-        fetchPost();
-    }, [
-        params,
-        router
-    ]);
+
+        console.log(params.slug);
+        const post = posts.find(post => post.slug === params.slug);
+        if (!post) {
+        }
+
+        setPost(post);
+    }, [loading]);
 
     return (
         <div className={"w-full h-full flex justify-center"}>
@@ -49,11 +40,11 @@ const Page = ({params}: {params: {slug: string}}) => {
                         </p>
                         <div className={"flex items-center text-light/70"}>
                             <p>
-                                {date}
+                                {post?.date}
                             </p>
                             <Separator orientation={"vertical"} className={"h-6 bg-light/60 mx-2"}/>
-                            <p>
-                                {readingTime} dk. okuma süresi
+                            <p className={post?.reading_time > 0 ? "block": "hidden"}>
+                                {post?.reading_time} dk. okuma süresi
                             </p>
                         </div>
                     </div>
