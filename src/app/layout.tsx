@@ -8,11 +8,11 @@ const inter = Inter({ subsets: ["latin"] });
 const jsonLD: WithContext<WebPage> = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Syntra Media | Web Design, SEO & Digital Marketing Agency",
+  name: "Syntra Media | Web Tasarım, SEO & Dijital Pazarlama Ajansı",
   description:
-    "Top-tier digital marketing services, including web design, SEO, and social media, without the high costs. Join our 20+ happy clients today, here in Syntra Media!",
+  "Yüksek maliyetler olmadan, web tasarımı, SEO ve sosyal medya gibi üst düzey dijital pazarlama hizmetleri sunuyoruz. 20'den fazla memnun müşterimizle birlikte Syntra Media'da yerinizi alın!",
   url: "https://syntramedia.com",
-  inLanguage: "en-US",
+  inLanguage: "tr-TR",
   image: "https://syntramedia.com/images/og-image.png",
 };
 
@@ -21,41 +21,43 @@ export const metadata: Metadata = {
 
   title: {
     template: "%s | Syntra Media",
-    default: "Syntra Media | Web Design, SEO & Digital Marketing Agency",
+    default: "Syntra Media | Web Tasarım, SEO & Dijital Pazarlama Ajansı",
   },
-  description: "Top-tier digital marketing services, including web design, SEO, and social media, without the high costs. Join our 20+ happy clients today, here in Syntra Media!",
-  keywords: "digital marketing",
+  description: "Yüksek maliyetler olmadan, web tasarımı, SEO ve sosyal medya gibi üst düzey dijital pazarlama hizmetleri sunuyoruz. 20'den fazla memnun müşterimizle birlikte Syntra Media'da yerinizi alın!",
+  keywords: "dijital pazarlama",
 
   alternates: {
     canonical: "./",
   },
 
   openGraph: {
-    title: "Syntra Media | Web Design, SEO & Digital Marketing Agency",
-    description: "Top-tier digital marketing services, including web design, SEO, and social media, without the high costs. Join our 20+ happy clients today, here in Syntra Media!",
+    title: "Syntra Media | Web Tasarım, SEO & Dijital Pazarlama Ajansı",
+    description:
+        "Yüksek maliyetler olmadan, web tasarımı, SEO ve sosyal medya gibi üst düzey dijital pazarlama hizmetleri sunuyoruz. 20'den fazla memnun müşterimizle birlikte Syntra Media'da yerinizi alın!",
     type: "website",
-    locale: "en_US",
+    locale: "tr_TR",
     url: "https://syntramedia.com",
     images: [
       {
         url: "https://syntramedia.com/images/og-image.png",
         width: 300,
         height: 300,
-        alt: "Syntra Media | Web Design, SEO & Digital Marketing Agency",
+        alt: "Syntra Media | Web Tasarım, SEO & Dijital Pazarlama Ajansı",
       },
     ],
   },
 
   twitter: {
     title: "Syntra Media | Web Design, SEO & Digital Marketing Agency",
-    description: "Top-tier digital marketing services, including web design, SEO, and social media, without the high costs. Join our 20+ happy clients today, here in Syntra Media!",
+    description:
+        "Yüksek maliyetler olmadan, web tasarımı, SEO ve sosyal medya gibi üst düzey dijital pazarlama hizmetleri sunuyoruz. 20'den fazla memnun müşterimizle birlikte Syntra Media'da yerinizi alın!",
     card: "summary_large_image",
     images: [
       {
         url: "https://syntramedia.com/images/og-image.png",
         width: 300,
         height: 300,
-        alt: "Syntra Media | Web Design, SEO & Digital Marketing Agency",
+        alt: "Syntra Media | Web Design, SEO & Dijital Pazarlama Ajansı",
       },
     ],
   },
