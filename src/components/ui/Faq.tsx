@@ -8,13 +8,15 @@ type FaqProps = {
     description: string,
     isActive: boolean,
     className?: string,
+    onClick: () => void
 }
 
 
-const Faq = ({title, description, isActive, className}: FaqProps) => {
+const Faq = ({title, description, isActive, className, onClick}: FaqProps) => {
     return (
         <motion.div
-            className={cn("flex flex-col text-light backdrop-blur bg-neutral-900/20 border border-light/10 rounded-lg transition-all duration-300", className)}
+            className={cn("flex flex-col cursor-pointer text-light backdrop-blur bg-neutral-900/20 border border-light/10 rounded-lg transition-all duration-300", className)}
+            onClick={onClick}
         >
             <div className={"flex justify-between m-4"}>
                 <p>{title}</p>

@@ -1,0 +1,40 @@
+{
+  "header": {
+    "contact": "Bize Ulaşın"
+  },
+  "hero": {
+    "subheader": "Karmaşayı çözüyoruz – Syntra Media'daki uzman ekibimiz, web tasarımı, sosyal medya ve SEO hedeflerinize ulaşmanıza yardımcı olur, zaman ve para tasarrufu sağlar.",
+    "email_placeholder": "E-postanızı girin...",
+    "cta_button": "ÜCRETSİZ Strateji Görüşmenizi Ayırtın",
+    "input_caption": "Uzman ekibimizle ücretsiz strateji görüşmesi alarak pazarlama değişiminizi başlatın!",
+    "footer_one": "20+ memnun müşteri ve firma",
+    "footer_two": "pazarlama hizmetlerimizle başarıya ulaşanların arasına katılın"
+  },
+  "services": {
+    "text": "Yetersiz dijital pazarlama sonuçlarından şikayetçi misiniz? Analiz-planlama-uygulama yöntemimizle size özel stratejiler geliştiriyoruz.\nUzmanlarımız, estetik web tasarımları oluşturmaktan SEO optimizasyonuna, sosyal medya yönetiminden hedeflenmiş reklam kampanyalarına kadar dijital pazarlamanızın her yönünü yönetir. Gerçek sonuçlar elde etmenizi sağlamak, zamanınızı ve bütçenizi korumak için uçtan uca çözümler sunuyoruz.\nÜcretsiz Strateji Görüşmeniz İçin Randevu Alın ve Size Nasıl Yardımcı Olabileceğimizi Tartışalım."
+  },
+  "aboutus": {
+    "text": "Dijital pazarlama alanında yılların deneyimine sahip ekibimiz, sektördeki tecrübeli ve yenilikçi profesyonellerden oluşmaktadır. \nMüşteri odaklı yaklaşımımızla, sadece başarılı çözümler değil, aynı zamanda vizyonunuza ve marka imajınıza uygun çözümler sunuyoruz.\nEstetik web tasarımları oluşturmaktan SEO ile optimize etmeye, sosyal medyada işinizi büyütmeye kadar dijital varlığınızın her yönünü etkin bir şekilde yönetiyoruz. Dijital pazarlama başarınız için her aşamada destek sağlıyoruz.",
+    "co_founder": "Kurucu Ortak",
+    "image_caption": "Ve bizimle çalışan onlarcası!"
+  },
+  "testimonials": {
+    "text": "Müşterilerimizin başarısı, yaptığımız işin merkezindedir ve onların geri bildirimleri, bağlılığımızın ne kadar derin olduğunu anlatır. Her bir referans, onların özel hedeflerine olan bağlılığımız sayesinde kazandığımız güven ve memnuniyeti yansıtır.\nÇevrimiçi görünürlüğü artırmaktan gerçek iş büyümesini sağlamaya kadar, müşterilerimizin deneyimleri hizmetlerimizin dönüştürücü gücünü vurgular. Hikayelerini paylaşmaktan onur duyuyor ve onları daha büyük başarılara ulaşmaları için sınırları zorlamaya devam ediyoruz.",
+    "satisfied_clients": "Memnun Müşteri"
+  },
+  "cta": {
+    "categories": {
+      "web_design": "Web Tasarımı",
+      "seo": "Beyaz Şapka SEO",
+      "ui_ux": "UI/UX Tasarım",
+      "socialmedia": "Sosyal Medya",
+      "other": "Genel/Diğer"
+    },
+    "contact": {
+      "full_name": "Ad Soyad",
+      "company": "Şirket İsmi",
+      "email": "E-posta adresi",
+      "meeting": "Toplantı Tercihi"
+    }
+  }
+}

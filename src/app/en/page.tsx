@@ -15,21 +15,21 @@ import CTASection from "@/components/ui/sections/CTASection";
 
 
 const Home = () => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const [locale, setLocale] = React.useState<"en" | "tr">(pathname === "/" ? "tr" : "en");
+    const router = useRouter();
+    const pathname = usePathname();
+    const [locale, setLocale] = React.useState<"en" | "tr">(pathname === "/" ? "tr" : "en");
 
-  return (
+    return (
         <div className={"flex flex-col w-full overflow-x-hidden"}>
-          <Header locale={locale}/>
-          <LandingHero locale={locale}/>
-          <LogoSection/>
-          <ServicesSection locale={locale}/>
-          <AboutUsSection locale={locale}/>
-          <TestimonialsSection locale={locale}/>
-          <FaqSection locale={locale}/>
-          <CTASection locale={locale}/>
-          <Footer locale={locale}/>
+            <Header locale={locale}/>
+            <LandingHero locale={locale}/>
+            <LogoSection/>
+            <ServicesSection locale={locale}/>
+            <AboutUsSection locale={locale}/>
+            <TestimonialsSection locale={locale}/>
+            <FaqSection locale={locale}/>
+            <CTASection locale={locale}/>
+            <Footer locale={locale}/>
         </div>
     );
 };

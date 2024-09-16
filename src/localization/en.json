@@ -1,0 +1,40 @@
+{
+  "header": {
+    "contact": "Contact Us"
+  },
+  "hero": {
+    "subheader": "Taking over the guesswork – Our expert team at Syntra Media will help you achieve your website, social media, and SEO goals, saving you time and money.",
+    "email_placeholder": "Type your favorite email...",
+    "cta_button": "Book Your FREE Strategy Call",
+    "input_caption": "Book your free strategy call with our experts to get started now. No cost.",
+    "footer_one": "Over 20+ happy clients & firms",
+    "footer_two": "be part of those who achieved their marketing goals"
+  },
+  "services": {
+    "text": "Frustrated by poor digital marketing results? We offer expert analysis, strategic planning, and hands-on management to turn your digital marketing around. \nOur experts handle every aspect of your digital marketing, from creating compelling web designs and optimizing it with SEO, to managing social media and executing targeted ad campaigns. We provide end-to-end solutions that drive real results and save you time, and money. \nBook Your FREE Strategy Call to Learn How Our Experts Can Transform Your Business into a Digital Powerhouse."
+  },
+  "aboutus": {
+    "text": "With years of experience in digital marketing landspace, our team consists of industry veterans and innovative thinkers who bring a wealth of expertise to every project. \nWe take pride in our client-centric approach. Our commitment is to deliver results that are not just effective but also aligned with your vision.\nFrom crafting appealing web designs and optimizing them with SEO, to growing your business on social media, we ensure every aspect of your digital presence  is effectively managed to drive results and support your digital marketing success.",
+    "co_founder": "Co-founder",
+    "image_caption": "And many more who works with us!"
+  },
+  "testimonials": {
+    "text": "Our clients' success is at the core of what we do, and their feedback speaks volumes about our dedication. Each testimonial reflects the trust and satisfaction we've earned by staying committed to their unique goals.\nFrom boosting online visibility to driving real business growth, our clients' experiences highlight the transformative power of our services. We’re honored to share their stories and continue pushing boundaries to help them achieve even greater success.",
+    "satisfied_clients": "Satisfied clients"
+  },
+  "cta": {
+    "categories": {
+      "web_design": "Web Design",
+      "seo": "White Hat SEO",
+      "ui_ux": "UI/UX Design",
+      "socialmedia": "Social Media",
+      "other": "General/Other"
+    },
+    "contact": {
+      "full_name": "Full Name",
+      "company": "Company Name",
+      "email": "Email Address",
+      "meeting": "Meeting Preference"
+    }
+  }
+}

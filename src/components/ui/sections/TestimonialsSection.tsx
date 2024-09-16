@@ -2,6 +2,9 @@ import React from "react";
 import {Button} from "@/components/ui/Button";
 import Marquee from "@/components/magicui/Marquee";
 
+import tr from '@/localization/tr.json'
+import en from '@/localization/en.json'
+
 const TESTIMONIALS = [
     {
         name: "Victor Shyptur",
@@ -25,20 +28,36 @@ const TESTIMONIALS = [
     },
 ]
 
-const TestimonialsSection = () => {
+const TestimonialsSection = ({locale}: {locale: string}) => {
+    const [selectedLocale, setSelectedLocale] = React.useState(locale === "en" ? en : tr)
+
     return (
         <div className={"flex w-full"}>
             <div className={"flex flex-col lg:flex-row gap-x-24 gap-y-8 w-full h-full mx-8 my-28 lg:mx-40 items-center "}>
                 <div className={"w-full flex flex-col gap-8"}>
                     <h2 className={"font-semibold text-3xl lg:text-4xl"}>
-                        Discover why our clients <span className={"text-primary"}>choose</span> us
+                        {
+                            locale === "en" ? (
+                                <span>
+                                    Discover why our clients <span className={"text-primary-100"}>choose</span> us
+                                </span>
+                            ) : (
+                                <span>
+                                    Müşterilerimiz neler <span className={"text-primary-100"}>düşünüyor?</span>
+                                </span>
+                            )
+                        }
                     </h2>
-                    <p className={"text-light/90"}>
-                    Our clients&apos; success is at the core of what we do, and their feedback speaks volumes about our dedication. Each testimonial reflects the trust and satisfaction we&apos;ve earned by staying committed to their unique goals.                       <br/><br/>
-                    From boosting online visibility to driving real business growth, our clients&apos; experiences highlight the transformative power of our services. We’re honored to share their stories and continue pushing boundaries to help them achieve even greater success.                    </p>
+                    {
+                        selectedLocale.testimonials.text.replaceAll("\n", "<br/>").split("<br/>").map((text, index) => (
+                            <p key={index} className={"text-light/90 text-lg"}>
+                                {text}
+                            </p>
+                        ))
+                    }
                     <div className={"hidden lg:flex flex-col lg:flex-row items-center gap-6"}>
                         <Button className={"w-max"}>
-                            Book Your FREE Strategy Call
+                            {selectedLocale.hero.cta_button}
                         </Button>
                         <div className={"flex gap-3 items-center"}>
                             <div className={"hidden -space-x-6"}>
@@ -52,7 +71,9 @@ const TestimonialsSection = () => {
                                     20+
                                 </p>
                                 <p className={"text-light/70 text-sm"}>
-                                    Satisfied clients
+                                    {
+                                        selectedLocale.testimonials.satisfied_clients
+                                    }
                                 </p>
                             </div>
                         </div>

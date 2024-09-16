@@ -19,6 +19,9 @@ import {
 import OrbitingCircles from "@/components/magicui/OrbitingCircles";
 import { cn } from '@/utils/cn';
 
+import tr from '@/localization/tr.json'
+import en from '@/localization/en.json'
+
 const WebDesignSection = () => {
     return (
         <div className={"w-full h-full flex justify-center items-center group"}>
@@ -128,31 +131,71 @@ const Skeleton = () => (
         className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"></div>
 );
 
-const ITEMS = [
+type LanguageCode = "tr" | "en";
+
+type LanguageContent = {
+    title: string;
+    description: string;
+};
+
+type Item = {
+    tr: LanguageContent;
+    en: LanguageContent;
+    header: JSX.Element; // The header is a React component
+};
+
+
+// @ts-ignore
+const ITEMS: Item[] = [
     {
-        title: "UI/UX Design",
-        description: "Expert UI/UX design that enhances user experience and drives engagement.",
+        tr: {
+            title: "UI/UX Tasarım",
+            description: "Kullanıcı deneyimini artıran ve etkileşimi artıran uzman UI/UX tasarımı.",
+        },
+        en: {
+            title: "UI/UX Design",
+            description: "Expert UI/UX design that enhances user experience and drives engagement.",
+        },
         header: <UIUXDesignSection/>
     },
     {
-        title: "Web Design",
-        description: "Custom web design that captivates and converts.",
+        tr: {
+            title: "Web Tasarım",
+            description: "Dikkat çeken ve dönüşüm sağlayan özel web tasarımı.",
+        },
+        en: {
+            title: "Web Design",
+            description: "Custom web design that captivates and converts.",
+        },
         header: <WebDesignSection/>
     },
     {
-        title: "SEO",
-        description: "Boost your visibility and grow your business with expert SEO services.",
+        tr: {
+            title: "SEO",
+            description: "Uzman SEO hizmetleri ile görünürlüğünüzü artırın ve işinizi büyütün.",
+        },
+        en: {
+            title: "SEO",
+            description: "Boost your visibility and grow your business with expert SEO services.",
+        },
         header: <SEOComponent/>
     },
     {
-        title: "Social Media Management",
-        description: "Effective social media management that grows your brand and audience.",
+        tr: {
+            title: "Sosyal Medya Yönetimi",
+            description: "Markanızı ve kitlenizi büyüten etkili sosyal medya yönetimi.",
+        },
+        en: {
+            title: "Social Media Management",
+            description: "Effective social media management that grows your brand and audience.",
+        },
         header: <SocialMediaComponent/>
     },
+];
 
-]
+const ServicesSection = ({locale}: {locale: string}) => {
+    const [selectedLocale, setSelectedLocale] = useState(locale === "en" ? en : tr);
 
-const ServicesSection = () => {
     return (
         <div className={"flex w-full overflow-hidden"}>
             <div className={"flex flex-col lg:flex-row w-full h-full mx-8 lg:mx-40 my-32 gap-32 items-center justify-center dark"}>
@@ -161,8 +204,8 @@ const ServicesSection = () => {
                         ITEMS.map((item, index) => (
                             <BentoGridItem
                                 key={index}
-                                title={item.title}
-                                description={item.description}
+                                title={item[locale as LanguageCode].title}
+                                description={item[locale as LanguageCode].description}
                                 header={item.header}
                                 className={cn("rounded-xl border border-neutral-100/10 bg-bg/50", index === 1 || index === 2 ? "lg:col-span-2": "")}
                             />
@@ -171,16 +214,24 @@ const ServicesSection = () => {
                 </BentoGrid>
                 <div className={"w-full h-full flex flex-col gap-8 justify-center"}>
                     <h2 className={"font-semibold text-4xl"}>
-                        Tired of poor digital marketing results? &ndash; <span className={"text-primary-100"}>We got you covered!</span>
+                        {
+                            locale === "en" ? (
+                                <span>Tired of poor digital marketing results? &ndash; <span className={"text-primary-100"}>We got you covered!</span></span>
+                            ) : (
+                                <span>
+                                    Dijital pazarlamanız beklentilerinizi karşılamıyor mu? &ndash; <span className={"text-primary-100"}>Çözüm bizde!</span>
+                                </span>
+                            )
+                        }
                     </h2>
-                    <p className={"text-light/90"}>
-                    Frustrated by poor digital marketing results? We offer expert analysis, strategic planning, and hands-on management to turn your digital marketing around. 
-                    <br></br><br></br>
-                    Our experts handle every aspect of your digital marketing, from creating <span className="font-medium">compelling web designs</span> and optimizing it with <span className="font-medium">SEO</span>, to managing <span className="font-medium">social media</span> and executing targeted ad campaigns. We provide end-to-end solutions that drive real results and save you time, and money. 
-                    <br></br><br></br>
-                    <span className="font-medium">Book Your FREE Strategy Call to Learn How Our Experts Can Transform Your Business into a Digital Powerhouse.</span>
-                    </p>
-                    <Button variant={"default"} className={"w-max"}>Book Your FREE Strategy Call</Button>
+                    {
+                        selectedLocale.services.text.replaceAll("\n", "<br/>").split("<br/>").map((text, index) => (
+                            <p key={index} className={"text-lg"}>
+                                {text}
+                            </p>
+                        ))
+                    }
+                    <Button variant={"default"} className={"w-max"}>{selectedLocale.hero.cta_button}</Button>
                 </div>
             </div>
         </div>
