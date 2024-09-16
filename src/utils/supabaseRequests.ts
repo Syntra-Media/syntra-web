@@ -1,36 +1,5 @@
 import {supabaseClient} from "@/utils/supabaseClient";
 
-export const isUserAdmin = async ({userId, token}: any) => {
-    const supabase = await supabaseClient(token);
-
-    const {data} = await supabase.from("admins").select().eq("user_id", userId).single();
-
-    if (data) {
-        return true;
-    }
-
-    return false;
-}
-
-export const getPostsByCategory = async (category: string) => {
-    console.log(category)
-    const supabase = await supabaseClient();
-
-    const {data, error} = await supabase.from("posts").select().eq("category", category);
-
-    if (error) {
-        console.error(error);
-        return [];
-    }
-
-    data?.forEach((post: any) => {
-        post.reading_time = Math.ceil(post.content.split(" ").length / 200);
-        post.date = new Date(post.created_at).toLocaleDateString("tr-TR");
-    })
-
-    return data;
-}
-
 export const getPosts = async () => {
     const supabase = await supabaseClient();
 
@@ -75,18 +44,21 @@ export const deletePost = async ({token, title}: any) => {
     return data;
 }
 
-export const updatePost = async ({token, title, content, image}: any) => {
+export const updatePost = async ({ token, id, title, slug, content, image, category }: any) => {
     const supabase = await supabaseClient(token);
 
-    const {data, error} = await supabase.from("posts").update({content, image}).eq("title", title);
+    const { data, error } = await supabase
+        .from("posts")
+        .update({ title, slug, content, image, category })
+        .eq("id", id);
 
     if (error) {
-        console.error(error);
+        console.error("Update error:", error.message, error.details);
         return false;
     }
 
     return data;
-}
+};
 
 export const getPost = async ({title}: any) => {
     const supabase = await supabaseClient();

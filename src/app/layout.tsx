@@ -70,14 +70,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} text-light bg-bg`}>
-        <Script
-          id="json-ld"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLD) }}
-        />
-          {children}
-      </body>
+    <body className={`${inter.className} text-light bg-bg`}>
+    <Script
+        id="json-ld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLD)}}
+    />
+    <Script async src="https://www.googletagmanager.com/gtag/js?id=G-D7W6008VJN"></Script>
+    <Script id="google-analytics" strategy="lazyOnload">
+      {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-D7W6008VJN');
+      `}
+    </Script>
+    {children}
+    </body>
     </html>
   );
 }

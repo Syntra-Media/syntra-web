@@ -2,6 +2,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import { ReactNode } from "react";
 import {AdminProvider} from "@/components/providers/AdminProvider";
+import {Toaster} from "react-hot-toast";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -12,6 +13,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     <ClerkProvider>
         <AdminProvider>
           <div className="admin-layout">
+            <Toaster position={"top-left"}/>
             {children}
           </div>
         </AdminProvider>
