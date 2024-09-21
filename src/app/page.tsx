@@ -19,6 +19,15 @@ const Home = () => {
   const pathname = usePathname();
   const [locale, setLocale] = React.useState<"en" | "tr">(pathname === "/" ? "tr" : "en");
 
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const locale = navigator.language || "en"
+            if (!locale.includes("tr")) {
+                router.push("/en")
+            }
+        }
+    }, []);
+
   return (
         <div className={"flex flex-col w-full overflow-x-hidden"}>
           <Header locale={locale}/>

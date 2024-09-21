@@ -73,9 +73,9 @@ const BlogHeader = () => {
                         </svg>
                     </Link>
                     <Separator orientation={"vertical"} className={"bg-light/20 mx-4 h-12"}/>
-                    <p className={"font-medium uppercase text-light/70"}>
+                    <Link className={"font-medium uppercase text-light/70"} href={"/blog"} passHref>
                         Blog
-                    </p>
+                    </Link>
                 </div>
                 <div className={"flex items-center justify-center lg:hidden"}>
                     <Button onClick={() => setOpen(!open)} variant={"ghost"}>
