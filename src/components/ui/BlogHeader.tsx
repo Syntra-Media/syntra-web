@@ -38,18 +38,6 @@ export const NAV_ITEMS = [
         name: "Ücretli Pazarlama",
         route: "/blog/category/paid-marketing",
     },
-    {
-        name: "İçerik Pazarlaması",
-        route: "/blog/category/content-marketing",
-    },
-    {
-        name: "E-Posta Pazarlaması",
-        route: "/blog/category/email-marketing",
-    },
-    {
-        name: "Dijital Kaynak Kütüphanesi",
-        route: "/blog/category/digital-library",
-    },
 ]
 
 const BlogHeader = () => {
@@ -79,7 +67,7 @@ const BlogHeader = () => {
                 </div>
                 <div className={"flex items-center justify-center lg:hidden"}>
                     <Button onClick={() => setOpen(!open)} variant={"ghost"}>
-                        <Menu/>
+                        <Menu className={"text-primary-100"}/>
                     </Button>
                     {
                         open && (
@@ -97,7 +85,7 @@ const BlogHeader = () => {
                         )
                     }
                 </div>
-                <div className={"gap-4 items-center justify-end hidden lg:flex flex-wrap"}>
+                <div className={"gap-4 items-center justify-end hidden lg:flex overflow-hidden"}>
                     {NAV_ITEMS.map((item) => (
                         <Link key={item.route}
                             href={item.route}
