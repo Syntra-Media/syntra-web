@@ -1,11 +1,11 @@
 "use client";
 
 import React, {useEffect} from 'react';
-import {useRouter} from "next/navigation";
 import { useAdmin } from '@/components/providers/AdminProvider';
+import Link from 'next/link';
+import {NotebookPen, Presentation, SquareUser } from 'lucide-react';
 
 const AdminPanel = () => {
-    const router = useRouter();
     const {user, isLoaded} = useAdmin();
 
     if (!isLoaded) {
@@ -19,23 +19,36 @@ const AdminPanel = () => {
     }
 
     return (
-        <div className={"w-full flex h-screen overflow-hidden"}>
+        <div className={"w-full flex h-screen overflow-hidden text-light"}>
             <div className={"flex flex-col gap-12 w-full h-full mx-24 mt-24"}>
-                <h1 className={"font-medium text-5xl"}>
-                    Welcome, <span className={"text-primary-100"}>{user?.firstName}.</span>
-                </h1>
-                <div className={"w-full h-full flex gap-24"}>
-                    <div className={"hover:bg-neutral-800/20 transition-all w-full h-full mb-24 flex flex-col border border-light/10 rounded-lg justify-center items-center"} onClick={() => router.push("/admin/blog")}>
-                        <p className={"text-6xl"}>
+                <div className={"flex flex-col gap-4"}>
+                    <h1 className={"font-medium text-5xl"}>
+                        Welcome, <span className={"text-primary-100"}>{user?.firstName}.</span>
+                    </h1>
+                    <p className={"text-light/90"}>
+                        This is the admin panel. Here you can manage your website content
+                    </p>
+                </div>
+                <div className={"flex gap-12"}>
+                    <Link className={"flex flex-col gap-4 items-center justify-center w-80 h-48 border rounded-lg border-light/30 hover:bg-neutral-800/30 transition-all"} href={"/admin/meetings"}>
+                        <Presentation size={48}/>
+                        <p className={"text-light/90"}>
+                            Meetings
+                        </p>
+                    </Link>
+                    <Link className={"flex flex-col gap-4 items-center justify-center w-80 h-48 border rounded-lg border-light/30 hover:bg-neutral-800/30 transition-all"} href={"/admin/blog"}>
+                        <NotebookPen size={48}/>
+                        <p className={"text-light/90"}>
                             Blog
                         </p>
-                    </div>
-                    <div
-                        className={"hover:bg-neutral-800/20 transition-all w-full h-full mb-24 flex flex-col border border-light/10 rounded-lg justify-center items-center"} onClick={() => router.push("/admin/portal")}>
-                        <p className={"text-6xl"}>
-                            Client Portal
+                    </Link>
+                    <Link className={"flex flex-col gap-4 items-center justify-center w-80 h-48 border rounded-lg border-light/30 hover:bg-neutral-800/30 transition-all"} href={"/admin/portal"}>
+                        <SquareUser size={48}/>
+                        <p className={"text-light/90"}>
+                            Portal
                         </p>
-                    </div>
+                    </Link>
+
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const BlogLayout = ({ children }: AdminLayoutProps) => {
     return (
-      <div className={"flex flex-col w-full bg-bg"}>
+      <div className={"flex flex-col w-full bg-bg text-light"}>
           <PostProvider>
               <BlogHeader/>
               {children}
