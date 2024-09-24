@@ -74,3 +74,71 @@ export const getPost = async ({title}: any) => {
 
     return data;
 }
+
+export const getMeetings = async ({token}: any) => {
+    const supabase = await supabaseClient(token);
+
+    const {data, error} = await supabase.from("meetings").select();
+
+    if (error) {
+        console.error(error);
+        return [];
+    }
+
+    return data;
+}
+
+export const approveMeeting = async ({token, id}: any) => {
+    const supabase = await supabaseClient(token);
+
+    const {data, error} = await supabase.from("meetings").update({status: "approved"}).eq("id", id);
+
+    if (error) {
+        console.error(error);
+        return false;
+    }
+
+    console.log(data)
+
+    return data;
+}
+
+export const declineMeeting = async ({token, id}: any) => {
+    const supabase = await supabaseClient(token);
+
+    const {data, error} = await supabase.from("meetings").update({status: "declined"}).eq("id", id);
+
+    if (error) {
+        console.error(error);
+        return false;
+    }
+
+    return data;
+}
+
+export const cancelMeeting = async ({token, id}: any) => {
+    const supabase = await supabaseClient(token);
+
+    const {data, error} = await supabase.from("meetings").update({status: "waiting"}).eq("id", id);
+
+    if (error) {
+        console.error(error);
+        return false;
+    }
+
+    return data;
+}
+
+export const deleteMeeting = async ({token, id}: any) => {
+    const supabase = await supabaseClient(token);
+
+    const {data, error} = await supabase.from("meetings").delete().eq("id", id);
+
+    if (error) {
+        console.error(error);
+        return false;
+    }
+
+    return data;
+}
+

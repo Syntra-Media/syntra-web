@@ -8,6 +8,16 @@ interface AdminLayoutProps {
   children: ReactNode;
 }
 
+//metadata noindex nofollow
+export const metadata = {
+    title: "Admin Layout",
+    description: "Admin layout for the admin pages",
+    robots: {
+        index: false,
+        follow: false,
+    },
+};
+
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <ClerkProvider>

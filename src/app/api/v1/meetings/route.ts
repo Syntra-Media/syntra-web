@@ -1,14 +1,13 @@
-// app/api/v1/meetings/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import rateLimit from '@/utils/rateLimit';
+import createClient from '@/utils/supabaseServer';
 
-const limit = rateLimit(10, 60000); // 10 requests per minute (60,000 ms)
+const limit = rateLimit(100, 10); // 10 requests per minute (60,000 ms)
 
-const username = "usr_uETJN3twzmfNAXYSG";
-const password = "5da59c644ca65aa0217c98f8cdff5946";
-const token = btoa(`${username}:${password}`);
+// production
+// const limit = rateLimit(1, 86400000) // 1 requests per day
 
-export async function GET(req: NextRequest) {
+export async function GET(req: any, res: any) {
     const rateLimitResponse = limit(req);
 
     if (rateLimitResponse) {
@@ -16,26 +15,54 @@ export async function GET(req: NextRequest) {
     }
 
     let body = req.body;
+    let supabase = createClient(req, res);
 
-
-    let response = await fetch('https://api.lemcal.com/api/lemcal/meetings', {
-         headers: {
-              'Authorization': `Basic ${token}`
-         }
-    });
-
-    let data = await response.json();
-
-    return NextResponse.json(data);
+    return NextResponse.json({ message: 'GET request successful' });
 }
 
-export async function POST(req: NextRequest) {
-    const rateLimitResponse = limit(req);
+function validateRequestBody(body: any) {
+    const requiredFields = ['fullName', 'companyName', 'email', 'meetingPreference', 'avaibleHour', 'date', 'category'];
+    for (const field of requiredFields) {
+        if (!body[field]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+export async function POST(req: NextRequest, res: any) {
+    const rateLimitResponse = limit(req as any);
 
     if (rateLimitResponse) {
         return rateLimitResponse;
     }
 
-    // Handle POST logic
-    return NextResponse.json({ message: 'POST request successful' });
+    const body = await req.json();
+
+    if (!validateRequestBody(body)) {
+        return NextResponse.json({ message: 'Invalid request body' }, { status: 400 });
+    }
+
+    console.log('Request Body:', body);
+
+    let supabase = createClient(req as any, res);
+
+    const { data, error } = await supabase.from('meetings').insert([
+        {
+            name: body.fullName,
+            company: body.companyName,
+            email: body.email,
+            meeting: body.meetingPreference,
+            time: body.avaibleHour,
+            date: body.date,
+            type: body.category,
+        }
+    ]);
+
+    if (error) {
+        console.error('Database insert error:', error.message);
+        return NextResponse.json({ message: 'Database insert error', error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ message: 'POST request successful', data });
 }

@@ -19,6 +19,7 @@ const formSchema = z.object({
     companyName: z.string().min(1, { message: "Company Name is required" }),
     email: z.string().email({ message: "Invalid email address" }),
     meetingPreference: z.enum(["Google Meet", "Phone", "Zoom"]).optional(),
+    avaibleHour: z.string().optional(),
 });
 
 const AVAIBLE_HOURS = [
@@ -38,16 +39,51 @@ const CTASection = ({locale}: {locale: string}) => {
     const [submitted, setSubmitted] = React.useState<boolean>(false);
     const [selectedLocale, setSelectedLocale] = React.useState(locale === "en" ? en : tr)
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: zodResolver(formSchema),
     });
 
     const onSubmit = (data: any) => {
-        setSubmitted(true);
-        console.log(data);
+        fetch("/api/v1/meetings", {
+            method: "POST",
+            body: JSON.stringify({
+                fullName: data.fullName,
+                companyName: data.companyName,
+                email: data.email,
+                meetingPreference: data.meetingPreference,
+                avaibleHour: selectedHour,
+                date: date,
+                category: selectedCategory,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((res) => {
+                if (res.ok) {
+                    setSubmitted(true);
+                }
+            })
+            .catch((error) => console.error(error));
     };
 
-    return (
+    return submitted ? (
+        <div className={"w-full flex my-24 justify-center"}>
+            <h2 className={"text-4xl font-semibold"}>
+                {
+                    locale === "en" ? (
+                        <span>
+                            Thank you for your interest! – <span className={"text-primary-100"}>We will contact you soon.</span>
+                        </span>
+                    ) : (
+                        <span>
+                            İlginiz için teşekkür ederiz! – <span className={"text-primary-100"}>En kısa sürede sizinle iletişime geçeceğiz.</span>
+                        </span>
+                    )
+                }
+            </h2>
+        </div>
+    ) : (
         <div className={"w-full flex"}>
             <div className={"mx-8 lg:mx-32 my-12 flex flex-col gap-8 w-full h-full"}>
                 <h2 className={"text-4xl font-semibold"}>
@@ -120,7 +156,7 @@ const CTASection = ({locale}: {locale: string}) => {
                             {
                                 AVAIBLE_HOURS.map((hour) => (
                                     <Button type={"button"} key={hour} size={"lg"} variant={hour === selectedHour ? "default" : "secondary"}
-                                            onClick={() => setHour(hour)}>
+                                            onClick={() => {setHour(hour); setValue("avaibleHour", hour)}}>
                                         {hour}
                                     </Button>
                                 ))
@@ -149,7 +185,7 @@ const CTASection = ({locale}: {locale: string}) => {
 
             </div>
         </div>
-    );
+    )
 };
 
 export default CTASection;
