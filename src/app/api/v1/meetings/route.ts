@@ -2,10 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import rateLimit from '@/utils/rateLimit';
 import createClient from '@/utils/supabaseServer';
 
-const limit = rateLimit(100, 10); // 10 requests per minute (60,000 ms)
-
-// production
-// const limit = rateLimit(1, 86400000) // 1 requests per day
+const limit = rateLimit(1, 86400000) // 1 requests per day
 
 export async function GET(req: any, res: any) {
     const rateLimitResponse = limit(req);
