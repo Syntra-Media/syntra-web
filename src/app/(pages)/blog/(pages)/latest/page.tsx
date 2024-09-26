@@ -45,7 +45,6 @@ const Blog = () => {
                     <div className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"}>
                         {
                             posts.map((post: any, index: number) => {
-                                if (index === posts.length - 1) return;
                                 if (selectedCategory === "all" || post.category === selectedCategory) {
                                     return (
                                         <Link href={`/blog/${post.slug}`} passHref key={post.id} className={"w-full"}>

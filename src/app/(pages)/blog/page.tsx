@@ -53,11 +53,11 @@ const Blog = () => {
                     </div>
                     <div className={"hidden lg:flex flex-col"}>
                         <div className={"flex justify-center w-full"}>
-                            <div className={cn("cursor-pointer flex items-center justify-center w-full py-5 bg-neutral-800/50", selected === "latest" && "bg-transparent border-b border-primary")} onClick={() => setSelected("latest")}>
+                            <div className={cn("cursor-pointer flex items-center justify-center w-full min-w-36 py-5 bg-neutral-800/50", selected === "latest" && "bg-transparent border-b border-primary")} onClick={() => setSelected("latest")}>
                                 En Yeniler
                             </div>
                             <div
-                                className={cn("cursor-pointer flex items-center justify-center w-full py-5 bg-neutral-800/50", selected === "popular" && "bg-transparent border-b border-primary")} onClick={() => setSelected("popular")}>
+                                className={cn("cursor-pointer flex items-center justify-center w-full min-w-36 py-5 bg-neutral-800/50", selected === "popular" && "bg-transparent border-b border-primary")} onClick={() => setSelected("popular")}>
                                 En Popülerler
                             </div>
                         </div>
@@ -137,7 +137,6 @@ const Blog = () => {
                     <div className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"}>
                         {
                             posts.map((post: any, index: number) => {
-                                if (index === posts.length - 1) return;
                                 if (selectedCategory === "all" || post.category === selectedCategory) {
                                     return (
                                         <Link href={`/blog/${post.slug}`} passHref key={post.id} className={"w-full"}>

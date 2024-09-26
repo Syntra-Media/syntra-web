@@ -38,12 +38,14 @@ const CTASection = ({locale}: {locale: string}) => {
     const [date, setDate] = React.useState<Date | undefined>(new Date(new Date().setDate(new Date().getDate() + 2)));
     const [submitted, setSubmitted] = React.useState<boolean>(false);
     const [selectedLocale, setSelectedLocale] = React.useState(locale === "en" ? en : tr)
+    const [buttonDisabled, setButtonDisabled] = React.useState<boolean>(false);
 
     const { register, handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: zodResolver(formSchema),
     });
 
     const onSubmit = (data: any) => {
+        setButtonDisabled(true);
         fetch("/api/v1/meetings", {
             method: "POST",
             body: JSON.stringify({
@@ -166,7 +168,7 @@ const CTASection = ({locale}: {locale: string}) => {
 
                         <Button type="submit"
                                 className="mt-6 w-max"
-                                disabled={submitted}
+                                disabled={buttonDisabled}
                         >
                             {selectedLocale.hero.cta_button}
                         </Button>

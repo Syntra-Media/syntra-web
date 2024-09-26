@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import rateLimit from '@/utils/rateLimit';
 import createClient from '@/utils/supabaseServer';
+import {Resend} from "resend";
+import {EmailTemplate} from "@/components/ui/EmailTemplate";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const limit = rateLimit(1, 86400000) // 1 requests per day
 
@@ -59,6 +63,22 @@ export async function POST(req: NextRequest, res: any) {
     if (error) {
         console.error('Database insert error:', error.message);
         return NextResponse.json({ message: 'Database insert error', error: error.message }, { status: 500 });
+    }
+
+    // inform the admin about the new meeting request
+    try {
+        const {data, error} = await resend.emails.send({
+            from: `Meeting Scheduler <meetings@syntramedia.com>`,
+            to: ['furkanesen@syntramedia.com', 'emirayaz@syntramedia.com'],
+            subject: 'New Meeting Request! 🚀',
+            react: EmailTemplate({body}),
+        })
+
+        if (error) {
+            return NextResponse.json({error: 'Failed to send email'}, {status: 500})
+        }
+    } catch (error) {
+        return NextResponse.json({error: 'Failed to send email'}, {status: 500})
     }
 
     return NextResponse.json({ message: 'POST request successful', data });
