@@ -1,46 +1,19 @@
-"use client"
+import { headers } from 'next/headers'
+import { redirect } from 'next/navigation'
+import ClientHome from './page.client'
 
-import React, { useEffect } from 'react';
-import {useRouter} from "next/navigation";
-import {usePathname} from "next/navigation"
-import Header from "@/components/ui/Header";
-import LandingHero from "@/components/ui/LandingHero";
-import LogoSection from "@/components/ui/sections/LogoSection";
-import AboutUsSection from "@/components/ui/sections/AboutUsSection";
-import ServicesSection from "@/components/ui/sections/ServicesSection";
-import Footer from "@/components/ui/Footer";
-import FaqSection from "@/components/ui/sections/FaqSection";
-import TestimonialsSection from "@/components/ui/sections/TestimonialsSection";
-import CTASection from "@/components/ui/sections/CTASection";
+export default function Home() {
+  const headersList = headers()
+  const acceptLanguage = headersList.get('accept-language') || ''
+  
+  // Get the first language from the accept-language header
+  const primaryLanguage = acceptLanguage.split(',')[0].split('-')[0].toLowerCase()
+  
+  // If the primary language is not Turkish, redirect to English
+  if (primaryLanguage !== 'tr') {
+    redirect('/en')
+  }
 
-
-const Home = () => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const [locale, setLocale] = React.useState<"en" | "tr">(pathname === "/" ? "tr" : "en");
-
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            const locale = navigator.language || "en"
-            if (!locale.includes("tr")) {
-                router.push("/en")
-            }
-        }
-    }, []);
-
-  return (
-        <div className={"flex flex-col w-full overflow-x-hidden"}>
-          <Header locale={locale}/>
-          <LandingHero locale={locale}/>
-          <LogoSection/>
-          <ServicesSection locale={locale}/>
-          <AboutUsSection locale={locale}/>
-          <TestimonialsSection locale={locale}/>
-          <FaqSection locale={locale}/>
-          <CTASection locale={locale}/>
-          <Footer locale={locale}/>
-        </div>
-    );
-};
-
-export default Home;
+  // If it is Turkish, render the Turkish version
+  return <ClientHome initialLocale="tr" />
+}

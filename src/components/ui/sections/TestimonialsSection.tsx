@@ -31,6 +31,14 @@ const TESTIMONIALS = [
 const TestimonialsSection = ({locale}: {locale: string}) => {
     const [selectedLocale, setSelectedLocale] = React.useState(locale === "en" ? en : tr)
 
+
+    const handleSectionScroll = () => {
+        const section = document.getElementById("cta-section");
+        if (section) {
+            section.scrollIntoView({behavior: "smooth"});
+        }
+    }
+
     return (
         <div className={"flex w-full"}>
             <div className={"flex flex-col lg:flex-row gap-x-24 gap-y-8 w-full h-full mx-8 my-28 lg:mx-40 items-center "}>
@@ -56,7 +64,7 @@ const TestimonialsSection = ({locale}: {locale: string}) => {
                         ))
                     }
                     <div className={"hidden lg:flex flex-col lg:flex-row items-center gap-6"}>
-                        <Button className={"w-max"}>
+                        <Button className={"w-max"} onClick={handleSectionScroll}>
                             {selectedLocale.hero.cta_button}
                         </Button>
                         <div className={"flex gap-3 items-center"}>

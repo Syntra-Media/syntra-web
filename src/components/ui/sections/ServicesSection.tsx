@@ -196,6 +196,13 @@ const ITEMS: Item[] = [
 const ServicesSection = ({locale}: {locale: string}) => {
     const [selectedLocale, setSelectedLocale] = useState(locale === "en" ? en : tr);
 
+    const handleSectionScroll = () => {
+        const section = document.getElementById("cta-section");
+        if (section) {
+            section.scrollIntoView({behavior: "smooth"});
+        }
+    }
+
     return (
         <div className={"flex w-full overflow-hidden"}>
             <div className={"flex flex-col lg:flex-row w-full h-full mx-8 lg:mx-40 my-32 gap-32 items-center justify-center dark"}>
@@ -231,7 +238,7 @@ const ServicesSection = ({locale}: {locale: string}) => {
                             </p>
                         ))
                     }
-                    <Button variant={"default"} className={"w-max"}>{selectedLocale.hero.cta_button}</Button>
+                    <Button variant={"default"} className={"w-max"} onClick={handleSectionScroll}>{selectedLocale.hero.cta_button}</Button>
                 </div>
             </div>
         </div>

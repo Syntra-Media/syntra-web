@@ -15,6 +15,13 @@ const LandingHero = ({locale}: any) => {
     const InputMotion = motion(Input);
     const ButtonMotion = motion(Button);
 
+    const handleSectionScroll = () => {
+        const section = document.getElementById("cta-section");
+        if (section) {
+            section.scrollIntoView({behavior: "smooth"});
+        }
+    }
+
     return (
         <div className={"w-full h-screen bg-radial flex flex-col justify-center items-center gap-4 md:gap-8"}>
             <motion.h1
@@ -55,13 +62,13 @@ const LandingHero = ({locale}: any) => {
                     <InputMotion type={"text"} placeholder={selectedLocale.hero.email_placeholder} className={"w-full pr-96 hidden lg:flex"}
                         initial={{x: -75}}
                         animate={{x: 0}}
-                         transition={{delay:1, duration:1.12, ease: "easeOut"}}
+                        transition={{delay:1, duration:1.12, ease: "easeOut"}}
                     />
                     <ButtonMotion variant={"default"} className={"hidden lg:flex lg:absolute lg:right-0 lg:rounded-l-none"}
                         initial={{x: 75}}
                         animate={{x: 0}}
-                          transition={{delay:1, duration:1.12, ease: "easeOut"}}
-
+                        transition={{delay:1, duration:1.12, ease: "easeOut"}}
+                        onClick={handleSectionScroll}
                     >
                         {
                             selectedLocale.hero.cta_button

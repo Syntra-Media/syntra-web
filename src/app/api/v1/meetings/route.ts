@@ -1,24 +1,44 @@
 import { NextRequest, NextResponse } from 'next/server';
 import rateLimit from '@/utils/rateLimit';
+import { Resend } from "resend";
+import { EmailTemplate } from "@/components/ui/EmailTemplate";
 import createClient from '@/utils/supabaseServer';
-import {Resend} from "resend";
-import {EmailTemplate} from "@/components/ui/EmailTemplate";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const limit = rateLimit(1, 86400000) // 1 requests per day
+const getLimit = rateLimit(10, 3600000) // 10 requests per hour
+const postLimit = rateLimit(1, 86400000) // 1 requests per day
 
-export async function GET(req: any, res: any) {
-    const rateLimitResponse = limit(req);
+// In-memory cache for meetings
+let meetingsCache: { [email: string]: boolean } = {};
 
-    if (rateLimitResponse) {
-        return rateLimitResponse;
-    }
+const GetMeetingsFromDB = async () => {
+    let supabase = createClient();
+    const {data, error} = await supabase.from('meetings').select();
+    return data;
+}
 
-    let body = req.body;
-    let supabase = createClient(req, res);
+GetMeetingsFromDB().then((data) => {
+  if (data) {
+    data.forEach((meeting) => {
+      meetingsCache[meeting.email] = true;
+    });
+  }
+});
 
-    return NextResponse.json({ message: 'GET request successful' });
+export async function GET(req: NextRequest) {
+  // Get the user's email from the query parameter
+  const { searchParams } = new URL(req.url);
+  const email = searchParams.get('email');
+
+  if (!email) {
+    return NextResponse.json({ message: 'Email is required' }, { status: 400 });
+  }
+
+  // Check if the email exists in the cache
+  const hasPendingMeeting = !!meetingsCache[email];
+
+  return NextResponse.json({ hasPendingMeeting });
 }
 
 function validateRequestBody(body: any) {
@@ -32,7 +52,7 @@ function validateRequestBody(body: any) {
 }
 
 export async function POST(req: NextRequest, res: any) {
-    const rateLimitResponse = limit(req as any);
+    const rateLimitResponse = postLimit(req as any);
 
     if (rateLimitResponse) {
         return rateLimitResponse;
@@ -64,6 +84,9 @@ export async function POST(req: NextRequest, res: any) {
         console.error('Database insert error:', error.message);
         return NextResponse.json({ message: 'Database insert error', error: error.message }, { status: 500 });
     }
+
+    // Update the cache
+    meetingsCache[body.email] = true;
 
     // inform the admin about the new meeting request
     try {
