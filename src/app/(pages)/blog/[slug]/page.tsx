@@ -19,9 +19,11 @@ const Page = ({params}: {params: {slug: string}}) => {
         console.log(params.slug);
         const post = posts.find(post => post.slug === params.slug);
         if (!post) {
+            return;
         }
 
         setPost(post);
+        window.document.title = post?.title;
     }, [loading]);
 
     return (
