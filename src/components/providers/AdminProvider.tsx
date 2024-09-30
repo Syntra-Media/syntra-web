@@ -11,7 +11,7 @@ interface AdminProviderProps {
 }
 
 export const AdminProvider = ({ children }: AdminProviderProps) => {
-    const {user, isLoaded, isSignedIn} = useUser();
+    const {user, isLoaded} = useUser();
     const router = useRouter()
 
     useEffect(() => {

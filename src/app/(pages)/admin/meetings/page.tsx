@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/Button';
 import {approveMeeting, cancelMeeting, declineMeeting, deleteMeeting, getMeetings} from "@/utils/supabaseRequests";
 import {useAuth} from "@clerk/nextjs";
 import {CircleCheck, CircleX, Loader } from 'lucide-react';
-import {unknown} from "zod";
 
 const AdminPage = () => {
     const {user, isLoaded} = useAdmin()
