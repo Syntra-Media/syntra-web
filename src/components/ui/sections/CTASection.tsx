@@ -7,6 +7,7 @@ import { z } from "zod";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {Calendar} from "@/components/ui/Calendar";
+import { useRouter } from "next/navigation";
 
 import tr from '@/localization/tr.json'
 import en from '@/localization/en.json'
@@ -33,6 +34,7 @@ const AVAIBLE_HOURS = [
 ]
 
 const CTASection = ({locale}: {locale: string}) => {
+    const router = useRouter();
     const [selectedCategory, setCategory] = useState<string>("Web Design");
     const [selectedHour, setHour] = useState<string | undefined>(undefined);
     const [minBookingDate, setMinBookingDate] = useState<Date | undefined>(new Date(new Date().setDate(new Date().getDate() + 2)));
@@ -88,6 +90,7 @@ const CTASection = ({locale}: {locale: string}) => {
             if (response.ok) {
                 setSubmitted(true);
                 localStorage.setItem('userEmail', data.email);
+                router.push('/discovery-thank-you');
             } else {
                 // Handle error
                 console.error("Failed to submit meeting request");

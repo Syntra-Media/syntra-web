@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PortalSideBar from "@/components/ui/PortalSideBar";
 import {ClerkProvider} from "@clerk/nextjs";
+import { PortalProvider } from "@/components/providers/PortalProvider";
 
 export const metadata: Metadata = {
     title: "Syntra Media - Client Portal",
@@ -14,9 +15,11 @@ export default function RootLayout({
 }>) {
     return (
         <ClerkProvider>
-            <PortalSideBar>
-                {children}
-            </PortalSideBar>
+            <PortalProvider>
+                <PortalSideBar>
+                    {children}
+                </PortalSideBar>
+            </PortalProvider>
         </ClerkProvider>
     );
 }

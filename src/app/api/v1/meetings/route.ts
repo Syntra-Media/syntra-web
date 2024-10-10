@@ -6,7 +6,6 @@ import createClient from '@/utils/supabaseServer';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const getLimit = rateLimit(10, 3600000) // 10 requests per hour
 const postLimit = rateLimit(1, 86400000) // 1 requests per day
 
 // In-memory cache for meetings

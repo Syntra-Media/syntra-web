@@ -1,68 +1,66 @@
-"use client"
-
-import React, {ReactElement, useEffect, useState} from 'react';
-import {usePathname} from "next/navigation";
-import {Button} from "@/components/ui/Button";
-import Link from "next/link";
+import React, { ReactElement } from 'react';
+import { notFound } from 'next/navigation';
+import Profile from '@/components/ui/Portal/Profile';
+import Projects from '@/components/ui/Portal/Projects';
 
 const ROUTES = [
-    {
-        name: "Proje",
-        href: "/portal/project",
-        component: ( <div>proje</div> ),
-    },
-    {
-        name: "Görevler",
-        href: "/portal/tasks",
-        component: ( <div>görevler</div> ),
-    },
-    {
-        name: "İletişim Merkezi",
-        href: "/portal/contact",
-        component: ( <div>iletisim</div> ),
-    },
-    {
-        name: "Ödemeler",
-        href: "/portal/payments",
-        component: ( <div>odemeler</div> ),
-    },
-    {
-        name: "Dökümanlar",
-        href: "/portal/documents",
-        component: ( <div>dokumanlar</div> ),
-    },
-    {
-        name: "Analiz ve İstatistik",
-        href: "/portal/analysis",
-        component: ( <div>analız</div> ),
-    },
+  {
+      name: "Projeler",
+      href: "/portal/project",
+      component: ( <Projects /> ),
+  },
+  {
+      name: "Görevler",
+      href: "/portal/tasks",
+      component: ( <div>görevler</div> ),
+  },
+  {
+      name: "İletişim Merkezi",
+      href: "/portal/contact",
+      component: ( <div>iletisim</div> ),
+  },
+  {
+      name: "Ödemeler",
+      href: "/portal/payments",
+      component: ( <div>odemeler</div> ),
+  },
+  {
+      name: "Dökümanlar",
+      href: "/portal/documents",
+      component: ( <div>dokumanlar</div> ),
+  },
+  {
+      name: "Analiz ve İstatistik",
+      href: "/portal/analysis",
+      component: ( <div>analız</div> ),
+  },
+  {
+    name: "Ayarlar",
+    href: "/portal/settings",
+    component: ( <div>ayarlar</div> ),
+  },
+  {
+    name: "Profil",
+    href: "/portal/profile",
+    component: ( <Profile /> ),
+  }
 ]
 
-const Page = () => {
-    const pathname = usePathname();
-    const [activeRoute, setActiveRoute] = useState<{ name: string; href: string; component: ReactElement } | undefined>(undefined);
+const Page = ({ params }: { params: { slug: string } }) => {
+    const activeRoute = ROUTES.find(route => route.href === `/portal/${params.slug}`);
 
-    useEffect(() => {
-        ROUTES.map(route => {
-            if (route.href === pathname) {
-                setActiveRoute(route);
-            }
-        })
-    }, [pathname]);
+    if (!activeRoute) {
+        notFound();
+    }
 
-    return !activeRoute ? <div className={"w-full h-full flex flex-col gap-4 justify-center items-center"}>
-        <h1 className={"text-7xl"}>
-            404
-        </h1>
-        <p className={"text-2xl"}>
-            Sayfa bulunamadı.
-        </p>
-        <Button>
-            <Link href={"/portal"}>
-                Portal&apos;a geri dön
-            </Link>
-        </Button>
-    </div> : activeRoute.component;
+    return activeRoute.component;
 };
 
 export default Page;
+
+// Add this new function for generating static params
+export async function generateStaticParams() {
+    return ROUTES.map(route => ({
+        slug: route.href.split('/').pop(),
+    }));
+}

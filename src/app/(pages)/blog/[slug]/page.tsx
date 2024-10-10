@@ -1,13 +1,11 @@
 import SinglePost from "@/components/ui/SinglePost";
 import { getPost } from "@/utils/supabaseServerActions";
 import { notFound } from "next/navigation";
-
 interface PostPageProps {
     params: {
         slug: string;
     }
 }
-
 
 export const generateMetadata = async ({params}: PostPageProps) => {
     const post: any = await getPost(params.slug);

@@ -142,3 +142,47 @@ export const deleteMeeting = async ({token, id}: any) => {
     return data;
 }
 
+export const getPortalInfo = async ({token, id}: any) => {
+    const supabase = await supabaseClient(token);
+
+    const {data, error} = await supabase.from("projects").select().eq("owner", id);
+
+    if (error) {
+        console.error(error);
+        return false;
+    }
+
+    let projects = [];
+
+    for (let project of data) {
+      const {data: phases, error: phasesError} = await supabase.from("phases").select().eq("project", project.id);
+
+      if (phasesError) {
+          console.error(phasesError);
+          return false;
+      }
+
+      project.phases = phases;
+      
+      const {data: tasks, error: tasksError} = await supabase.from("tasks").select().eq("project", project.id);
+
+      if (tasksError) {
+          console.error(tasksError);
+          return false;
+      }
+
+      project.tasks = tasks;
+      
+      const {data: payments, error: paymentsError} = await supabase.from("payments").select().eq("project", project.id);
+
+      project.payments = payments;
+
+      const {data: files, error: filesError} = await supabase.from("files").select().eq("project", project.id);
+
+      project.files = files;
+
+      projects.push(project);
+    }
+
+    return projects;
+}

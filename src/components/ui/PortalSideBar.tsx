@@ -1,18 +1,21 @@
 "use client";
 
 import React, {useMemo} from 'react';
-import {motion} from "framer-motion";
+import { useUser } from '@clerk/nextjs';
 import {usePathname} from "next/navigation";
-import {CalendarCheck, Home, Mail, PanelsTopLeft, WalletCards, File, AreaChart} from "lucide-react";
+import {CalendarCheck, Home, Mail, PanelsTopLeft, WalletCards, File, AreaChart, Settings} from "lucide-react";
 import Link from "next/link";
 import {cn} from "@/utils/cn";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
+import { Avatar } from '@radix-ui/react-avatar';
+import { AvatarFallback, AvatarImage } from './Avatar';
 
 type PortalSideBarProps = {
     children: React.ReactNode
 }
 
 const PortalSideBar = ({children}: PortalSideBarProps) => {
+    const {user} = useUser();
     const pathname = usePathname();
     const routes = useMemo(() => [
         {
@@ -22,7 +25,7 @@ const PortalSideBar = ({children}: PortalSideBarProps) => {
             icon: ( <Home/> )
         },
         {
-            name: "Proje",
+            name: "Projeler",
             href: "/portal/project",
             active: pathname === "/portal/project",
             icon: ( <PanelsTopLeft /> )
@@ -69,27 +72,60 @@ const PortalSideBar = ({children}: PortalSideBarProps) => {
                             stroke={"#FFC300"}
                         />
                     </svg>
-                    <div className={"flex flex-col gap-2"}>
-                        {
-                            routes.map((route, index) => (
-                                <div key={index}>
-                                <TooltipProvider>
-                                    <Tooltip>
-                                        <TooltipTrigger>
-                                            <Link href={route.href} key={index}
-                                                  className={cn("w-12 h-12 flex items-center justify-center", route.active && "rounded-lg bg-blue-300/20")}>
-                                                {route.icon}
-                                            </Link>
-                                        </TooltipTrigger>
-                                        <TooltipContent>
-                                            {route.name}
-                                        </TooltipContent>
-                                    </Tooltip>
-                                </TooltipProvider>
-                                </div>
-                            ))
-                        }
-                    </div>
+                      <TooltipProvider>
+                        <div className={"flex flex-col gap-2 h-full mb-16"}>
+                            {
+                                routes.map((route, index) => (
+                                    <div key={index}>
+                                          <Tooltip>
+                                              <TooltipTrigger>
+                                                  <Link href={route.href} key={index}
+                                                        className={cn("w-12 h-12 flex items-center justify-center", route.active && "rounded-lg bg-blue-300/20")}>
+                                                      {route.icon}
+                                                  </Link>
+                                              </TooltipTrigger>
+                                              <TooltipContent>
+                                                  {route.name}
+                                              </TooltipContent>
+                                          </Tooltip>
+                                    </div>
+                                ))
+                            }
+
+                            {/* User profile and settings in the bottom */}
+                            <div className={"flex flex-col gap-2 mt-auto"}>
+                              {/* Settings */}
+                              <div className={"flex flex-col gap-2 mt-auto"}>
+                                  <Tooltip>
+                                      <TooltipTrigger>
+                                          <Link href={"/portal/settings"} className={"h-8 flex items-center justify-center w-full"}>
+                                              <Settings size={20}/>
+                                          </Link>
+                                      </TooltipTrigger>
+                                      <TooltipContent>
+                                          Ayarlar
+                                      </TooltipContent>
+                                  </Tooltip>
+                              </div>
+
+                              {/* User profile */}
+                              <div className={"flex flex-col gap-2 mt-auto"}>
+                                  <Tooltip>
+                                      <TooltipTrigger>
+                                          <Link href={"/portal/profile"} className={"w-12 h-12 flex items-center justify-center rounded-full"}>
+                                            <Avatar>
+                                              <AvatarImage src={user?.imageUrl} className='rounded-full'/>
+                                              <AvatarFallback>
+                                                {user?.fullName?.charAt(0)}
+                                              </AvatarFallback>
+                                            </Avatar>
+                                          </Link>
+                                      </TooltipTrigger>
+                                  </Tooltip>
+                              </div>
+                            </div>
+                        </div>
+                      </TooltipProvider>
                 </div>
             </div>
             {children}
