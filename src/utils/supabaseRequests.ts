@@ -3,7 +3,7 @@ import {supabaseClient} from "@/utils/supabaseClient";
 export const getPosts = async () => {
     const supabase = await supabaseClient();
 
-    const {data, error} = await supabase.from("posts").select();
+    const {data, error} = await supabase.from("posts").select().order("created_at", {ascending: true});
 
     if (error) {
         console.error(error);

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Profile from '@/components/ui/Portal/Profile';
 import Projects from '@/components/ui/Portal/Projects';
 import Files from '@/components/ui/Portal/Files';
+import Notifications from '@/components/ui/Portal/Notifications';
 
 const ROUTES = [
   {
@@ -18,7 +19,7 @@ const ROUTES = [
   {
       name: "İletişim Merkezi",
       href: "/portal/contact",
-      component: ( <div>iletisim</div> ),
+      component: ( <Notifications /> ),
   },
   {
       name: "Ödemeler",

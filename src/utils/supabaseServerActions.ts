@@ -42,7 +42,6 @@ export const getNotification = async (id: string) => {
 
         notification.attachments = files;
 
-        console.log(notification);  
         return notification;
     }
     return null;
