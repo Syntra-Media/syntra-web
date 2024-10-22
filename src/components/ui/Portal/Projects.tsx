@@ -7,6 +7,7 @@ import { Button } from '../Button';
 import { useUser } from '@clerk/nextjs';
 import { cn } from '@/lib/utils';
 import { Oval } from 'react-loader-spinner';
+import { motion } from 'framer-motion';
 
 function Projects() {
   const {user, isLoaded} = useUser();
@@ -48,15 +49,36 @@ function Projects() {
   );
 
   return (
-    <div className='flex w-full'>
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className='flex w-full'
+    >
       <div className='flex flex-col gap-4 w-full h-full mx-16 my-16'>
-        <h2 className='text-2xl font-bold'>
+        <motion.h2 
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className='text-2xl font-bold'
+        >
           Aktif Projeler
-        </h2>
-        <div className='flex flex-col gap-4 w-full h-full'>
+        </motion.h2>
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className='flex flex-col gap-4 w-full h-full'
+        >
           {
-            projects.map((project: any) => (
-              <div key={project.id} className='flex flex-col gap-2 px-4 py-3 rounded-md bg-light/10'>
+            projects.map((project: any, index: number) => (
+              <motion.div 
+                key={project.id} 
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                className='flex flex-col gap-2 px-4 py-3 rounded-md bg-light/10'
+              >
                 <div className='flex flex-row justify-between items-center'>
                   <div className='flex gap-4 items-center'>
                     <p className='text-lg font-medium'>
@@ -100,12 +122,12 @@ function Projects() {
                     </Button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))
           }
-        </div>
+        </motion.div>
       </div>  
-    </div>
+    </motion.div>
   )
 }
 

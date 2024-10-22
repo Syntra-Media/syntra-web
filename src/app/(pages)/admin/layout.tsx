@@ -3,6 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ReactNode } from "react";
 import {AdminProvider} from "@/components/providers/AdminProvider";
 import {Toaster} from "react-hot-toast";
+import { headers } from "next/headers";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -18,7 +19,7 @@ export const metadata = {
     },
 };
 
-const AdminLayout = ({ children }: AdminLayoutProps) => {
+const AdminLayout = async ({ children }: AdminLayoutProps) => {
   return (
     <ClerkProvider>
         <AdminProvider>

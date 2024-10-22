@@ -1,7 +1,7 @@
 "use client";
 
 import React, {useMemo} from 'react';
-import { useUser } from '@clerk/nextjs';
+import { UserButton, useUser } from '@clerk/nextjs';
 import {usePathname} from "next/navigation";
 import {CalendarCheck, Home, Mail, PanelsTopLeft, WalletCards, File, AreaChart, Settings} from "lucide-react";
 import Link from "next/link";
@@ -49,9 +49,9 @@ const PortalSideBar = ({children}: PortalSideBarProps) => {
             icon: ( <WalletCards /> )
         },
         {
-            name: "Dökümanlar",
-            href: "/portal/documents",
-            active: pathname === "/portal/documents",
+            name: "Dosyalar",
+            href: "/portal/files",
+            active: pathname === "/portal/files",
             icon: ( <File /> )
         },
         {
@@ -112,15 +112,18 @@ const PortalSideBar = ({children}: PortalSideBarProps) => {
                               <div className={"flex flex-col gap-2 mt-auto"}>
                                   <Tooltip>
                                       <TooltipTrigger>
-                                          <Link href={"/portal/profile"} className={"w-12 h-12 flex items-center justify-center rounded-full"}>
-                                            <Avatar>
-                                              <AvatarImage src={user?.imageUrl} className='rounded-full'/>
-                                              <AvatarFallback>
-                                                {user?.fullName?.charAt(0)}
-                                              </AvatarFallback>
-                                            </Avatar>
-                                          </Link>
+                                        <Link href={"/portal/profile"} className={"w-12 h-12 flex items-center justify-center rounded-full"}>
+                                          <Avatar>
+                                            <AvatarImage src={user?.imageUrl} className='rounded-full'/>
+                                          <AvatarFallback>
+                                            {user?.fullName?.charAt(0)}
+                                          </AvatarFallback>
+                                        </Avatar>
+                                      </Link>
                                       </TooltipTrigger>
+                                      <TooltipContent>
+                                        Profil
+                                      </TooltipContent>
                                   </Tooltip>
                               </div>
                             </div>

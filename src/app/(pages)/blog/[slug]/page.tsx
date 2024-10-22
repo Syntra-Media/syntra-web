@@ -2,12 +2,13 @@ import SinglePost from "@/components/ui/SinglePost";
 import { getPost } from "@/utils/supabaseServerActions";
 import { notFound } from "next/navigation";
 interface PostPageProps {
-    params: {
+    params: Promise<{
         slug: string;
-    }
+    }>
 }
 
-export const generateMetadata = async ({params}: PostPageProps) => {
+export const generateMetadata = async (props: PostPageProps) => {
+    const params = await props.params;
     const post: any = await getPost(params.slug);
 
     if (!post) {
@@ -23,13 +24,14 @@ export const generateMetadata = async ({params}: PostPageProps) => {
   }
 }
 
-const PostPage = async ({params}: PostPageProps) => {
+const PostPage = async (props: PostPageProps) => {
+    const params = await props.params;
     const post: any = await getPost(params.slug);
 
     if (!post) {
         return notFound();
     }
-    
+
 
     return (
         <SinglePost post={post} />

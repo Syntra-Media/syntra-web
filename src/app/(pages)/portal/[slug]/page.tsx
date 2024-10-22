@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import { notFound } from 'next/navigation';
 import Profile from '@/components/ui/Portal/Profile';
 import Projects from '@/components/ui/Portal/Projects';
+import Files from '@/components/ui/Portal/Files';
 
 const ROUTES = [
   {
@@ -25,9 +26,9 @@ const ROUTES = [
       component: ( <div>odemeler</div> ),
   },
   {
-      name: "Dökümanlar",
-      href: "/portal/documents",
-      component: ( <div>dokumanlar</div> ),
+      name: "Dosyalar",
+      href: "/portal/files",
+      component: ( <Files /> ),
   },
   {
       name: "Analiz ve İstatistik",
@@ -46,7 +47,8 @@ const ROUTES = [
   }
 ]
 
-const Page = ({ params }: { params: { slug: string } }) => {
+const Page = async (props: { params: Promise<{ slug: string }> }) => {
+    const params = await props.params;
     const activeRoute = ROUTES.find(route => route.href === `/portal/${params.slug}`);
 
     if (!activeRoute) {

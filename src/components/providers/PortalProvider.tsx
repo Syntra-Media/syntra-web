@@ -15,6 +15,7 @@ export const PortalProvider = ({ children }: PortalProviderProps) => {
   const {getToken} = useAuth();
   const [loading, setLoading] = useState(true);
   const [projects, setProjects] = useState<any>([]);
+  const [favoriteProject, setFavoriteProject] = useState<any>(null);
   useEffect(() => {
     if (!isLoaded) return;
     const id = user?.id;
@@ -24,6 +25,9 @@ export const PortalProvider = ({ children }: PortalProviderProps) => {
         const token = await getToken({template: "supabase"});
         const projects = await getPortalInfo({token,id});
         setProjects(projects);
+        if (Array.isArray(projects)) {
+            setFavoriteProject(projects.find((project: any) => project.id === user?.unsafeMetadata?.favorite));
+        }
         setLoading(false);
     }
 
@@ -32,7 +36,7 @@ export const PortalProvider = ({ children }: PortalProviderProps) => {
   }, [isLoaded]);
   
   return (
-        <PortalContext.Provider value={{projects, loading}}>
+        <PortalContext.Provider value={{projects, loading, favoriteProject}}>
             {children}
         </PortalContext.Provider>
   );

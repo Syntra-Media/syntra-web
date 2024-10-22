@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type JSX } from 'react';
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import {Button} from "@/components/ui/Button";

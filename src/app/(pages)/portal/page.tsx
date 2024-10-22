@@ -1,14 +1,16 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import PortalSideBar from "@/components/ui/PortalSideBar";
-import {useRouter} from "next/navigation";
+import { motion } from 'framer-motion';
 import PhaseCard from "@/components/ui/PhaseCard";
 import {useUser} from "@clerk/nextjs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
 import { usePortal } from '@/components/providers/PortalProvider';
-import { SelectLabel } from '@radix-ui/react-select';
 import { Oval } from 'react-loader-spinner';
+import FastLinks from '@/components/ui/FastLinksCard';
+import TasksOverviewCard from '@/components/ui/TasksOverviewCard';
+import SyntraDriveCard from '@/components/ui/SyntraDriveCard';
+import NotificationsCard from '@/components/ui/NotificationsCard';
 
 const Portal = () => {
     const {user, isLoaded} = useUser();
@@ -57,9 +59,30 @@ const Portal = () => {
     if (!selectedProject) return <div>No project selected</div>;
 
     return (
-        <div className={"flex w-full h-screen"}>
+      <>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="w-full h-screen items-center justify-center flex lg:hidden"
+        >
+          <p className='text-2xl font-medium'>
+            Mobile version coming soon...
+          </p>
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className={"w-full h-screen overflow-hidden hidden lg:flex"}
+        >
             <div className={"flex flex-col gap-4 w-full mx-16 my-16"}>
-                <div className={"flex justify-between items-center w-full"}>
+                <motion.div 
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className={"flex justify-between items-center w-full"}
+                >
                     <div className='flex flex-col gap-2'>
                         <h1 className={"font-medium text-5xl"}>
                             Hoş geldin, <span className={"text-primary-100"}>{user?.firstName}.</span>
@@ -83,21 +106,66 @@ const Portal = () => {
                         </SelectContent>
                       </Select>
                     </div>
-                </div>
-                <div className={"w-full h-full grid grid-cols-8 grid-rows-4 gap-8"}>
-                    <div className="col-span-2">
+                </motion.div>
+                <motion.div 
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="w-full h-full gap-4 sm:gap-6 md:gap-8 grid-cols-1 md:grid-cols-4 lg:grid-cols-8 auto-rows-fr overflow-hidden grid"
+                >
+                    <motion.div 
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "tween", duration: 0.3 }}
+                      className="col-span-1 md:col-span-2 overflow-hidden"
+                    >
                         <PhaseCard phase={selectedProject.phases[0]}/>
-                    </div>
-                    <div className="col-span-3 col-start-3 bg-bg-100/70 rounded-lg">2</div>
-                    <div className="col-span-3 col-start-6 bg-bg-100/70 rounded-lg">3</div>
-                    <div className="col-span-2 row-start-2 bg-bg-100/70 rounded-lg">4</div>
-                    <div className="col-span-3 col-start-3 row-start-2 bg-bg-100/70 rounded-lg">5</div>
-                    <div className="col-span-3 col-start-6 row-start-2 bg-bg-100/70 rounded-lg">6</div>
-                    <div className="col-span-5 row-span-2 row-start-3 bg-bg-100/70 rounded-lg">7</div>
-                    <div className="col-span-3 row-span-2 col-start-6 row-start-3 bg-bg-100/70 rounded-lg">8</div>
-                </div>
+                    </motion.div>
+                    <motion.div 
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "tween", duration: 0.3 }}
+                      className="col-span-1 md:col-span-2 lg:col-span-3 overflow-hidden"
+                    >
+                        <FastLinks />
+                    </motion.div>
+                    <motion.div 
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "tween", duration: 0.3 }}
+                      className="col-span-1 md:col-span-4 lg:col-span-3 md:row-span-2 bg-bg-100/70 rounded-lg"
+                    >
+                      3
+                    </motion.div>
+                    <motion.div 
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "tween", duration: 0.3 }}
+                      className="col-span-1 md:col-span-2 overflow-hidden"
+                    >
+                        <TasksOverviewCard tasks={selectedProject.tasks} />
+                    </motion.div>
+                    <motion.div 
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "tween", duration: 0.3 }}
+                      className="col-span-1 md:col-span-2 lg:col-span-3"
+                    >
+                      <NotificationsCard notifications={selectedProject.notifications} />
+                    </motion.div>
+                    <motion.div 
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "tween", duration: 0.3 }}
+                      className="col-span-1 md:col-span-4 lg:col-span-5 md:row-span-2 "
+                    >
+                      <SyntraDriveCard files={selectedProject.files} />
+                    </motion.div>
+                    <motion.div 
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "tween", duration: 0.3 }}
+                      className="col-span-1 md:col-span-4 lg:col-span-3 md:row-span-2 bg-bg-100/70 rounded-lg"
+                    >
+                      8
+                    </motion.div>
+                </motion.div>
             </div>
-        </div>
+        </motion.div>
+      </>
     );
 };
 

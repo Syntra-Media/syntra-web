@@ -1,13 +1,14 @@
 "use client";
 
-import React, {useEffect} from 'react'
+import React, { useEffect, use } from 'react';
 import {NAV_ITEMS} from '@/components/ui/BlogHeader'
 import {usePosts} from "@/components/providers/PostProvider";
 import {Oval} from "react-loader-spinner";
 import Link from "next/link";
 import Image from "next/image";
 
-const Category = ({params}: {params: {slug: string}}) => {
+const Category = (props: {params: Promise<{slug: string}>}) => {
+    const params = use(props.params);
     const [categorizedPosts, setCategorizedPosts] = React.useState<any[]>();
     const [category, setCategory] = React.useState<string>(NAV_ITEMS.find(item => item.route === `/blog/category/${params.slug}`)?.name || "");
     const {posts, loading} = usePosts();

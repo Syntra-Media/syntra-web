@@ -31,3 +31,19 @@ export const getLatestPost = async () => {
 
     return null;
 }
+
+export const getNotification = async (id: string) => {
+    const supabase = createClient();
+    const {data, error} = await supabase.from("notifications").select().eq("id", id);
+    if (data && data.length > 0) {
+        const notification = data[0];
+        
+        const {data: files} = await supabase.from("files").select().in("id", notification.attachments);
+
+        notification.attachments = files;
+
+        console.log(notification);  
+        return notification;
+    }
+    return null;
+}

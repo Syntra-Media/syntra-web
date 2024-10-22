@@ -181,6 +181,10 @@ export const getPortalInfo = async ({token, id}: any) => {
 
       project.files = files;
 
+      const {data: notifications, error: notificationsError} = await supabase.from("notifications").select().eq("project", project.id);
+
+      project.notifications = notifications;
+
       projects.push(project);
     }
 

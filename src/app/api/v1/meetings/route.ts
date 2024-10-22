@@ -65,7 +65,8 @@ export async function POST(req: NextRequest, res: any) {
 
     console.log('Request Body:', body);
 
-    let supabase = createClient(req as any, res);
+    let supabase = createClient(req as any, /* @next-codemod-error 'res' is passed as an argument. Any asynchronous properties of 'props' must be awaited when accessed. */
+    res);
 
     const { data, error } = await supabase.from('meetings').insert([
         {

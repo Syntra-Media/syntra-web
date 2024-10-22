@@ -2,8 +2,8 @@ import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import ClientHome from './page.client'
 
-export default function Home() {
-  const headersList = headers()
+export default async function Home() {
+  const headersList = await headers()
   const acceptLanguage = headersList.get('accept-language') || ''
   
   // Get the first language from the accept-language header
@@ -14,6 +14,6 @@ export default function Home() {
     redirect('/en')
   }
 
-  // If it is Turkish, render the Turkish version
+  // If it is Turkish, render the Turkish version without creating a new component
   return <ClientHome initialLocale="tr" />
 }
