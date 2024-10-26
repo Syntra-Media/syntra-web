@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
 import {Oval} from "react-loader-spinner";
@@ -10,7 +10,7 @@ import {usePosts} from "@/components/providers/PostProvider";
 
 const Blog = () => {
     const {posts, loading} = usePosts();
-    const latestPost = posts?.[posts?.length - 1];
+    const latestPost = useMemo(() => posts?.[0], [posts]);
 
     const [selected, setSelected] = React.useState<"latest" | "popular">("latest")
     const [selectedCategory, setSelectedCategory] = React.useState<string>("all")

@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useEffect, use } from 'react';
+import React, { useEffect, use, useMemo } from 'react';
 import {NAV_ITEMS} from '@/components/ui/BlogHeader'
 import {usePosts} from "@/components/providers/PostProvider";
 import {Oval} from "react-loader-spinner";
 import Link from "next/link";
 import Image from "next/image";
 
-const Category = (props: {params: Promise<{slug: string}>}) => {
-    const params = use(props.params);
+const Category = ({params}: {params: {slug: string}}) => {
     const [categorizedPosts, setCategorizedPosts] = React.useState<any[]>();
     const [category, setCategory] = React.useState<string>(NAV_ITEMS.find(item => item.route === `/blog/category/${params.slug}`)?.name || "");
     const {posts, loading} = usePosts();
@@ -18,8 +17,7 @@ const Category = (props: {params: Promise<{slug: string}>}) => {
             return;
         }
 
-        const categoryPosts = posts.filter(post => post.category === category);
-        console.log(categoryPosts);
+        const categoryPosts = posts.filter(post => post.category === category).sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
         setCategorizedPosts(categoryPosts);
     }, [loading]);
 
@@ -51,7 +49,7 @@ const Category = (props: {params: Promise<{slug: string}>}) => {
                             )
                         }
                         {
-                            categorizedPosts?.map((post: any, index: number) => {
+                            categorizedPosts?.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map((post: any, index: number) => {
                                 if (post.category === category || category === "Tüm Yazılar") {
                                     return (
                                         <Link href={`/blog/${post.slug}`} passHref key={post.id} className={"w-full"}>
