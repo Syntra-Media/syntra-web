@@ -20,6 +20,13 @@ const Header = ({ className, locale = "tr" }: HeaderProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedLocale, setSelectedLocale] = useState(locale === "en" ? en : tr);
 
+    const handleClick = (section: string) => {
+        const sectionElement = document.getElementById(section);
+        if (sectionElement) {
+            sectionElement.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     useEffect(() => {
         const handler = (e: MouseEvent) => {
             if ((e.target as HTMLElement).closest(".menu") || (e.target as HTMLElement).closest("button")) return;
@@ -54,6 +61,7 @@ const Header = ({ className, locale = "tr" }: HeaderProps) => {
                                 transition={{ duration: 1, ease: "easeInOut" }}
                             >
                                 <div className={"w-full flex justify-center my-8"}>
+                                    <Link href={"/"}>
                                     <svg width="18" height="38" viewBox="0 0 18 38" fill="none"
                                          xmlns="http://www.w3.org/2000/svg"
                                          className={"absolute right-1/2 translate-x-1/2"}>
@@ -65,14 +73,21 @@ const Header = ({ className, locale = "tr" }: HeaderProps) => {
                                             transition={{ duration: 1.5, ease: "easeInOut" }}
                                         />
                                     </svg>
+                                    </Link>
                                 </div>
                                 <div className={"w-full flex flex-col gap-6"}>
                                     {
                                         navItems.map((item: NavItem, index: number) => (
-                                            <div key={index} className={"mx-6 flex justify-between transition-all border-b border-light hover:border-primary-100 group"}>
-                                                <Link href={item.href} className={"text-xl"}>
-                                                    {item.title}
-                                                </Link>
+                                            <div key={index} className={"mx-6 flex justify-between transition-all border-b border-light hover:border-primary-100 group text-xl cursor-pointer"}>
+                                                {
+                                                    item.href ? (
+                                                        <Link href={item.href}>
+                                                            {item.title}
+                                                        </Link>
+                                                    ) : (
+                                                        <p onClick={() => handleClick(item.id)}>{item.title}</p>
+                                                    )
+                                                }
                                                 <MoveUpRight className={"group-hover:text-primary-100"} />
                                             </div>
                                         ))
@@ -87,16 +102,18 @@ const Header = ({ className, locale = "tr" }: HeaderProps) => {
                     }
                 </AnimatePresence>
 
-                <svg width="18" height="38" viewBox="0 0 18 38" fill="none" xmlns="http://www.w3.org/2000/svg"
-                     className={"lg:relative lg:translate-x-0 lg:right-0 absolute right-0 mr-8"}>
-                    <motion.path
-                        d="M0 18.1485L6.13333 5.99242L11.6 3.08182L18 0L9.32727 18.1485H18L11.4667 32.5303L6.13333 34.9273L0 37.6667L9.32727 18.1485H0Z"
-                        stroke={"#FFC300"}
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 1.5, ease: "easeInOut" }}
-                    />
-                </svg>
+                <Link href={locale === "en" ? "/en" : "/"}>
+                  <svg width="18" height="38" viewBox="0 0 18 38" fill="none" xmlns="http://www.w3.org/2000/svg"
+                      className={"lg:relative lg:translate-x-0 lg:right-0 absolute right-0 mr-8"}>
+                      <motion.path
+                          d="M0 18.1485L6.13333 5.99242L11.6 3.08182L18 0L9.32727 18.1485H18L11.4667 32.5303L6.13333 34.9273L0 37.6667L9.32727 18.1485H0Z"
+                          stroke={"#FFC300"}
+                          initial={{ pathLength: 0 }}
+                          animate={{ pathLength: 1 }}
+                          transition={{ duration: 1.5, ease: "easeInOut" }}
+                      />
+                  </svg>
+                </Link>
 
                 <motion.div
                     className={"hidden lg:flex gap-8 items-center absolute right-1/2 translate-x-1/2 py-4 px-5 border border-light/10 rounded-xl shadow-xl"}
@@ -105,11 +122,19 @@ const Header = ({ className, locale = "tr" }: HeaderProps) => {
                     transition={{ duration: 1.5 }}
                 >
                     {
-                        navItems.map((item: NavItem, index: number) => (
-                            <Link key={index} href={item.href} className={"font-light text-light/70 hover:text-primary-100 hover:drop-shadow-2xl transition-all"}>
+                        navItems.map((item: NavItem, index: number) => {
+                          if (item.href) {
+                            return (
+                              <Link key={index} href={item.href} className={"font-light text-light/70 hover:text-primary-100 hover:drop-shadow-2xl transition-all"}>
                                 {item.title}
-                            </Link>
-                        ))
+                              </Link>
+                            );
+                          }
+
+                          return (
+                            <p key={index} className={"font-light text-light/70 hover:text-primary-100 hover:drop-shadow-2xl transition-all cursor-pointer"} onClick={() => handleClick(item.id)}>{item.title}</p>
+                          );
+                        })
                     }
                 </motion.div>
 
@@ -119,7 +144,7 @@ const Header = ({ className, locale = "tr" }: HeaderProps) => {
                     transition={{ duration: 1.5 }}
                     className={"hidden lg:flex"}
                 >
-                    <Button variant={"secondary"}>
+                    <Button variant={"secondary"} onClick={() => handleClick("contact")}>
                         {selectedLocale.header.contact}
                     </Button>
                 </motion.div>

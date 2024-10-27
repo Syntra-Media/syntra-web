@@ -1,9 +1,10 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { notFound } from 'next/navigation';
 import Profile from '@/components/ui/Portal/Profile';
 import Projects from '@/components/ui/Portal/Projects';
 import Files from '@/components/ui/Portal/Files';
 import Notifications from '@/components/ui/Portal/Notifications';
+import Invoices from '@/components/ui/Portal/Invoices';
 
 const ROUTES = [
   {
@@ -24,7 +25,7 @@ const ROUTES = [
   {
       name: "Ödemeler",
       href: "/portal/payments",
-      component: ( <div>odemeler</div> ),
+      component: ( <Invoices /> ),
   },
   {
       name: "Dosyalar",

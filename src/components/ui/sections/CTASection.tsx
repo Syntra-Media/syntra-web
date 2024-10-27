@@ -4,10 +4,11 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import {Button} from "@/components/ui/Button";
-import {Input} from "@/components/ui/Input";
-import {Calendar} from "@/components/ui/Calendar";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { Calendar } from "@/components/ui/Calendar";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 import tr from '@/localization/tr.json'
 import en from '@/localization/en.json'
@@ -104,27 +105,48 @@ const CTASection = ({locale}: {locale: string}) => {
 
     if (isLoading) {
         return (
-            <div className={"w-full flex my-24 justify-center"}>
+            <motion.div 
+                className={"w-full flex my-24 justify-center"}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                id={"contact"}
+            >
                 <div className="animate-spin rounded-full h-32 w-32 border-4 border-primary-100 border-t-transparent shadow-lg"></div>
-            </div>
+            </motion.div>
         );
     }
 
     if (hasPendingMeeting) {
         return (
-            <div className={"w-full flex my-24 justify-center items-center"}>
+            <motion.div 
+                className={"w-full flex my-24 justify-center items-center"}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                id={"contact"}
+            >
                 <h2 className={"text-4xl font-semibold"}>
                     {locale === "en" 
                         ? "You already have a pending meeting request. We'll contact you soon."
                         : "Zaten bekleyen bir toplantı talebiniz var. Yakında sizinle iletişime geçeceğiz."}
                 </h2>
-            </div>
+            </motion.div>
         );
     }
 
     if (submitted) {
         return (
-            <div className={"w-full flex my-24 justify-center"}>
+            <motion.div 
+                className={"w-full flex my-24 justify-center"}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                id={"contact"}
+            >
                 <h2 className={"text-4xl font-semibold"}>
                     {
                         locale === "en" ? (
@@ -138,13 +160,20 @@ const CTASection = ({locale}: {locale: string}) => {
                         )
                     }
                 </h2>
-            </div>
+            </motion.div>
         );
     }
 
     if (!hasPendingMeeting) {
         return (
-            <div className={"w-full flex"}>
+            <motion.div 
+                className={"w-full flex"}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                id={"contact"}
+            >
                 <div className={"mx-8 lg:mx-32 my-12 flex flex-col gap-8 w-full h-full"}>
                     <h2 className={"text-4xl font-semibold"}>
                         {
@@ -248,7 +277,7 @@ const CTASection = ({locale}: {locale: string}) => {
                     </div>
 
                 </div>
-            </div>
+            </motion.div>
         );
     }
 };

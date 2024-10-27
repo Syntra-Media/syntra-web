@@ -27,9 +27,7 @@ function NotificationsCard({notifications}: {notifications: any[]}) {
             {lastNotification.title}
           </p>
         </div>
-        <p className='text-sm font-medium text-light/80 line-clamp-3'>
-          {lastNotification.content}
-        </p>
+        <div className='text-sm font-medium text-light/80 line-clamp-3 prose prose-xs prose-invert' dangerouslySetInnerHTML={{__html: lastNotification.content}}></div>
         <div className='flex w-full mt-auto items-end justify-between'>
           <p className='text-xs font-medium text-light/60'>
             {lastNotification.sender} tarafından gönderildi

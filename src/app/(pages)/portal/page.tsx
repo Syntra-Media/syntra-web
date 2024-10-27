@@ -11,6 +11,7 @@ import FastLinks from '@/components/ui/FastLinksCard';
 import TasksOverviewCard from '@/components/ui/TasksOverviewCard';
 import SyntraDriveCard from '@/components/ui/SyntraDriveCard';
 import NotificationsCard from '@/components/ui/NotificationsCard';
+import InvoiceCard from '@/components/ui/InvoiceCard';
 
 const Portal = () => {
     const {user, isLoaded} = useUser();
@@ -158,9 +159,9 @@ const Portal = () => {
                     <motion.div 
                       whileHover={{ scale: 1.05 }}
                       transition={{ type: "tween", duration: 0.3 }}
-                      className="col-span-1 md:col-span-4 lg:col-span-3 md:row-span-2 bg-bg-100/70 rounded-lg"
+                      className="col-span-1 md:col-span-4 lg:col-span-3 md:row-span-2 "
                     >
-                      8
+                      <InvoiceCard />
                     </motion.div>
                 </motion.div>
             </div>

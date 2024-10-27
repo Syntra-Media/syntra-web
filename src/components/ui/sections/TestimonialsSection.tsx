@@ -1,6 +1,9 @@
+"use client"
+
 import React from "react";
 import {Button} from "@/components/ui/Button";
 import Marquee from "@/components/magicui/Marquee";
+import { motion } from 'framer-motion';
 
 import tr from '@/localization/tr.json'
 import en from '@/localization/en.json'
@@ -40,7 +43,12 @@ const TestimonialsSection = ({locale}: {locale: string}) => {
     }
 
     return (
-        <div className={"flex w-full"}>
+        <motion.div className={"flex w-full"}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+        >
             <div className={"flex flex-col lg:flex-row gap-x-24 gap-y-8 w-full h-full mx-8 my-28 lg:mx-40 items-center "}>
                 <div className={"w-full flex flex-col gap-8"}>
                     <h2 className={"font-semibold text-3xl lg:text-4xl"}>
@@ -107,7 +115,7 @@ const TestimonialsSection = ({locale}: {locale: string}) => {
                     </Marquee>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

@@ -25,10 +25,11 @@ const LandingHero = ({locale}: any) => {
     return (
         <div className={"w-full h-screen bg-radial flex flex-col justify-center items-center gap-4 md:gap-8"}>
             <motion.h1
-                className={"font-medium text-3xl text-center lg:text-6xl 3xl:text-7xl"}
+                className={"lg:font-medium font-semibold text-[2rem] text-center lg:text-6xl 3xl:text-7xl"}
                 initial={{opacity: 0}}
                 animate={{opacity: 1}}
                 transition={{duration: 1.5}}
+                id={"home"}
             >
                 {locale === "en" ? (
                     <p>

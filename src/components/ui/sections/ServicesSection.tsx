@@ -204,7 +204,14 @@ const ServicesSection = ({locale}: {locale: string}) => {
     }
 
     return (
-        <div className={"flex w-full overflow-hidden"}>
+        <motion.div 
+            className={"flex w-full overflow-hidden"}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            id={"services"}
+        >
             <div className={"flex flex-col lg:flex-row w-full h-full mx-8 lg:mx-40 my-32 gap-32 items-center justify-center dark"}>
                 <BentoGrid>
                     {
@@ -241,7 +248,7 @@ const ServicesSection = ({locale}: {locale: string}) => {
                     <Button variant={"default"} className={"w-max"} onClick={handleSectionScroll}>{selectedLocale.hero.cta_button}</Button>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

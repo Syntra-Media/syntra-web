@@ -1,9 +1,10 @@
+"use client"
+
 import React, {useState} from 'react';
 import Faq from "@/components/ui/Faq";
 import Link from "next/link";
 
-import tr from '@/localization/tr.json'
-import en from '@/localization/en.json'
+import { motion } from 'framer-motion';
 
 type LanguageCode = "en" | "tr"
 
@@ -56,10 +57,14 @@ const QUESTIONS = {
 
 const FaqSection = ({locale}: {locale: string}) => {
     const [activeIndex, setActiveIndex] = useState(0)
-    const [selectedLocale, setSelectedLocale] = useState(locale === "en" ? en : tr)
 
     return (
-        <div className={"flex w-full overflow-hidden"}>
+        <motion.div className={"flex w-full overflow-hidden"}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+        >
             <div className={"w-full h-full flex flex-col mx-8 lg:mx-40 my-24 gap-8"}>
                 <h2 className={"font-semibold text-4xl"}>
                     {
@@ -103,7 +108,7 @@ const FaqSection = ({locale}: {locale: string}) => {
                     </p>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 import tr from '@/localization/tr.json'
 import en from '@/localization/en.json'
@@ -12,7 +13,14 @@ const AboutUsSection = ({locale}: {locale: string}) => {
     const [selectedLocale, setSelectedLocale] = React.useState(locale === "en" ? en : tr)
 
     return (
-        <div className={"flex w-full overflow-hidden"}>
+        <motion.div 
+            className={"flex w-full overflow-hidden"}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            id={"about"}
+        >
             <div className={"flex flex-col gap-y-12 lg:gap-48 3xl:gap-80  items-center lg:flex-row w-full h-full my-28 mx-8 lg:mx-40"}>
                 <div className={"flex flex-col justify-center gap-8 w-full h-full"}>
                     <h2 className={"font-semibold text-4xl"}>
@@ -67,7 +75,7 @@ const AboutUsSection = ({locale}: {locale: string}) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

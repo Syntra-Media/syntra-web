@@ -2,6 +2,7 @@
 type NavItem = {
     title: string;
     href: string;
+    id: string;
 };
 
 type NavItems = {
@@ -11,18 +12,18 @@ type NavItems = {
 
 const NAV_ITEMS: NavItems = {
     "en": [
-        { title: "Home", href: "/" },
-        { title: "Blog", href: "/blog" },
-        { title: "About Us", href: "/about" },
-        { title: "Services", href: "/services" },
-        { title: "Contact", href: "/contact" }
+        { title: "Home", href: "", id: "home" },
+        { title: "Blog", href: "/blog", id: "" },
+        { title: "About Us", href: "", id: "about" },
+        { title: "Services", href: "", id: "services" },
+        { title: "Contact", href: "", id: "contact" }
     ],
     "tr": [
-        { title: "Anasayfa", href: "/" },
-        { title: "Blog", href: "/blog" },
-        { title: "Hakkımızda", href: "/about" },
-        { title: "Hizmetler", href: "/services" },
-        { title: "İletişim", href: "/contact" }
+        { title: "Anasayfa", href: "", id: "home" },
+        { title: "Blog", href: "/blog", id: "" },
+        { title: "Hakkımızda", href: "", id: "about" },
+        { title: "Hizmetler", href: "", id: "services" },
+        { title: "İletişim", href: "", id: "contact" }
     ]
 };
 
