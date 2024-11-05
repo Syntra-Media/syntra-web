@@ -6,19 +6,19 @@ import { Oval } from 'react-loader-spinner';
 import { Button } from './Button';
 import { CheckCircleIcon } from 'lucide-react';
 
-function InvoiceCard() {
-  const { favoriteProject, loading } = usePortal();
+function InvoiceCard({invoices, project}: {invoices: any[], project: any}) {
+  const { loading } = usePortal();
   const [currentInvoice, setCurrentInvoice] = useState<any>(null);
 
   useEffect(() => {
-    if (favoriteProject) {
-      favoriteProject.payments.forEach((payment: any, index: number) => {
+    if (invoices) {
+      invoices.forEach((payment: any, index: number) => {
         if (payment.paid === false) {
           setCurrentInvoice({...payment, id: index + 1, deadline: new Date(payment.deadline)});
         }
       });
     }
-  }, [favoriteProject]);
+  }, [invoices]);
   
   if (loading) return (
     <div className={"flex w-full h-screen items-center justify-center"}>
@@ -53,10 +53,10 @@ function InvoiceCard() {
       <div className='flex flex-col w-full h-full gap-2 p-3'>
         <div className='flex items-center justify-between w-full'>
           <p className='text-xl font-bold text-light/90'>
-            {favoriteProject?.name} Projesi
+            {project.name} Projesi
           </p>
           <p className='text-lg font-medium text-primary/90'>
-            {currentInvoice?.id}. Ödeme / {favoriteProject?.payment_info}
+            {currentInvoice?.id}. Ödeme / {project.payment_info}
           </p>
         </div>
         <p className='text-base font-medium text-light/70'>
@@ -67,7 +67,7 @@ function InvoiceCard() {
             {currentInvoice?.fee} TL
           </p>
           <p className='text-xs text-light/50'>
-            {favoriteProject?.payment_info} aylık ücretin her aya dağılmış şeklinde geldiği aylık ücret miktarı.
+            {project.payment_info} aylık ücretin her aya dağılmış şeklinde geldiği aylık ücret miktarı.
           </p>
         </div>
         <div className='flex flex-col w-full mt-auto gap-3'>
