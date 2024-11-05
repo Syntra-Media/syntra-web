@@ -190,3 +190,104 @@ export const getPortalInfo = async ({token, id}: any) => {
 
     return projects;
 }
+
+export const getAllProjects = async ({token}: any) => {
+    const supabase = await supabaseClient(token);
+
+    const {data, error} = await supabase.from("projects").select();
+
+    if (error) {
+        console.error(error);
+        return [];
+    }
+
+    return data;
+}
+
+export const getProject = async ({token, id}: any) => {
+    const supabase = await supabaseClient(token);
+
+    const {data, error} = await supabase.from("projects").select().eq("id", id);
+
+    if (error) {
+        console.error(error);
+        return false;
+    }
+
+    let project = {...data[0]};
+
+    const {data: phases, error: phasesError} = await supabase.from("phases").select().eq("project", project.id);
+
+    project.phases = phases;
+
+      
+    const {data: tasks, error: tasksError} = await supabase.from("tasks").select().eq("project", project.id);
+
+    project.tasks = tasks;
+      
+    const {data: payments, error: paymentsError} = await supabase.from("payments").select().eq("project", project.id);
+
+    project.payments = payments;
+
+    const {data: files, error: filesError} = await supabase.from("files").select().eq("project", project.id);
+
+    project.files = files;
+
+    const {data: notifications, error: notificationsError} = await supabase.from("notifications").select().eq("project", project.id);
+
+    project.notifications = notifications;
+
+    return project;
+}
+
+export const deleteFunc = async ({token, id, type}: any) => {
+    const supabase = await supabaseClient(token);
+
+    const {data, error} = await supabase.from(type).delete().eq("id", id);
+
+    if (error) {
+        console.error(error);
+        return false;
+    }
+
+    return true;
+}
+
+export const createFunc = async ({token, type, insertData}: any) => {
+    const supabase = await supabaseClient(token);
+
+    const {data, error} = await supabase.from(type).insert(insertData);
+
+    if (error) {
+        console.error(error);
+        return false;
+    }
+
+    return true;
+}
+
+export const updateFunc = async ({token, type, id, updateData}: any) => {
+    const supabase = await supabaseClient(token);
+
+    const {data, error} = await supabase.from(type).update(updateData).eq("id", id);
+
+    if (error) {
+        console.error(error);
+        return false;
+    }
+
+    return true;
+}
+
+export const createProject = async ({token, data: {name, owner, payment_info}}: any) => {
+    const supabase = await supabaseClient(token);
+
+    const {data, error} = await supabase.from("projects").insert({name, owner, payment_info});
+
+    if (error) {
+        console.error(error);
+        return false;
+    }
+
+    return true;
+}

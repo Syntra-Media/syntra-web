@@ -7,13 +7,18 @@ import { motion } from 'framer-motion';
 import { DownloadIcon } from 'lucide-react';
 import { Button } from '../Button';
 import { cn } from '@/lib/utils';
+import { useTheme } from '@/components/providers/PortalThemeProvider';
 
 function Invoices() {
   const { favoriteProject, loading } = usePortal();
+  const { isDarkTheme } = useTheme();
 
   if (loading) {
     return (
-      <div className='flex w-full h-screen items-center justify-center'>
+      <div className={cn(
+        'flex w-full h-screen items-center justify-center',
+        isDarkTheme ? 'bg-bg-200/20' : 'bg-gray-100'
+      )}>
         <Oval
           height={64}
           width={64}
@@ -35,7 +40,10 @@ function Invoices() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className='flex w-full overflow-y-auto'
+      className={cn(
+        'flex w-full overflow-y-auto',
+        isDarkTheme ? 'bg-bg-200/20' : 'bg-gray-100'
+      )}
     >
       <div className='flex flex-col gap-4 mx-6 lg:mx-16 my-16 w-full'>
         <motion.h1 
@@ -60,7 +68,10 @@ function Invoices() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.1 * index }}
-                  className='bg-slate-800/50 rounded-xl shadow-lg overflow-hidden'
+                  className={cn(
+                    'rounded-xl shadow-lg overflow-hidden',
+                    isDarkTheme ? 'bg-slate-800/50' : 'bg-white'
+                  )}
                 >
                   <div className='p-6 flex flex-col h-full'>
                     <div className='flex justify-between items-start mb-4'>
@@ -79,7 +90,10 @@ function Invoices() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.5, delay: 0.1 * index + 0.7 }}
-                        className='text-xs text-light/50'
+                        className={cn(
+                          'text-xs',
+                          isDarkTheme ? 'text-light/50' : 'text-gray-500'
+                        )}
                       >
                         {new Date(payment.deadline).toLocaleDateString()}
                       </motion.p>
@@ -96,7 +110,10 @@ function Invoices() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.5, delay: 0.1 * index + 1.1 }}
-                      className='text-xs text-light/60 mb-4 line-clamp-2'
+                      className={cn(
+                        'text-xs mb-4 line-clamp-2',
+                        isDarkTheme ? 'text-light/60' : 'text-gray-600'
+                      )}
                     >
                       {payment.description}
                     </motion.p>
@@ -126,9 +143,15 @@ function Invoices() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className='bg-gradient-to-br from-slate-800/50 to-slate-700/50 rounded-xl shadow-lg p-8'
+              className={cn(
+                'rounded-xl shadow-lg p-8',
+                isDarkTheme ? 'bg-gradient-to-br from-slate-800/50 to-slate-700/50' : 'bg-white'
+              )}
             >
-              <p className='text-gray-400 text-center text-lg'>Henüz fatura bulunmamaktadır.</p>
+              <p className={cn(
+                'text-center text-lg',
+                isDarkTheme ? 'text-gray-400' : 'text-gray-500'
+              )}>Henüz fatura bulunmamaktadır.</p>
             </motion.div>
           )}
         </motion.div>

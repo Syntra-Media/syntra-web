@@ -9,6 +9,7 @@ import {cn} from "@/utils/cn";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
 import { Avatar } from '@radix-ui/react-avatar';
 import { AvatarFallback, AvatarImage } from './Avatar';
+import { useTheme } from '@/components/providers/PortalThemeProvider';
 
 type PortalSideBarProps = {
     children: React.ReactNode
@@ -17,6 +18,8 @@ type PortalSideBarProps = {
 const PortalSideBar = ({children}: PortalSideBarProps) => {
     const {user} = useUser();
     const pathname = usePathname();
+    const { isDarkTheme } = useTheme();
+    
     const routes = useMemo(() => [
         {
             name: "Portal",
@@ -54,17 +57,15 @@ const PortalSideBar = ({children}: PortalSideBarProps) => {
             active: pathname === "/portal/files",
             icon: ( <File /> )
         },
-        {
-            name: "Analiz ve İstatistik",
-            href: "/portal/analysis",
-            active: pathname === "/portal/analysis",
-            icon: ( <AreaChart /> )
-        },
     ], [pathname]);
 
     return (
-        <div className={"flex w-full h-screen bg-radial overflow-hidden text-light"}>
-            <div className={"w-20 h-screen hidden md:flex bg-bg"}>
+        <div className={cn("flex w-full h-screen overflow-hidden", 
+          isDarkTheme ? "text-light" : "text-gray-800"
+        )}>
+            <div className={cn("w-20 h-screen hidden md:flex", 
+              isDarkTheme ? "bg-bg-100/15 " : "bg-white border-r border-gray-200"
+            )}>
                 <div className={"w-full h-full flex flex-col mx-4 my-8 items-center gap-8"}>
                     <svg width="18" height="38" viewBox="0 0 18 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -80,7 +81,9 @@ const PortalSideBar = ({children}: PortalSideBarProps) => {
                                           <Tooltip>
                                               <TooltipTrigger>
                                                   <Link href={route.href} key={index}
-                                                        className={cn("w-12 h-12 flex items-center justify-center", route.active && "rounded-lg bg-blue-300/20")}>
+                                                        className={cn("w-12 h-12 flex items-center justify-center", 
+                                                          route.active && (isDarkTheme ? "rounded-lg bg-blue-300/20" : "rounded-lg bg-blue-100")
+                                                        )}>
                                                       {route.icon}
                                                   </Link>
                                               </TooltipTrigger>

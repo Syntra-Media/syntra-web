@@ -21,6 +21,7 @@ const SingleNotification: React.FC<NotificationProps> = ({ notification }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
+      className='flex w-full h-full bg-bg-200/20'
     >
       <div className='flex w-full h-full'>
         <div className='flex flex-col gap-4 mx-6 lg:mx-16 my-16 w-full h-full'>

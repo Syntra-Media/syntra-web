@@ -13,11 +13,14 @@ import SyntraDriveCard from '@/components/ui/SyntraDriveCard';
 import NotificationsCard from '@/components/ui/NotificationsCard';
 import InvoiceCard from '@/components/ui/InvoiceCard';
 import TasksCard from '@/components/ui/TasksCard';
+import { useTheme } from '@/components/providers/PortalThemeProvider';
+import { cn } from '@/lib/utils';
 
 const Portal = () => {
     const {user, isLoaded} = useUser();
     const {projects, loading} = usePortal();
     const [selectedProject, setSelectedProject] = useState<any>(null);
+    const { isDarkTheme } = useTheme();
 
     const handleProjectChange = (projectId: string) => {
       user?.update({
@@ -40,7 +43,10 @@ const Portal = () => {
     }, [loading, isLoaded]);
 
     if (loading) return (
-      <div className={"flex w-full h-screen items-center justify-center"}>
+      <div className={cn(
+        'flex w-full h-screen items-center justify-center',
+        isDarkTheme ? 'bg-bg-200/20' : 'bg-gray-100'
+      )}>
         <Oval
           height={64}
           width={64}
@@ -56,7 +62,13 @@ const Portal = () => {
       </div>
     );
 
-    if (projects.length === 0) return <div>No projects found</div>;
+    if (projects.length === 0) return (
+      <div className='flex w-full h-screen items-center justify-center'>
+        <p className='text-2xl font-medium'>
+          Hiçbir proje bulunamadı.
+        </p>
+      </div>
+    );
 
     if (!selectedProject) return <div>No project selected</div>;
 
@@ -66,7 +78,7 @@ const Portal = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="w-full h-screen items-center justify-center flex lg:hidden"
+          className="w-full h-screen items-center justify-center flex lg:hidden bg-bg-200/20"
         >
           <p className='text-2xl font-medium'>
             Mobile version coming soon...
@@ -76,7 +88,7 @@ const Portal = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className={"w-full h-screen overflow-hidden hidden lg:flex"}
+          className={`w-full h-screen overflow-hidden hidden lg:flex ${isDarkTheme ? 'bg-[radial-gradient(ellipse_at_bottom_right,rgb(0,53,102,0.05),rgb(0,53,102,0.2))] text-light' : 'bg-white text-gray-800'}`}
         >
             <div className={"flex flex-col gap-4 w-full mx-16 my-16"}>
                 <motion.div 
@@ -93,15 +105,14 @@ const Portal = () => {
                             Sizlere daha iyi hizmet sunabilmek için ihtiyaç duyduğunuz tüm araçlara bu portal üzerinden kolayca ulaşabilirsiniz.
                         </p>
                     </div>
-                    <div className='flex flex-col gap-2 dark'>
+                    <div className='flex flex-col gap-2'>
                       <Select onValueChange={handleProjectChange}>
-                        <SelectTrigger>
+                        <SelectTrigger className={isDarkTheme ? 'dark' : ''}>
                           <SelectValue placeholder={"Varsayılan Proje"} />
                         </SelectTrigger>
-                        <SelectContent className='dark'>
+                        <SelectContent className={isDarkTheme ? 'dark' : ''}>
                           {projects.map((project: any) => (
-                            <SelectItem key={project.id} value={project.id} className='dark' 
-                            >
+                            <SelectItem key={project.id} value={project.id} className={isDarkTheme ? 'dark' : ''}>
                               {project.name}
                             </SelectItem>
                           ))}
@@ -113,60 +124,32 @@ const Portal = () => {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="w-full h-full gap-4 sm:gap-6 md:gap-8 grid-cols-1 md:grid-cols-4 lg:grid-cols-8 auto-rows-fr overflow-hidden grid"
+                  className="w-full h-full gap-4 sm:gap-6 md:gap-6 grid-cols-1 md:grid-cols-4 lg:grid-cols-8 auto-rows-fr overflow-hidden grid"
                 >
-                    <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ type: "tween", duration: 0.3 }}
-                      className="col-span-1 md:col-span-2 overflow-hidden"
-                    >
-                        <PhaseCard phase={selectedProject.phases[0]}/>
-                    </motion.div>
-                    <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ type: "tween", duration: 0.3 }}
-                      className="col-span-1 md:col-span-2 lg:col-span-3 overflow-hidden"
-                    >
+                    <div className="col-span-1 md:col-span-2 overflow-hidden">
+                        <PhaseCard phase={selectedProject.phases[selectedProject.phases.length - 1]}/>
+                    </div>
+                    <div className="col-span-1 md:col-span-2 lg:col-span-3 overflow-hidden">
                         <FastLinks />
-                    </motion.div>
-                    <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ type: "tween", duration: 0.3 }}
-                      className="col-span-1 md:col-span-4 lg:col-span-3 md:row-span-2"
-                    >
+                    </div>
+                    <div className="col-span-1 md:col-span-4 lg:col-span-3 md:row-span-2">
                       <TasksCard tasks={selectedProject.tasks} />
-                    </motion.div>
-                    <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ type: "tween", duration: 0.3 }}
-                      className="col-span-1 md:col-span-2 overflow-hidden"
-                    >
+                    </div>
+                    <div className="col-span-1 md:col-span-2 overflow-hidden">
                         <TasksOverviewCard tasks={selectedProject.tasks} />
-                    </motion.div>
-                    <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ type: "tween", duration: 0.3 }}
-                      className="col-span-1 md:col-span-2 lg:col-span-3"
-                    >
+                    </div>
+                    <div className="col-span-1 md:col-span-2 lg:col-span-3">
                       <NotificationsCard notifications={selectedProject.notifications} />
-                    </motion.div>
-                    <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ type: "tween", duration: 0.3 }}
-                      className="col-span-1 md:col-span-4 lg:col-span-5 md:row-span-2 "
-                    >
+                    </div>
+                    <div className="col-span-1 md:col-span-4 lg:col-span-5 md:row-span-2">
                       <SyntraDriveCard files={selectedProject.files} />
-                    </motion.div>
-                    <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ type: "tween", duration: 0.3 }}
-                      className="col-span-1 md:col-span-4 lg:col-span-3 md:row-span-2 "
-                    >
+                    </div>
+                    <div className="col-span-1 md:col-span-4 lg:col-span-3 md:row-span-2">
                       <InvoiceCard invoices={selectedProject.payments} project={{
                         payment_info: selectedProject.payment_info,
                         name: selectedProject.name
                       }}/>
-                    </motion.div>
+                    </div>
                 </motion.div>
             </div>
         </motion.div>

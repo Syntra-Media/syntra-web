@@ -3,8 +3,13 @@
 import React, {useMemo} from 'react'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
+import { useTheme } from '@/components/providers/PortalThemeProvider'
+import { cn } from '@/lib/utils'
+import { motion } from 'framer-motion'
 
 const TasksOverviewCard = ({tasks}: {tasks: any}) => {
+  const { isDarkTheme } = useTheme();
+
   const completedTasks = useMemo(() => {
     if (!tasks) return 0
 
@@ -22,9 +27,21 @@ const TasksOverviewCard = ({tasks}: {tasks: any}) => {
   }, [completedTasks, totalTasks])
 
   return (
-    <div className={"flex w-full h-full bg-bg-200/20 rounded-lg"}>
-          <div className={"flex w-full justify-center mx-3 my-3 gap-2"}>
-            <div className='flex flex-col gap-4 items-center justify-center'>
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, delay: 0.5 }}
+      className={cn(
+        "flex w-full h-full rounded-lg backdrop-blur border transition-all duration-200 hover:shadow-lg",
+        isDarkTheme ? "bg-bg-100/15 border-slate-700/60 hover:bg-bg-100/30" : "bg-gray-100 border-gray-200 hover:bg-gray-200/50"
+      )}>
+          <div className={"flex w-full justify-center px-3 py-3 gap-2"}>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className='flex flex-col gap-4 items-center justify-center'
+            >
               <CircularProgressbar value={progress} text={`${progress}%`} 
                 styles={{
                   path: {
@@ -34,16 +51,24 @@ const TasksOverviewCard = ({tasks}: {tasks: any}) => {
                     stroke: '#ffc30033',
                   },
                   text: {
-                    fill: '#ffc300',
+                    fill: isDarkTheme ? '#ffc300' : '#ffc300',
                     fontSize: '16px',
                   },
                 }}
               />
-              <p className='text-xs font-medium text-light/60'>
+              <p className={cn(
+                'text-xs font-medium',
+                isDarkTheme ? 'text-light/60' : 'text-gray-600'
+              )}>
                 İlerleme
               </p>
-            </div>
-            <div className='flex flex-col gap-4 items-center justify-center'>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className='flex flex-col gap-4 items-center justify-center'
+            >
               <CircularProgressbar value={progress} text={`${completedTasks} / ${totalTasks}`} 
                 styles={{
                   path: {
@@ -53,17 +78,20 @@ const TasksOverviewCard = ({tasks}: {tasks: any}) => {
                     stroke: '#ffc30033',
                   },
                   text: {
-                    fill: '#ffc300',
+                    fill: isDarkTheme ? '#ffc300' : '#ffc300',
                     fontSize: '16px',
                   },
                 }}
               />
-              <p className='text-xs text-center font-medium text-light/60'>
+              <p className={cn(
+                'text-xs text-center font-medium',
+                isDarkTheme ? 'text-light/60' : 'text-gray-600'
+              )}>
                 Görevler
               </p>
-            </div>
+            </motion.div>
           </div>
-    </div>
+    </motion.div>
   )
 }
 

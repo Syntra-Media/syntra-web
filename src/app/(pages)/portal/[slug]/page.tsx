@@ -5,6 +5,8 @@ import Projects from '@/components/ui/Portal/Projects';
 import Files from '@/components/ui/Portal/Files';
 import Notifications from '@/components/ui/Portal/Notifications';
 import Invoices from '@/components/ui/Portal/Invoices';
+import Tasks from '@/components/ui/Portal/Tasks';
+import Settings from '@/components/ui/Portal/Settings';
 
 const ROUTES = [
   {
@@ -15,7 +17,7 @@ const ROUTES = [
   {
       name: "Görevler",
       href: "/portal/tasks",
-      component: ( <div>görevler</div> ),
+      component: ( <Tasks /> ),
   },
   {
       name: "İletişim Merkezi",
@@ -33,14 +35,9 @@ const ROUTES = [
       component: ( <Files /> ),
   },
   {
-      name: "Analiz ve İstatistik",
-      href: "/portal/analysis",
-      component: ( <div>analız</div> ),
-  },
-  {
     name: "Ayarlar",
     href: "/portal/settings",
-    component: ( <div>ayarlar</div> ),
+    component: ( <Settings /> ),
   },
   {
     name: "Profil",

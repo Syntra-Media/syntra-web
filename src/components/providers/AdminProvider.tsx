@@ -16,7 +16,7 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
 
     useEffect(() => {
         if (!isLoaded) return;
-
+      
         const admin = user?.publicMetadata.admin;
 
         if (!admin) {
@@ -24,7 +24,7 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
         }
     }, [isLoaded, user]);
 
-    return (
+    if (user && isLoaded) return (
         <AdminContext.Provider value={{ user, isLoaded }}>
             {children}
         </AdminContext.Provider>

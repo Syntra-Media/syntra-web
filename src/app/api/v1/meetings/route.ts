@@ -12,7 +12,7 @@ const postLimit = rateLimit(1, 86400000) // 1 requests per day
 let meetingsCache: { [email: string]: boolean } = {};
 
 const GetMeetingsFromDB = async () => {
-    let supabase = createClient();
+    let supabase = await createClient();
     const {data, error} = await supabase.from('meetings').select();
     return data;
 }
@@ -65,7 +65,7 @@ export async function POST(req: NextRequest, res: any) {
 
     console.log('Request Body:', body);
 
-    let supabase = createClient(req as any, /* @next-codemod-error 'res' is passed as an argument. Any asynchronous properties of 'props' must be awaited when accessed. */
+    let supabase = await createClient(req as any, /* @next-codemod-error 'res' is passed as an argument. Any asynchronous properties of 'props' must be awaited when accessed. */
     res);
 
     const { data, error } = await supabase.from('meetings').insert([

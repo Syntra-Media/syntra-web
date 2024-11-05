@@ -13,13 +13,18 @@ import { cn } from '@/lib/utils'
 import {dark} from '@clerk/themes'
 import { Dialog, DialogContent, DialogTrigger } from '../Dialog'
 import { motion } from 'framer-motion'
+import { useTheme } from '@/components/providers/PortalThemeProvider'
 
 function Profile() {
   const { projects, loading, favoriteProject } = usePortal()
   const { user, isLoaded } = useUser()
+  const { isDarkTheme } = useTheme()
 
   if (loading || !isLoaded) return (
-    <div className={"flex w-full h-screen items-center justify-center"}>
+    <div className={cn(
+      'flex w-full h-screen items-center justify-center',
+      isDarkTheme ? 'bg-bg-200/20' : 'bg-gray-100'
+    )}>
       <Oval
         height={64}
         width={64}
@@ -41,7 +46,10 @@ function Profile() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className='flex w-full h-full'
+        className={cn(
+          'flex w-full h-full',
+          isDarkTheme ? 'bg-bg-200/20' : 'bg-gray-100'
+        )}
       >
         <div className='flex flex-col gap-4 mx-6 lg:mx-16 my-16 w-full h-full'>
           <motion.h1 
@@ -66,7 +74,10 @@ function Profile() {
                 </AvatarFallback>
               </Avatar>
               <div className='flex flex-col gap-0'>
-                <h2 className='text-4xl'>{user?.fullName}</h2>
+                <h2 className={cn(
+                  'text-4xl',
+                  isDarkTheme ? 'text-light' : 'text-gray-800'
+                )}>{user?.fullName}</h2>
                 <p className='text-sm text-gray-500 mt-1'>{user?.emailAddresses[0].emailAddress}</p>
               </div>
             </div>
@@ -79,7 +90,7 @@ function Profile() {
               <DialogContent className='w-full h-full flex items-center justify-center bg-transparent border-none border-transparent bg-none'>
                 <UserProfile routing='virtual' appearance={
                   {
-                    baseTheme: dark,
+                    baseTheme: isDarkTheme ? dark : undefined,
                     elements: {
                       card: "hidden"
                     }
@@ -94,7 +105,10 @@ function Profile() {
             transition={{ duration: 0.5, delay: 0.6 }}
             className='flex flex-col w-full gap-4 mt-8'
           >
-            <h2 className='text-2xl font-medium text-light/90'>Aktif Projeler</h2>
+            <h2 className={cn(
+              'text-2xl font-medium',
+              isDarkTheme ? 'text-light/90' : 'text-gray-800'
+            )}>Aktif Projeler</h2>
             <div className='flex flex-wrap w-full gap-4'>
               {
                 loading ? <Skeleton className='w-full h-16 rounded-md' /> :
@@ -104,13 +118,27 @@ function Profile() {
                     initial={{ x: -20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                    className={cn('flex items-center gap-4 px-4 py-3 rounded-md bg-light/10 cursor-pointer transition-colors duration-200 hover:bg-light/20', {
-                      'bg-yellow-500/20 hover:bg-yellow-500/30': favoriteProject?.id === project.id
-                    })}
+                    className={cn(
+                      'flex items-center gap-4 px-4 py-3 rounded-md cursor-pointer transition-colors duration-200',
+                      isDarkTheme 
+                        ? 'bg-light/10 hover:bg-light/20' 
+                        : 'bg-white hover:bg-gray-50',
+                      favoriteProject?.id === project.id && (
+                        isDarkTheme 
+                          ? 'bg-yellow-500/20 hover:bg-yellow-500/30'
+                          : 'bg-yellow-300/20 hover:bg-yellow-300/30'
+                      )
+                    )}
                   >
-                    <FolderRootIcon className='w-12 h-12 opacity-70' />
+                    <FolderRootIcon className={cn(
+                      'w-12 h-12',
+                      isDarkTheme ? 'opacity-70' : 'text-gray-600'
+                    )} />
                     <div className='flex flex-col gap-1'>
-                      <p className='text-lg font-medium flex items-center gap-2'>
+                      <p className={cn(
+                        'text-lg font-medium flex items-center gap-2',
+                        isDarkTheme ? 'text-light' : 'text-gray-800'
+                      )}>
                         {project.name}
                         {
                           favoriteProject?.id === project.id && (
@@ -118,12 +146,21 @@ function Profile() {
                           )
                         }
                       </p>
-                      <p className='text-xs text-light/50'>
+                      <p className={cn(
+                        'text-xs',
+                        isDarkTheme ? 'text-light/50' : 'text-gray-500'
+                      )}>
                         {new Date(project.created_at).toLocaleDateString()} tarihinde oluşturuldu
                       </p>
                     </div>
-                    <Link href={`/portal/project/`} className='flex items-center justify-center w-6 h-6 rounded-full bg-light/10'>
-                      <ArrowRightIcon className='w-4 h-4 opacity-70' />
+                    <Link href={`/portal/project/`} className={cn(
+                      'flex items-center justify-center w-6 h-6 rounded-full',
+                      isDarkTheme ? 'bg-light/10' : 'bg-gray-100'
+                    )}>
+                      <ArrowRightIcon className={cn(
+                        'w-4 h-4',
+                        isDarkTheme ? 'opacity-70' : 'text-gray-600'
+                      )} />
                     </Link>
                   </motion.div>
                 ))

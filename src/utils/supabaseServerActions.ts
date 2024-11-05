@@ -1,7 +1,7 @@
 import createClient from "./supabaseServer";
 
 export const getPost = async (slug: string) => {
-    const supabase = createClient();
+    const supabase = await createClient();
     const {data, error} = await supabase.from("posts").select().eq("slug", slug);
 
     if (data && data.length > 0) {
@@ -15,7 +15,7 @@ export const getPost = async (slug: string) => {
 }
 
 export const getLatestPost = async () => {
-    const supabase = createClient();
+    const supabase = await createClient();
     const { data, error } = await supabase
         .from("posts")
         .select()
@@ -33,7 +33,7 @@ export const getLatestPost = async () => {
 }
 
 export const getNotification = async (id: string) => {
-    const supabase = createClient();
+    const supabase = await createClient();
     const {data, error} = await supabase.from("notifications").select().eq("id", id);
     if (data && data.length > 0) {
         const notification = data[0];

@@ -33,7 +33,7 @@ export const PortalProvider = ({ children }: PortalProviderProps) => {
 
     GetData(id);
 
-  }, [isLoaded]);
+  }, [isLoaded, user?.unsafeMetadata]);
   
   return (
         <PortalContext.Provider value={{projects, loading, favoriteProject}}>

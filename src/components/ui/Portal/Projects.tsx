@@ -8,10 +8,12 @@ import { useUser } from '@clerk/nextjs';
 import { cn } from '@/lib/utils';
 import { Oval } from 'react-loader-spinner';
 import { motion } from 'framer-motion';
+import { useTheme } from '@/components/providers/PortalThemeProvider';
 
 function Projects() {
   const { user, isLoaded } = useUser();
   const { projects, loading } = usePortal();
+  const { isDarkTheme } = useTheme();
   const [favoriteProjectId, setFavoriteProjectId] = useState<any>(null);
 
   useEffect(() => {
@@ -31,7 +33,10 @@ function Projects() {
   }
 
   if (loading) return (
-    <div className="flex w-full h-screen items-center justify-center">
+    <div className={cn(
+      'flex w-full h-screen items-center justify-center',
+      isDarkTheme ? 'bg-bg-200/20' : 'bg-gray-100'
+    )}>
       <Oval
         height={64}
         width={64}
@@ -52,13 +57,19 @@ function Projects() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className='w-full max-w-7xl px-12 py-12'
+      className={cn(
+        'w-full px-12 py-12',
+        isDarkTheme ? 'bg-bg-200/20' : 'bg-gray-100'
+      )}
     >
       <motion.h2 
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className='text-3xl font-bold mb-8'
+        className={cn(
+          'text-3xl font-bold mb-8',
+          isDarkTheme ? 'text-light' : 'text-gray-800'
+        )}
       >
         Aktif Projeler
       </motion.h2>
@@ -74,13 +85,21 @@ function Projects() {
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-            className='bg-slate-800/50 rounded-lg shadow-md overflow-hidden'
+            className={cn(
+              'rounded-lg shadow-md overflow-hidden',
+              isDarkTheme ? 'bg-slate-800/50' : 'bg-white'
+            )}
           >
             <div className='p-6'>
               <div className='flex items-center justify-between mb-4'>
                 <div className='flex items-center'>
                   <FolderIcon className='w-6 h-6 text-primary mr-2' />
-                  <h3 className='text-xl font-semibold'>{project.name}</h3>
+                  <h3 className={cn(
+                    'text-xl font-semibold',
+                    isDarkTheme ? 'text-light' : 'text-gray-800'
+                  )}>
+                    {project.name}
+                  </h3>
                 </div>
                 <Button
                   variant="ghost"
@@ -90,12 +109,15 @@ function Projects() {
                 >
                   <Star className={cn(
                     "w-5 h-5",
-                    favoriteProjectId === project.id ? "text-yellow-400 fill-current" : "text-gray-400"
+                    favoriteProjectId === project.id ? "text-yellow-400 fill-current" : isDarkTheme ? "text-gray-400" : "text-gray-500"
                   )} />
                 </Button>
               </div>
-              <div className='text-sm text-gray-600 dark:text-gray-300 mb-4'>
-                {project.payments.sort((a: any, b: any) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())[0].paid ? (
+              <div className={cn(
+                'text-sm mb-4',
+                isDarkTheme ? 'text-gray-300' : 'text-gray-600'
+              )}>
+                {project?.payments?.sort((a: any, b: any) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())[0]?.paid ? (
                   <div className='flex items-center text-green-500'>
                     <CheckIcon className='w-4 h-4 mr-2' />
                     <p>Son fatura ödenmiş</p>
@@ -107,8 +129,11 @@ function Projects() {
                   </div>
                 )}
               </div>
-              <div className='text-xs text-gray-500 dark:text-gray-400'>
-                Oluşturulma tarihi: {new Date(project.created_at).toLocaleDateString()}
+              <div className={cn(
+                'text-xs',
+                isDarkTheme ? 'text-gray-400' : 'text-gray-500'
+              )}>
+                Oluşturulma tarihi: {new Date(project?.created_at).toLocaleDateString()}
               </div>
             </div>
           </motion.div>
