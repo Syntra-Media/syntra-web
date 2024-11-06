@@ -1,93 +1,58 @@
-import { notFound } from 'next/navigation';
-import dynamic from 'next/dynamic';
+"use client"
 
-// Dynamically import components with loading fallback
-const Profile = dynamic(() => import('@/components/ui/Portal/Profile'), {
-  loading: () => <div>Loading...</div>
-});
-const Projects = dynamic(() => import('@/components/ui/Portal/Projects'), {
-  loading: () => <div>Loading...</div>
-});
-const Files = dynamic(() => import('@/components/ui/Portal/Files'), {
-  loading: () => <div>Loading...</div>
-});
-const Notifications = dynamic(() => import('@/components/ui/Portal/Notifications'), {
-  loading: () => <div>Loading...</div>
-});
-const Invoices = dynamic(() => import('@/components/ui/Portal/Invoices'), {
-  loading: () => <div>Loading...</div>
-});
-const Tasks = dynamic(() => import('@/components/ui/Portal/Tasks'), {
-  loading: () => <div>Loading...</div>
-});
-const Settings = dynamic(() => import('@/components/ui/Portal/Settings'), {
-  loading: () => <div>Loading...</div>
-});
+import React from 'react';
+import Files from '@/components/ui/Portal/Files';
+import Profile from '@/components/ui/Portal/Profile';
+import Tasks from '@/components/ui/Portal/Tasks';
+import Notifications from '@/components/ui/Portal/Notifications';
+import Settings from '@/components/ui/Portal/Settings';
+import Invoices from '@/components/ui/Portal/Invoices';
+import Projects from '@/components/ui/Portal/Projects';
+import { useRouter } from 'next/navigation';
 
-// Define routes with path segments for easier matching
 const ROUTES = {
-  project: {
-    name: "Projeler",
-    component: Projects,
-  },
-  tasks: {
-    name: "Görevler",
-    component: Tasks, 
-  },
-  contact: {
-    name: "İletişim Merkezi",
-    component: Notifications,
-  },
-  payments: {
-    name: "Ödemeler", 
-    component: Invoices,
-  },
-  files: {
-    name: "Dosyalar",
-    component: Files,
-  },
-  settings: {
-    name: "Ayarlar",
-    component: Settings,
-  },
-  profile: {
-    name: "Profil",
+  "portal": {
     component: Profile,
+    name: "Portal"
+  },
+  "project": {
+    component: Projects,
+    name: "Projeler"
+  },
+  "tasks": {
+    component: Tasks,
+    name: "Görevler"
+  },
+  "contact": {
+    component: Notifications,
+    name: "İletişim Merkezi"
+  },
+  "payments": {
+    component: Invoices,
+    name: "Ödemeler"
+  },
+  "files": {
+    component: Files,
+    name: "Dosyalar"
+  },
+  "settings": {
+    component: Settings,
+    name: "Ayarlar"
+  },
+  "profile": {
+    component: Profile,
+    name: "Profil"
   }
-} as const;
-
-// Update generateStaticParams to be more explicit
-export async function generateStaticParams() {
-  return [
-    { slug: 'project' },
-    { slug: 'tasks' },
-    { slug: 'contact' },
-    { slug: 'payments' },
-    { slug: 'files' },
-    { slug: 'settings' },
-    { slug: 'profile' }
-  ];
 }
 
-// Enable dynamic parameters
-export const dynamicParams = true;
-
-// Type for route params
-type RouteParams = {
-  params: {
-    slug: keyof typeof ROUTES;
-  };
-};
-
-const Page = async ({ params }: RouteParams) => {
-  const route = ROUTES[params.slug];
+export default function PortalSlugPage({ params }: { params: { slug: string } }) {
+  const route = ROUTES[params.slug as keyof typeof ROUTES];
+  const router = useRouter();
   
   if (!route) {
-    notFound();
+    return router.push("/portal");
   }
-
+  
   const Component = route.component;
   return <Component />
-};
-
-export default Page;
+}
