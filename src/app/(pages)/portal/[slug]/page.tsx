@@ -28,53 +28,63 @@ const Settings = dynamic(() => import('@/components/ui/Portal/Settings'), {
 const ROUTES = {
   project: {
     name: "Projeler",
-    component: Projects
+    component: Projects,
   },
   tasks: {
     name: "Görevler",
-    component: Tasks
+    component: Tasks, 
   },
   contact: {
-    name: "İletişim Merkezi", 
-    component: Notifications
+    name: "İletişim Merkezi",
+    component: Notifications,
   },
   payments: {
-    name: "Ödemeler",
-    component: Invoices
+    name: "Ödemeler", 
+    component: Invoices,
   },
   files: {
     name: "Dosyalar",
-    component: Files
+    component: Files,
   },
   settings: {
     name: "Ayarlar",
-    component: Settings
+    component: Settings,
   },
   profile: {
     name: "Profil",
-    component: Profile
+    component: Profile,
   }
 } as const;
 
-// Enable ISR
-export const revalidate = 3600; // Revalidate every hour
+// Enable dynamic params
 export const dynamicParams = true;
+export const dynamicConfig = {
+  forceDynamic: true,
+};
 
-const Page = async ({ params }: { params: { slug: string } }) => {
-  const route = ROUTES[params.slug as keyof typeof ROUTES];
+// Type for route params
+type RouteParams = {
+  params: {
+    slug: keyof typeof ROUTES;
+  };
+};
+
+const Page = async ({ params }: RouteParams) => {
+  const route = ROUTES[params.slug];
   
   if (!route) {
     notFound();
   }
 
   const Component = route.component;
-  return <Component />;
+  return <Component />
 };
 
 export default Page;
 
-export async function generateStaticParams() {
-  return Object.keys(ROUTES).map(slug => ({
-    slug
+// Generate static paths at build time
+export function generateStaticParams() {
+  return Object.keys(ROUTES).map((slug) => ({
+    slug,
   }));
 }
