@@ -12,37 +12,37 @@ const ROUTES = [
   {
       name: "Projeler",
       href: "/portal/project",
-      component: ( <Projects /> ),
+      component: Projects,
   },
   {
       name: "Görevler",
       href: "/portal/tasks",
-      component: ( <Tasks /> ),
+      component: Tasks,
   },
   {
       name: "İletişim Merkezi",
       href: "/portal/contact",
-      component: ( <Notifications /> ),
+      component: Notifications,
   },
   {
       name: "Ödemeler",
       href: "/portal/payments",
-      component: ( <Invoices /> ),
+      component: Invoices,
   },
   {
       name: "Dosyalar",
       href: "/portal/files",
-      component: ( <Files /> ),
+      component: Files,
   },
   {
     name: "Ayarlar",
     href: "/portal/settings",
-    component: ( <Settings /> ),
+    component: Settings,
   },
   {
     name: "Profil",
     href: "/portal/profile",
-    component: ( <Profile /> ),
+    component: Profile,
   }
 ]
 
@@ -54,7 +54,8 @@ const Page = async (props: { params: Promise<{ slug: string }> }) => {
         notFound();
     }
 
-    return activeRoute.component;
+    const Component = activeRoute.component;
+    return <Component />;
 };
 
 export default Page;
