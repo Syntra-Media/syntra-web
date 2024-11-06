@@ -10,7 +10,7 @@ export default async function NewProject() {
       id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
-      email: user.emailAddresses[0]?.emailAddress,
+      email: user.emailAddresses?.[0]?.emailAddress || null,
       avatar: user.imageUrl,
     }))
   ));
