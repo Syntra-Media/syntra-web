@@ -58,9 +58,6 @@ const ROUTES = {
 
 // Enable dynamic params
 export const dynamicParams = true;
-export const dynamicConfig = {
-  forceDynamic: true,
-};
 
 // Type for route params
 type RouteParams = {
