@@ -15,13 +15,13 @@ const ROUTES = [
       component: Projects,
   },
   {
-      name: "Görevler",
+      name: "Görevler", 
       href: "/portal/tasks",
       component: Tasks,
   },
   {
       name: "İletişim Merkezi",
-      href: "/portal/contact",
+      href: "/portal/contact", 
       component: Notifications,
   },
   {
@@ -46,9 +46,8 @@ const ROUTES = [
   }
 ]
 
-const Page = async (props: { params: Promise<{ slug: string }> }) => {
-    const params = await props.params;
-    const activeRoute = ROUTES.find(route => route.href === `/portal/${params.slug}`);
+const Page = async ({ params }: { params: { slug: string } }) => {
+    const activeRoute = ROUTES.find(route => route.href.split('/').pop() === params.slug);
 
     if (!activeRoute) {
         notFound();
@@ -60,9 +59,8 @@ const Page = async (props: { params: Promise<{ slug: string }> }) => {
 
 export default Page;
 
-// Add this new function for generating static params
 export async function generateStaticParams() {
     return ROUTES.map(route => ({
-        slug: route.href.split('/').pop(),
+        slug: route.href.split('/').pop() || '',
     }));
 }
