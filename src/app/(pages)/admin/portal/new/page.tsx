@@ -3,10 +3,9 @@ import { clerkClient } from "@clerk/nextjs/server";
 
 export default async function NewProject() {
   try {
-    const client = await clerkClient();
-    const users = await client.users.getUserList();
+    const users = await clerkClient.users.getUserList();
     
-    if (!users?.data || users.data.length === 0) {
+    if (!users.data || users.data.length === 0) {
       console.error('No user data received from Clerk');
       return (
         <div className="flex flex-col gap-4 p-16 min-h-screen">
@@ -17,8 +16,8 @@ export default async function NewProject() {
 
     const serializedUsers = users.data.map(user => ({
       id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      firstName: user.firstName || '',
+      lastName: user.lastName || '',
       avatar: user.imageUrl,
     }));
 
