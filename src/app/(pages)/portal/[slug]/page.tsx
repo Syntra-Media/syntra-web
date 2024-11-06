@@ -56,8 +56,15 @@ const ROUTES = {
   }
 } as const;
 
-// Enable dynamic params
-export const dynamicParams = true;
+// Add this new function to generate static params
+export async function generateStaticParams() {
+  return Object.keys(ROUTES).map((slug) => ({
+    slug: slug,
+  }));
+}
+
+// Change this to false if you want to only allow pre-rendered paths
+export const dynamicParams = false;
 
 // Type for route params
 type RouteParams = {
