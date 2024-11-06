@@ -6,7 +6,7 @@ export default async function NewProject() {
     const client = await clerkClient();
     const users = await client.users.getUserList();
     
-    if (!users?.data) {
+    if (!users?.data || users.data.length === 0) {
       console.error('No user data received from Clerk');
       return (
         <div className="flex flex-col gap-4 p-16 min-h-screen">
@@ -15,14 +15,12 @@ export default async function NewProject() {
       );
     }
 
-    const serializedUsers = JSON.parse(JSON.stringify(
-      users.data.map(user => ({
-        id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        avatar: user.imageUrl,
-      }))
-    ));
+    const serializedUsers = users.data.map(user => ({
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      avatar: user.imageUrl,
+    }));
 
     return (
       <div className="flex flex-col gap-4 p-16 min-h-screen">
