@@ -1,72 +1,80 @@
-import React from 'react';
 import { notFound } from 'next/navigation';
-import Profile from '@/components/ui/Portal/Profile';
-import Projects from '@/components/ui/Portal/Projects';
-import Files from '@/components/ui/Portal/Files';
-import Notifications from '@/components/ui/Portal/Notifications';
-import Invoices from '@/components/ui/Portal/Invoices';
-import Tasks from '@/components/ui/Portal/Tasks';
-import Settings from '@/components/ui/Portal/Settings';
+import dynamic from 'next/dynamic';
 
-const ROUTES = [
-  {
-      name: "Projeler",
-      href: "/portal/project",
-      component: Projects,
+// Dynamically import components with loading fallback
+const Profile = dynamic(() => import('@/components/ui/Portal/Profile'), {
+  loading: () => <div>Loading...</div>
+});
+const Projects = dynamic(() => import('@/components/ui/Portal/Projects'), {
+  loading: () => <div>Loading...</div>
+});
+const Files = dynamic(() => import('@/components/ui/Portal/Files'), {
+  loading: () => <div>Loading...</div>
+});
+const Notifications = dynamic(() => import('@/components/ui/Portal/Notifications'), {
+  loading: () => <div>Loading...</div>
+});
+const Invoices = dynamic(() => import('@/components/ui/Portal/Invoices'), {
+  loading: () => <div>Loading...</div>
+});
+const Tasks = dynamic(() => import('@/components/ui/Portal/Tasks'), {
+  loading: () => <div>Loading...</div>
+});
+const Settings = dynamic(() => import('@/components/ui/Portal/Settings'), {
+  loading: () => <div>Loading...</div>
+});
+
+// Define routes with path segments for easier matching
+const ROUTES = {
+  project: {
+    name: "Projeler",
+    component: Projects
   },
-  {
-      name: "Görevler", 
-      href: "/portal/tasks",
-      component: Tasks,
+  tasks: {
+    name: "Görevler",
+    component: Tasks
   },
-  {
-      name: "İletişim Merkezi",
-      href: "/portal/contact", 
-      component: Notifications,
+  contact: {
+    name: "İletişim Merkezi", 
+    component: Notifications
   },
-  {
-      name: "Ödemeler",
-      href: "/portal/payments",
-      component: Invoices,
+  payments: {
+    name: "Ödemeler",
+    component: Invoices
   },
-  {
-      name: "Dosyalar",
-      href: "/portal/files",
-      component: Files,
+  files: {
+    name: "Dosyalar",
+    component: Files
   },
-  {
+  settings: {
     name: "Ayarlar",
-    href: "/portal/settings",
-    component: Settings,
+    component: Settings
   },
-  {
+  profile: {
     name: "Profil",
-    href: "/portal/profile",
-    component: Profile,
+    component: Profile
   }
-]
+} as const;
 
+// Enable ISR
+export const revalidate = 3600; // Revalidate every hour
 export const dynamicParams = true;
 
 const Page = async ({ params }: { params: { slug: string } }) => {
-    const activeRoute = ROUTES.find(route => route.href.split('/').pop() === params.slug);
+  const route = ROUTES[params.slug as keyof typeof ROUTES];
+  
+  if (!route) {
+    notFound();
+  }
 
-    if (!activeRoute) {
-        notFound();
-    }
-
-    const Component = activeRoute.component;
-    return <Component />;
+  const Component = route.component;
+  return <Component />;
 };
 
 export default Page;
 
 export async function generateStaticParams() {
-    const paths = ROUTES.map(route => {
-        const slug = route.href.split('/').pop();
-        if (!slug) return null;
-        return { slug };
-    }).filter(Boolean);
-    
-    return paths;
+  return Object.keys(ROUTES).map(slug => ({
+    slug
+  }));
 }
