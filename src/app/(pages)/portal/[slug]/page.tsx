@@ -78,10 +78,3 @@ const Page = async ({ params }: RouteParams) => {
 };
 
 export default Page;
-
-// Generate static paths at build time
-export function generateStaticParams() {
-  return Object.keys(ROUTES).map((slug) => ({
-    slug,
-  }));
-}
