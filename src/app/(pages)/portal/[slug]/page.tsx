@@ -46,6 +46,8 @@ const ROUTES = [
   }
 ]
 
+export const dynamicParams = true;
+
 const Page = async ({ params }: { params: { slug: string } }) => {
     const activeRoute = ROUTES.find(route => route.href.split('/').pop() === params.slug);
 
@@ -60,7 +62,11 @@ const Page = async ({ params }: { params: { slug: string } }) => {
 export default Page;
 
 export async function generateStaticParams() {
-    return ROUTES.map(route => ({
-        slug: route.href.split('/').pop() || '',
-    }));
+    const paths = ROUTES.map(route => {
+        const slug = route.href.split('/').pop();
+        if (!slug) return null;
+        return { slug };
+    }).filter(Boolean);
+    
+    return paths;
 }
