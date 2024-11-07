@@ -14,6 +14,7 @@ import PhaseContent from '@/components/ui/AdminContent/PhaseContent';
 import PaymentsContent from '@/components/ui/AdminContent/PaymentsContent';
 import FilesContent from '@/components/ui/AdminContent/FilesContent';
 import NotificationsContent from '@/components/ui/AdminContent/NotificationsContent';
+import { useParams } from 'next/navigation';
 
 interface ProjectData {
   id: string;
@@ -35,7 +36,8 @@ const TABS = [
   { name: 'Notifications', icon: (<BellIcon className="w-4 h-4" />), content: (project: any) => <NotificationsContent notifications={project.notifications} files={project.files} projectId={project.id} /> }, 
 ];
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
+export default function ProjectPage() {
+  const params = useParams();
   const { getToken } = useAuth();
   const [project, setProject] = useState<ProjectData | null>(null);
   const [activeTab, setActiveTab] = useState<string>('Tasks');
