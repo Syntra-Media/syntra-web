@@ -1,3 +1,5 @@
+'use client'
+
 import Files from "@/components/ui/Portal/Files";
 import Invoices from "@/components/ui/Portal/Invoices";
 import Notifications from "@/components/ui/Portal/Notifications";
@@ -5,79 +7,56 @@ import Profile from "@/components/ui/Portal/Profile";
 import Projects from "@/components/ui/Portal/Projects";
 import Settings from "@/components/ui/Portal/Settings";
 import Tasks from "@/components/ui/Portal/Tasks";
-import { notFound } from "next/navigation";
-import React from "react";
+import { useParams, useRouter } from "next/navigation";
 
 const ROUTES = {
   project: {
-    name: "Projeler", 
-    href: "project",
-    component: Projects,
+    name: "Projeler",
+    href: "project", 
+    component: Projects
   },
   tasks: {
     name: "Görevler",
-    href: "tasks", 
-    component: Tasks,
+    href: "tasks",
+    component: Tasks
   },
   contact: {
-    name: "İletişim Merkezi",
+    name: "İletişim Merkezi", 
     href: "contact",
-    component: Notifications,
+    component: Notifications
   },
   payments: {
     name: "Ödemeler",
     href: "payments",
-    component: Invoices,
+    component: Invoices
   },
   files: {
     name: "Dosyalar",
     href: "files",
-    component: Files,
+    component: Files
   },
   settings: {
     name: "Ayarlar",
     href: "settings",
-    component: Settings,
+    component: Settings
   },
   profile: {
     name: "Profil",
     href: "profile",
-    component: Profile,
-  },
-}
+    component: Profile
+  }
+} as const;
 
-async function PortalSlug({
-  params,
-}: {
-  params: Promise<{slug: string}>
-}) {
-  const slug = (await params).slug;
-
+const PortalSlug = () => {
+  const { slug } = useParams();
   const route = ROUTES[slug as keyof typeof ROUTES];
+  const router = useRouter();
 
   if (!route) {
-    notFound();
+    router.push("/404");
   }
 
-  const Component = route.component
+  return <route.component />;
+};
 
-  return (
-    <Component />
-  )
-}
-
-export default PortalSlug
-
-export const dynamic = 'force-dynamic'
-
-export async function generateStaticParams() {
-  return [
-    { slug: 'project' },
-    { slug: 'tasks' },
-    { slug: 'contact' },
-    { slug: 'payments' },
-    { slug: 'files' },
-    { slug: 'settings' },
-    { slug: 'profile' },
-  ];
-}
+export default PortalSlug;
