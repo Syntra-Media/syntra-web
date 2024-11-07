@@ -3,10 +3,10 @@
 import React from 'react'
 import Invoices from '@/components/ui/Portal/Invoices'
 
-function InvoicesPage() {
+function PaymentsPage() {
   return (
     <Invoices />
   )
 }
 
-export default InvoicesPage
+export default PaymentsPage
