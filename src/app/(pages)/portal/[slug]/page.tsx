@@ -68,6 +68,16 @@ async function PortalSlug({
 
 export default PortalSlug
 
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams() {
-  return Object.keys(ROUTES).map((key) => ({ slug: key }));
+  return [
+    { slug: 'project' },
+    { slug: 'tasks' },
+    { slug: 'contact' },
+    { slug: 'payments' },
+    { slug: 'files' },
+    { slug: 'settings' },
+    { slug: 'profile' },
+  ];
 }
