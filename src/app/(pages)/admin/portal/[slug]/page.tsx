@@ -8,7 +8,6 @@ import { getProject, deleteFunc } from '@/utils/supabaseRequests';
 import { Button } from '@/components/ui/Button';
 import { ChevronLeftIcon, CreditCardIcon, PlusIcon, TrashIcon, CalendarCheckIcon, PenIcon, FileIcon, BellIcon } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/Dialog';
 import { Oval } from 'react-loader-spinner';
 import TasksContent from '@/components/ui/AdminContent/TasksContent';
 import PhaseContent from '@/components/ui/AdminContent/PhaseContent';
@@ -43,12 +42,21 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     const fetchProject = async () => {
-      const token = await getToken({ template: 'supabase' });
-      const data = await getProject({ token, id: params.slug });
-      if (data) setProject(data);
+      try {
+        const token = await getToken({ template: 'supabase' });
+        const data = await getProject({ token, id: params.slug });
+        if (data) {
+          setProject(data);
+        } else {
+          toast.error('Project not found');
+        }
+      } catch (error) {
+        console.error('Error fetching project:', error);
+        toast.error('Failed to fetch project');
+      }
     };
     fetchProject();
-  }, [params.slug]);
+  }, [params.slug, getToken]);
 
   const handleDelete = async (id: string, type: string) => {
     const token = await getToken({ template: 'supabase' });
