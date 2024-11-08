@@ -28,17 +28,34 @@ interface ProjectData {
 }
 
 const TABS = [
-  { name: 'Tasks', icon: (<CalendarCheckIcon className="w-4 h-4" />), content: (project: any) => <TasksContent tasks={project.tasks} projectId={project.id} /> },
-  { name: 'Phases', icon: (<PlusIcon className="w-4 h-4" />), content: (project: any) => <PhaseContent projectPhases={project.phases} projectId={project.id} /> },
-  { name: 'Payments', icon: (<CreditCardIcon className="w-4 h-4" />), content: (project: any) => <PaymentsContent payments={project.payments} projectId={project.id} /> },
-  { name: 'Files', icon: (<FileIcon className="w-4 h-4" />), content: (project: any) => <FilesContent files={project.files} projectId={project.id} /> },
-  { name: 'Notifications', icon: (<BellIcon className="w-4 h-4" />), content: (project: any) => <NotificationsContent notifications={project.notifications} files={project.files} projectId={project.id} /> }, 
+  { name: 'Tasks', icon: (<CalendarCheckIcon className="w-4 h-4" />) },
+  { name: 'Phases', icon: (<PlusIcon className="w-4 h-4" />) },
+  { name: 'Payments', icon: (<CreditCardIcon className="w-4 h-4" />) },
+  { name: 'Files', icon: (<FileIcon className="w-4 h-4" />) },
+  { name: 'Notifications', icon: (<BellIcon className="w-4 h-4" />) },
 ];
 
 export default function ProjectPage({project}: {project: ProjectData}) {
   const { getToken } = useAuth();
   const [activeTab, setActiveTab] = useState<string>('Tasks');
   const [projectState, setProjectState] = useState<ProjectData | null>(project);
+
+  const renderTab = () => {
+    switch (activeTab) {
+      case 'Tasks':
+        return <TasksContent tasks={project.tasks} projectId={project.id} />;
+      case 'Phases':
+        return <PhaseContent projectPhases={project.phases} projectId={project.id} />;
+      case 'Payments':
+        return <PaymentsContent payments={project.payments} projectId={project.id} />;
+      case 'Files':
+        return <FilesContent files={project.files} projectId={project.id} />;
+      case 'Notifications':
+        return <NotificationsContent notifications={project.notifications} files={project.files} projectId={project.id} />;
+      default:
+        return <TasksContent tasks={project.tasks} projectId={project.id} />;
+    }
+  }
 
   const handleDelete = async (id: string, type: string) => {
     const token = await getToken({ template: 'supabase' });
@@ -109,7 +126,7 @@ export default function ProjectPage({project}: {project: ProjectData}) {
         {/* content */}
         <div className='flex flex-col gap-2 w-full h-full p-4 rounded-lg bg-bg-100/15 border border-slate-700/60'>
           {
-            TABS.find(tab => tab.name === activeTab)?.content?.(project)
+            renderTab()
           }
         </div>
       </div>
