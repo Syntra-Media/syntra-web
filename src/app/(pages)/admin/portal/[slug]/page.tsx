@@ -8,5 +8,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
     return <div>Project not found</div>;
   }
 
-  return <SingleProjectPage project={project} />;
+  return (
+    <div className='w-full h-full flex'>
+      <SingleProjectPage project={project} />
+    </div>
+  )
 }
