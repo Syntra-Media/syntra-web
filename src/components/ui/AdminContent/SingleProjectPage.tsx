@@ -35,26 +35,17 @@ const TABS = [
   { name: 'Notifications', icon: (<BellIcon className="w-4 h-4" />), content: (project: any) => <NotificationsContent notifications={project.notifications} files={project.files} projectId={project.id} /> }, 
 ];
 
-export default function ProjectPage({slug}: {slug: string}) {
+export default function ProjectPage({project}: {project: ProjectData}) {
   const { getToken } = useAuth();
-  const [project, setProject] = useState<ProjectData | null>(null);
   const [activeTab, setActiveTab] = useState<string>('Tasks');
-
-  useEffect(() => {
-    const fetchProject = async () => {
-      const token = await getToken({ template: 'supabase' });
-      const data = await getProject({ token, id: slug });
-      setProject(data);
-    };
-    fetchProject();
-  }, [slug, getToken]);
+  const [projectState, setProjectState] = useState<ProjectData | null>(project);
 
   const handleDelete = async (id: string, type: string) => {
     const token = await getToken({ template: 'supabase' });
 
     const data = await deleteFunc({token, id, type});
     if (data) {
-      setProject(prev => prev ? {
+      setProjectState(prev => prev ? {
         ...prev,
         [type]: Array.isArray(prev[type]) ? prev[type].filter((item: any) => item.id !== id) : prev[type]
       } : null);
