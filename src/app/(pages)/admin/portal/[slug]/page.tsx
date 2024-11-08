@@ -1,16 +1,15 @@
 import SingleProjectPage from '@/components/ui/AdminContent/SingleProjectPage';
 import { getProject } from '@/utils/supabaseServerActions';
-
-interface ProjectPageProps {
+interface PortalPageProps {
   params: Promise<{
       slug: string;
   }>
 }
 
-export default async function Page({ params }: ProjectPageProps) {
+export default async function Page(props: PortalPageProps) {
   try {
-    const slug = (await params).slug;
-    const project = await getProject(slug);
+    const params = await props.params;
+    const project = await getProject(params.slug);
 
     if (!project) {
       return (

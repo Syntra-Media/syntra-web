@@ -58,25 +58,24 @@ export const getProject = async (id: string) => {
 
   let project = {...data[0]};
 
-  const {data: phases, error: phasesError} = await supabase.from("phases").select().eq("project", project.id);
+  const [
+    { data: phases },
+    { data: tasks },
+    { data: payments },
+    { data: files },
+    { data: notifications }
+  ] = await Promise.all([
+    supabase.from("phases").select().eq("project", project.id),
+    supabase.from("tasks").select().eq("project", project.id), 
+    supabase.from("payments").select().eq("project", project.id),
+    supabase.from("files").select().eq("project", project.id),
+    supabase.from("notifications").select().eq("project", project.id)
+  ]);
 
   project.phases = phases;
-
-    
-  const {data: tasks, error: tasksError} = await supabase.from("tasks").select().eq("project", project.id);
-
   project.tasks = tasks;
-    
-  const {data: payments, error: paymentsError} = await supabase.from("payments").select().eq("project", project.id);
-
   project.payments = payments;
-
-  const {data: files, error: filesError} = await supabase.from("files").select().eq("project", project.id);
-
   project.files = files;
-
-  const {data: notifications, error: notificationsError} = await supabase.from("notifications").select().eq("project", project.id);
-
   project.notifications = notifications;
 
   return project;
